@@ -12,8 +12,16 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxtjs/tailwindcss": "^6.9.4",
+    "@pinia/nuxt": "^0.5.1",
+    "@vueuse/nuxt": "^10.6.1",
     "nuxt": "^3.8.1",
     "vue": "^3.3.8",
     "vue-router": "^4.2.5"
+  },
+  "dependencies": {
+    "apexcharts": "^3.44.0",
+    "preline": "^2.0.0",
+    "vue3-apexcharts": "^1.4.4",
+    "vue3-easy-data-table": "^1.5.47"
   }
 }

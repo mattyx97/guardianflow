@@ -1,5 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["@nuxtjs/tailwindcss"]
-})
+  modules: ["@nuxtjs/tailwindcss", "@vueuse/nuxt", "nuxt-icon", "@pinia/nuxt"],
+  app: {
+    head: {
+      script: [
+        {
+          src: "/assets/preline/preline.js",
+          body: true,
+          defer: true,
+        },
+      ],
+    },
+  },
+});
