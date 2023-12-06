@@ -3,13 +3,48 @@ definePageMeta({
   layout: false,
 });
 const isLoading = ref(false);
+const open = ref(false);
+/* COMPOSABLES */
+const authStore = useAuthStore();
+
+/* STATES */
+const credentials = reactive({
+  email: "peppe@gmail.com",
+  password: "peppe123",
+});
+
+/* FUNCTIONS */
+function onSubmit() {
+  isLoading.value = true;
+  authStore
+    .login({
+      email: credentials.email,
+      password: credentials.password,
+    })
+    .then(() => {
+      useRouter().push("/gestionale/");
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      isLoading.value = false;
+    });
+}
+
+function openModal() {
+  open.value = true;
+  console.log(open.value);
+}
 </script>
 
 <template>
   <!-- WRAPPER CENTRATO -->
   <div class="absolute -translate-x-1/2 left-1/2 top-1/2 -translate-y-3/4">
     <!-- CARD -->
-    <div class="w-[95vw] max-w-[350px] rounded-lg px-4 py-8 sm:w-[350px] shadow-[0px_0px_15px_8px_rgba(0,0,0,0.1);]">
+    <div
+      class="w-[95vw] max-w-[350px] rounded-lg px-4 py-8 sm:w-[350px] shadow-[0px_0px_15px_8px_rgba(0,0,0,0.1);]"
+    >
       <!-- HEADER -->
       <div class="mb-4 text-center">
         <h1 class="text-2xl font-semibold tracking-tight">Area Riservata</h1>
@@ -17,7 +52,7 @@ const isLoading = ref(false);
       </div>
 
       <!-- FORM -->
-      <form @submit.prevent="" class="flex flex-col w-full gap-2">
+      <form @submit.prevent="onSubmit" class="flex flex-col w-full gap-2">
         <label class="flex flex-col space-y-1">
           <span>Email</span>
           <input
@@ -37,7 +72,7 @@ const isLoading = ref(false);
             required
           />
         </label>
-        
+
         <button
           class="w-full p-2 border rounded-md hover:bg-black hover:text-white"
           :disabled="isLoading"
@@ -46,12 +81,11 @@ const isLoading = ref(false);
           <Icon v-if="isLoading" name="svg-spinners:90-ring" size="20" />
           <span v-else>Accedi</span>
         </button>
-
-        <!-- LINK RESET PSW -->
-        <NuxtLink to="" class="text-center cursor-pointer">
-        <h1 class="text-sm font-bold">Hai dimenticato la password?</h1>
-        </NuxtLink>
       </form>
+      <!-- LINK RESET PSW -->
+      <button class="mt-5 text-sm font-bold" @click="openModal()">
+        Hai dimenticato la password?
+      </button>
     </div>
   </div>
 </template>

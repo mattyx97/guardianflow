@@ -115,7 +115,6 @@ const seriesRicMedieMensili = [
   <div class="flex flex-col p-4 text-black bg-white border shadow-sm rounded-xl md:p-5">
     <ClientOnly>
       <VueApexCharts
-        class="border"
         type="pie"
         height="200"
         :options="optionsRicMensili"

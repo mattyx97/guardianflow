@@ -20,7 +20,7 @@ definePageMeta({
       <!-- CARD 2FA -->
       <Card2FA class="col-span-2" />
     </div>
-
+    <!-- table -->
     <div class="-m-1.5 overflow-x-auto max-w-[1400px] mt-2">
       <div class="p-1.5 min-w-full inline-block align-middle">
         <div class="overflow-hidden border rounded-lg shadow">
@@ -77,33 +77,7 @@ definePageMeta({
                 <td class="px-6 py-4 text-sm whitespace-nowrap">Basic</td>
                 <td class="px-6 py-4 text-sm font-medium whitespace-nowrap text-end">
                   <button type="button" class="items-center">
-                    <Icon name="humbleicons:dots-horizontal" size="20" />
-                  </button>
-                </td>
-              </tr>
-
-              <tr class="cursor-pointer hover:bg-gray-100">
-                <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">07/11/2023</td>
-                <td class="px-6 py-4 text-sm whitespace-nowrap">Ottobre</td>
-                <td class="px-6 py-4 text-sm whitespace-nowrap">394€</td>
-                <td class="px-6 py-4 text-sm whitespace-nowrap">Pagato</td>
-                <td class="px-6 py-4 text-sm whitespace-nowrap">Basic</td>
-                <td class="px-6 py-4 text-sm font-medium whitespace-nowrap text-end">
-                  <button type="button" class="items-center">
-                    <Icon name="humbleicons:dots-horizontal" size="20" />
-                  </button>
-                </td>
-              </tr>
-
-              <tr class="cursor-pointer hover:bg-gray-100">
-                <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">07/11/2023</td>
-                <td class="px-6 py-4 text-sm whitespace-nowrap">Ottobre</td>
-                <td class="px-6 py-4 text-sm whitespace-nowrap">394€</td>
-                <td class="px-6 py-4 text-sm whitespace-nowrap">Pagato</td>
-                <td class="px-6 py-4 text-sm whitespace-nowrap">Basic</td>
-                <td class="px-6 py-4 text-sm font-medium whitespace-nowrap text-end">
-                  <button type="button" class="items-center">
-                    <Icon name="humbleicons:dots-horizontal" size="20" />
+                    <Icon name="tabler:file-invoice" size="20" />
                   </button>
                 </td>
               </tr>

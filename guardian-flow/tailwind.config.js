@@ -3,6 +3,6 @@ export default {
   theme: {
     extend: {},
   },
-  content: ["node_modules/preline/dist/*.js"],
+  content: ["./node_modules/preline/preline.js"],
   plugins: [require("preline/plugin")],
 };

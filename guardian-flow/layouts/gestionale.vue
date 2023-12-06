@@ -1,4 +1,8 @@
 <script setup lang="ts">
+function logout() {
+  useAuthStore().logout();
+  useRouter().push("/gestionale/login");
+}
 </script>
 
 <template>
@@ -84,9 +88,23 @@
           </span>
         </NuxtLink>
       </div>
+      <div class="hs-tooltip inline-block [--placement:right]">
+        <NuxtLink
+          to="/gestionale/anomalie"
+          class="hs-tooltip-toggle w-[2.375rem] h-[2.375rem] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-500 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 focus:ring-gray-600"
+        >
+          <Icon name="mingcute:warning-fill" size="20" />
 
+          <span
+            class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 inline-block absolute invisible z-20 py-1.5 px-2.5 bg-gray-900 text-xs text-white rounded-lg whitespace-nowrap"
+            role="tooltip"
+            >Anomalie
+          </span>
+        </NuxtLink>
+      </div>
       <div class="hs-tooltip inline-block [--placement:right]">
         <button
+          @click="logout()"
           type="button"
           class="hs-tooltip-toggle w-[2.375rem] h-[2.375rem] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-500 hover:bg-red-500 hover:text-white disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 focus:ring-gray-600"
         >

@@ -20,7 +20,9 @@
   },
   "dependencies": {
     "apexcharts": "^3.44.0",
-    "preline": "^2.0.0",
+    "firebase": "^10.7.0",
+    "nuxt-icon": "^0.6.6",
+    "preline": "^2.0.2",
     "vue3-apexcharts": "^1.4.4",
     "vue3-easy-data-table": "^1.5.47"
   }
