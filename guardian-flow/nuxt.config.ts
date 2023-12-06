@@ -13,17 +13,6 @@ export default defineNuxtConfig({
   imports: {
     dirs: ["stores", "composables/**"],
   },
-  runtimeConfig: {
-    public: {
-      APIKEY: "",
-      AUTHDOMAIN: "",
-      PROJECTID: "",
-      STORAGEBUCKET: "",
-      MESSAGINGSENDERID: "",
-      APPID: "",
-    },
-  },
-  routeRules: {
-    "/gestionale/**": { ssr: true },
-  },
+  
+
 });

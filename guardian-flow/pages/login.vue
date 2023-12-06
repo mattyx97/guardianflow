@@ -4,17 +4,9 @@ definePageMeta({
 });
 const isLoading = ref(false);
 const open = ref(false);
-/* COMPOSABLES */
-const authStore = useAuthStore();
-
-/* STATES */
-const credentials = reactive({
-  email: "peppe@gmail.com",
-  password: "peppe123",
-});
 
 /* FUNCTIONS */
-function onSubmit() {
+/* function onSubmit() {
   isLoading.value = true;
   authStore
     .login({
@@ -30,7 +22,7 @@ function onSubmit() {
     .finally(() => {
       isLoading.value = false;
     });
-}
+} */
 
 function openModal() {
   open.value = true;
@@ -52,7 +44,7 @@ function openModal() {
       </div>
 
       <!-- FORM -->
-      <form @submit.prevent="onSubmit" class="flex flex-col w-full gap-2">
+      <form class="flex flex-col w-full gap-2">
         <label class="flex flex-col space-y-1">
           <span>Email</span>
           <input

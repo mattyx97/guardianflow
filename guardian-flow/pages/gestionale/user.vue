@@ -12,13 +12,13 @@ definePageMeta({
       <CardPay class="col-span-3" />
 
       <!-- CARD LOGIN HISTORY -->
-      <CardLoginInfo class="col-span-2" />
+      <CardLoginInfo class="col-span-3 md:col-span-2" />
 
       <!-- CARD ACCOUNT INFO -->
       <CardAccountInfo class="col-span-3" />
 
       <!-- CARD 2FA -->
-      <Card2FA class="col-span-2" />
+      <Card2FA class="col-span-3 md:col-span-2" />
     </div>
     <!-- table -->
     <div class="-m-1.5 overflow-x-auto max-w-[1400px] mt-2">
@@ -70,15 +70,30 @@ definePageMeta({
             </thead>
             <tbody class="divide-y divide-gray-200">
               <tr class="cursor-pointer hover:bg-gray-100">
-                <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">07/11/2023</td>
+                <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">
+                  07/11/2023
+                </td>
                 <td class="px-6 py-4 text-sm whitespace-nowrap">Ottobre</td>
                 <td class="px-6 py-4 text-sm whitespace-nowrap">394€</td>
                 <td class="px-6 py-4 text-sm whitespace-nowrap">Pagato</td>
                 <td class="px-6 py-4 text-sm whitespace-nowrap">Basic</td>
-                <td class="px-6 py-4 text-sm font-medium whitespace-nowrap text-end">
-                  <button type="button" class="items-center">
-                    <Icon name="tabler:file-invoice" size="20" />
-                  </button>
+                <td
+                  class="px-6 py-4 text-sm font-medium whitespace-nowrap text-end"
+                >
+                  <div class="hs-tooltip inline-block [--placement:right]">
+                    <button
+                      type="button"
+                      class="hs-tooltip-toggle w-10 h-10 inline-flex justify-center items-center gap-2 "
+                    >
+                      <Icon name="tabler:file-invoice" size="20" />
+                      <span
+                        class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute bg-white z-10 py-1 px-2 text-xs font-medium rounded shadow-md"
+                        role="tooltip"
+                      >
+                        Scarica fattura
+                      </span>
+                    </button>
+                  </div>
                 </td>
               </tr>
             </tbody>

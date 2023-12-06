@@ -117,7 +117,7 @@ const seriesRicMedieMensili = [
 <template>
   <div class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
     <h1 class="text-4xl">Ciao,Giuseppe</h1>
-    <div class="grid items-center justify-center grid-cols-6 gap-5 mt-3">
+    <div class="grid items-center justify-center grid-col-1 md:grid-col-3 lg:grid-cols-6 gap-5 mt-3">
       <CardWarnings class="col-span-2" />
       <CardWarningsStatus class="col-span-2" />
       <CardAccount class="col-span-2" />
