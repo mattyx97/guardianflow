@@ -9,7 +9,7 @@ import Falco_Bianco from "@/assets/Falco_Bianco.png";
       aria-label="Global"
     >
       <div class="flex items-center justify-between">
-        <img class="w-20" :src="Falco_Bianco" />
+        <img class="w-20" :src="Falco_Bianco" alt="Logo" />
         <!-- HAMBURGER -->
         <div class="sm:hidden">
           <button

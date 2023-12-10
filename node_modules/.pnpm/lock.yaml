@@ -1,0 +1,16 @@
+lockfileVersion: '6.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+dependencies:
+  '@preline/tooltip':
+    specifier: ^2.0.1
+    version: 2.0.1
+
+packages:
+
+  /@preline/tooltip@2.0.1:
+    resolution: {integrity: sha512-xLznrmy0z6a7dFAvi5wFMxeirE4L3/BHutFoTwnDkzzlUvCY2LaybtjTcmbtuSQHdLv933jYtEnZ76TCZWA94A==}
+    dev: false
