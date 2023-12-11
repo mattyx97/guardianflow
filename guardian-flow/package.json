@@ -19,6 +19,7 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
+    "@lottiefiles/lottie-player": "^2.0.2",
     "apexcharts": "^3.44.0",
     "firebase": "^10.7.0",
     "nuxt-icon": "^0.6.6",

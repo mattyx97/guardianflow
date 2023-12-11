@@ -2,7 +2,10 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@nuxtjs/tailwindcss", "@vueuse/nuxt", "nuxt-icon", "@pinia/nuxt"],
-  plugins: ["~/plugins/preline.client.ts"],
+  plugins: [
+    "~/plugins/preline.client.ts",
+    "~/plugins/lottie-vue-player.client.js",
+  ],
 
   components: [
     {
@@ -13,6 +16,4 @@ export default defineNuxtConfig({
   imports: {
     dirs: ["stores", "composables/**"],
   },
-  
-
 });
