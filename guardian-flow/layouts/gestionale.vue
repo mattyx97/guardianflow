@@ -1,9 +1,4 @@
-<script setup lang="ts">
-function logout() {
-  useAuthStore().logout();
-  useRouter().push("/gestionale/login");
-}
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <!-- Navigation Toggle -->
@@ -104,7 +99,6 @@ function logout() {
       </div>
       <div class="hs-tooltip inline-block [--placement:right]">
         <button
-          @click="logout()"
           type="button"
           class="hs-tooltip-toggle w-[2.375rem] h-[2.375rem] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-500 hover:bg-red-500 hover:text-white disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-1 focus:ring-gray-600"
         >
