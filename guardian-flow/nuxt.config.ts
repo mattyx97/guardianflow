@@ -2,10 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@nuxtjs/tailwindcss", "@vueuse/nuxt", "nuxt-icon", "@pinia/nuxt"],
-  plugins: [
-    "~/plugins/preline.client.ts",
-    "~/plugins/lottie-vue-player.client.js",
-  ],
+  plugins: ["~/plugins/preline.client.ts"],
 
   components: [
     {
