@@ -5,8 +5,8 @@
 <div class="max-w-[500px] px-4 sm:px-6 mx-auto">
   <div class="mt-12 max-w-lg mx-auto">
     <!-- Card -->
-    <div class="flex flex-col border rounded-xl p-4 sm:p-6 lg:p-8">
-      <h2 class="mb-8 text-xl font-semibold text-gray-800 ">
+    <div class="flex flex-col border border-gray-300 shadow-md rounded-xl p-4 sm:p-6 lg:p-8">
+      <h2 class="mb-8 text-2xl font-bold text-gray-800 text-center md:text-start">
         Contattaci!
       </h2>
 
@@ -41,14 +41,14 @@
           <!-- End Grid -->
 
           <div>
-            <label for="hs-about-contacts-1" class="block mb-2 text-sm text-gray-700 font-medium">Mesaggio</label>
+            <label for="hs-about-contacts-1" class="block mb-2 text-sm text-gray-700 font-medium">Messaggio</label>
             <textarea id="hs-about-contacts-1" name="hs-about-contacts-1" rows="4" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm"></textarea>
           </div>
         </div>
         <!-- End Grid -->
 
         <div class="mt-6 grid">
-          <button type="submit" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none ">Invia Email</button>
+          <button type="submit" class="w-full py-3 px-4 inline-flex justify-center shadow-md text-sm font-bold rounded-lg text-white bg-[#ED1C24]  disabled:opacity-50 disabled:pointer-events-none transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105">Invia Email</button>
         </div>
 
         <div class="mt-3 text-center">

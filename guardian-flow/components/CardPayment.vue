@@ -1,0 +1,143 @@
+<script setup lang="ts"></script>
+<template>
+  <!-- Card Section -->
+  <div class="max-w-[500px]">
+    <!-- Card -->
+    <div
+      class="bg-white rounded-xl border border-gray-300 shadow-md p-4 sm:p-7"
+    >
+      <div class="text-center mb-8">
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-800">
+          Procedi all'acquisto
+        </h2>
+        <p class="text-sm text-gray-600 dark:text-gray-400">
+          Inserisci i dati utili al completamento dell'acquisto
+        </p>
+      </div>
+
+      <form>
+        <!-- Section -->
+        <div
+          class="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200"
+        >
+          <label
+            for="af-payment-billing-contact"
+            class="inline-block text-sm font-medium"
+          >
+            I tuoi dati
+          </label>
+
+          <div class="mt-2 space-y-3">
+            <input
+              id="af-payment-billing-contact"
+              type="text"
+              class="py-2 px-3 w-full border border-gray-200 text-sm rounded-lg disabled:pointer-events-none"
+              placeholder="Nome*"
+            />
+            <input
+              type="text"
+              class="py-2 px-3 w-full border border-gray-200 text-sm rounded-lg disabled:pointer-events-none"
+              placeholder="Cognome*"
+            />
+            <input
+              type="text"
+              class="py-2 px-3 w-full border border-gray-200 text-sm rounded-lg disabled:pointer-events-none"
+              placeholder="Email*"
+            />
+          </div>
+        </div>
+        <!-- End Section -->
+
+        <!-- Section -->
+        <div
+          class="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200"
+        >
+          <label
+            for="af-payment-billing-address"
+            class="inline-block text-sm font-medium"
+          >
+            Informazioni aziendali
+          </label>
+
+          <div class="mt-2 space-y-3">
+            <input
+              id="af-payment-billing-address"
+              type="text"
+              class="py-2 px-3 w-full border border-gray-200 text-sm rounded-lg disabled:pointer-events-none"
+              placeholder="Nome azienda*"
+            />
+            <input
+              id="af-payment-billing-address"
+              type="text"
+              class="py-2 px-3 w-full border border-gray-200 text-sm rounded-lg disabled:pointer-events-none"
+              placeholder="P.IVA*"
+            />
+            <input
+              id="af-payment-billing-address"
+              type="text"
+              class="py-2 px-3 w-full border border-gray-200 text-sm rounded-lg disabled:pointer-events-none"
+              placeholder="Email aziendale*"
+            />
+            <input
+              id="af-payment-billing-address"
+              type="text"
+              class="py-2 px-3 w-full border border-gray-200 text-sm rounded-lg disabled:pointer-events-none"
+              placeholder="Numero di telefono*"
+            />
+          </div>
+        </div>
+        <!-- End Section -->
+
+        <!-- Section -->
+        <div
+          class="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200"
+        >
+          <label
+            for="af-payment-payment-method"
+            class="inline-block text-sm font-medium"
+          >
+            Metodo di pagamento
+          </label>
+
+          <div class="mt-2 space-y-3">
+            <input
+              id="af-payment-payment-method"
+              type="text"
+              class="py-2 px-3 w-full border border-gray-200 text-sm rounded-lg disabled:pointer-events-none"
+              placeholder="Intestatario carta*"
+            />
+            <input
+              type="text"
+              class="py-2 px-3 w-full border border-gray-200 text-sm rounded-lg disabled:pointer-events-none"
+              placeholder="Numero carta*"
+            />
+            <div class="grid sm:flex gap-3">
+              <input
+                type="text"
+                class="py-2 px-3 w-full border border-gray-200 text-sm rounded-lg disabled:pointer-events-none"
+                placeholder="Data di scadenza*"
+              />
+              <input
+                type="text"
+                class="py-2 px-3 w-full border border-gray-200 text-sm rounded-lg disabled:pointer-events-none"
+                placeholder="CVV*"
+              />
+            </div>
+          </div>
+        </div>
+        <!-- End Section -->
+      </form>
+
+      <div class="mt-5 flex justify-center gap-x-2">
+        <button
+          type="button"
+          class="inline-flex text-sm font-bold rounded-lg bg-[#ED1C24] text-white shadow-md w-full inline-flex justify-center py-3 px-4 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 disabled:pointer-events-none"
+        >
+          Paga Ora
+        </button>
+      </div>
+    </div>
+    <!-- End Card -->
+  </div>
+  <!-- End Card Section -->
+</template>
