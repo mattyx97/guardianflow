@@ -14,7 +14,7 @@
               <h1>ATTIVO</h1>
             </div> -->
           </div>
-          <!-- escrizione piano -->
+          <!-- descrizione piano -->
         </div>
         <div class="flex flex-row items-baseline">
           <h1 class="text-5xl">50€</h1>

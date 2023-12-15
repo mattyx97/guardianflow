@@ -4,53 +4,25 @@ import type { Header, Item } from "vue3-easy-data-table";
 definePageMeta({
   layout: "gestionale",
 });
-const headers: Header[] = [
-  { text: "PLAYER", value: "player" },
-  { text: "TEAM", value: "team" },
-  { text: "NUMBER", value: "number" },
-  { text: "POSITION", value: "position" },
-  { text: "HEIGHT", value: "indicator.height" },
-  { text: "WEIGHT (lbs)", value: "indicator.weight", sortable: true },
-  { text: "LAST ATTENDED", value: "lastAttended", width: 200 },
-  { text: "COUNTRY", value: "country" },
-];
 
-const items: Item[] = [
+const Utente = [
   {
-    player: "Stephen Curry",
-    team: "GSW",
-    number: 30,
-    position: "G",
-    indicator: { height: "6-2", weight: 185 },
-    lastAttended: "Davidson",
-    country: "USA",
+    userEmail: "ciao",
+    userNome: "ciao",
+    userCognome: "ciao",
+    userPermessi: "ciao",
   },
   {
-    player: "Lebron James",
-    team: "LAL",
-    number: 6,
-    position: "F",
-    indicator: { height: "6-9", weight: 250 },
-    lastAttended: "St. Vincent-St. Mary HS (OH)",
-    country: "USA",
+    userEmail: "ciao",
+    userNome: "ciao",
+    userCognome: "ciao",
+    userPermessi: "ciao",
   },
   {
-    player: "Kevin Durant",
-    team: "BKN",
-    number: 7,
-    position: "F",
-    indicator: { height: "6-10", weight: 240 },
-    lastAttended: "Texas-Austin",
-    country: "USA",
-  },
-  {
-    player: "Giannis Antetokounmpo",
-    team: "MIL",
-    number: 34,
-    position: "F",
-    indicator: { height: "6-11", weight: 242 },
-    lastAttended: "Filathlitikos",
-    country: "Greece",
+    userEmail: "ciao",
+    userNome: "ciao",
+    userCognome: "ciao",
+    userPermessi: "ciao",
   },
 ];
 </script>
@@ -116,7 +88,7 @@ const items: Item[] = [
                             type="email"
                             id="hs-floating-input-email"
                             required
-                            class="border outline-none w-full peer p-4 border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2"
+                            class="border outline-none w-full peer p-4 border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2"
                             placeholder="you@email.com"
                           />
                           <label
@@ -130,7 +102,7 @@ const items: Item[] = [
                             type="text"
                             id="hs-floating-input-name"
                             required
-                            class="border w-full outline-none peer p-4 border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2"
+                            class="border w-full outline-none peer p-4 border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2"
                             placeholder="Nome"
                           />
                           <label
@@ -144,7 +116,7 @@ const items: Item[] = [
                             type="text"
                             id="hs-floating-input-surname"
                             required
-                            class="border outline-none w-full p-4 border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 peer focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2"
+                            class="border outline-none w-full p-4 border-gray-200 rounded-lg text-sm placeholder:text-transparent peer focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2"
                             placeholder="Cognome"
                           />
                           <label
@@ -155,7 +127,7 @@ const items: Item[] = [
                         </div>
                         <select
                           required
-                          class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 border outline-none"
+                          class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm disabled:opacity-50 border outline-none"
                         >
                           <option>Admin</option>
                           <option>Moderatore</option>
@@ -167,7 +139,7 @@ const items: Item[] = [
                     >
                       <button
                         type="button"
-                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg hover:text-white border border-black hover:bg-green-500 hover:border-transparent"
+                        class="py-2 px-3 inline-flex w-full justify-center gap-x-10 text-sm font-semibold rounded-lg text-white bg-red-500 hover:border-transparent transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105"
                       >
                         Salva
                       </button>
@@ -175,9 +147,9 @@ const items: Item[] = [
                   </div>
                 </div>
               </div>
+              <!-- FINE MODAL -->
             </div>
           </div>
-
           <!-- INIZIO TABELLA -->
           <table class="min-w-full">
             <thead class="p-2 border-b">
@@ -215,124 +187,12 @@ const items: Item[] = [
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
-              <tr class="cursor-pointer hover:bg-gray-100">
-                <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">
-                  edmondo888@gmail.com
-                </td>
-                <td class="px-6 py-4 text-sm whitespace-nowrap">Edmondo</td>
-                <td class="px-6 py-4 text-sm whitespace-nowrap">De Simone</td>
-                <td class="px-6 py-4 text-sm whitespace-nowrap">Admin</td>
-                <td
-                  class="px-6 py-4 text-sm font-medium whitespace-nowrap text-end"
-                >
-                  <div class="relative inline-flex hs-dropdown">
-                    <button
-                      id="hs-dropdown-custom-icon-trigger"
-                      type="button"
-                      class="flex items-center justify-center text-sm font-semibold text-gray-800 hs-dropdown-toggle disabled:opacity-50 disabled:pointer-events-none"
-                    >
-                      <Icon name="humbleicons:dots-horizontal" size="20" />
-                    </button>
-
-                    <div
-                      class="z-50 hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[15rem] bg-white shadow-md rounded-lg p-2 mt-2"
-                      aria-labelledby="hs-dropdown-custom-icon-trigger"
-                    >
-                      <a
-                        class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                        href="#"
-                      >
-                        Modifica
-                      </a>
-                      <a
-                        class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm  focus:outline-none focus:bg-gray-100 hover:bg-red-500 hover:text-white"
-                        href="#"
-                      >
-                        Elimina
-                      </a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-
-              <tr class="cursor-pointer hover:bg-gray-100">
-                <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">
-                  giuseppe@gmail.com
-                </td>
-                <td class="px-6 py-4 text-sm whitespace-nowrap">Giuseppe</td>
-                <td class="px-6 py-4 text-sm whitespace-nowrap">Cerella</td>
-                <td class="px-6 py-4 text-sm whitespace-nowrap">Admin</td>
-                <td
-                  class="px-6 py-4 text-sm font-medium whitespace-nowrap text-end"
-                >
-                  <div class="relative inline-flex hs-dropdown">
-                    <button
-                      id="hs-dropdown-custom-icon-trigger"
-                      type="button"
-                      class="flex items-center justify-center text-sm font-semibold text-gray-800 hs-dropdown-toggle disabled:opacity-50 disabled:pointer-events-none "
-                    >
-                      <Icon name="humbleicons:dots-horizontal" size="20" />
-                    </button>
-
-                    <div
-                      class="z-50 hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[15rem] bg-white shadow-md rounded-lg p-2 mt-2"
-                      aria-labelledby="hs-dropdown-custom-icon-trigger"
-                    >
-                      <a
-                        class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                        href="#"
-                      >
-                        Modifica
-                      </a>
-                      <a
-                        class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 hover:bg-red-500 hover:text-white"
-                        href="#"
-                      >
-                        Elimina
-                      </a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr class="cursor-pointer hover:bg-gray-100">
-                <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">
-                  giuseppe@gmail.com
-                </td>
-                <td class="px-6 py-4 text-sm whitespace-nowrap">Giuseppe</td>
-                <td class="px-6 py-4 text-sm whitespace-nowrap">Cerella</td>
-                <td class="px-6 py-4 text-sm whitespace-nowrap">Admin</td>
-                <td
-                  class="px-6 py-4 text-sm font-medium whitespace-nowrap text-end"
-                >
-                  <div class="relative inline-flex hs-dropdown">
-                    <button
-                      id="hs-dropdown-custom-icon-trigger-2"
-                      type="button"
-                      class="flex items-center justify-center text-sm font-semibold text-gray-800 hs-dropdown-toggle disabled:opacity-50 disabled:pointer-events-none"
-                    >
-                      <Icon name="humbleicons:dots-horizontal" size="20" />
-                    </button>
-
-                    <div
-                      class="z-50 hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[15rem] bg-white shadow-md rounded-lg p-2 mt-2"
-                      aria-labelledby="hs-dropdown-custom-icon-trigger-2"
-                    >
-                      <a
-                        class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                        href="#"
-                      >
-                        Modifica
-                      </a>
-                      <a
-                        class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 hover:bg-red-500 hover:text-white"
-                        href="#"
-                      >
-                        Elimina
-                      </a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
+              <UsersTableRow
+                user-Email="Utente"
+                user-nome="Ciao"
+                user-cognome="Ciao"
+                user-permessi="ciao"
+              />
             </tbody>
           </table>
         </div>

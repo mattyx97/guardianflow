@@ -9,11 +9,11 @@ import GFLogo from "@/assets/Falco_Bianco.png"
 <template>
   <div>
     <!--PARTE IL NOSTRO PROGETTO-->
-    <div class="flex flex-col md:flex-row justify-center items-center gap-5">
-      <img :src="GFLogo" alt="Logo protezione" class="max-w-[40%] hidden md:block" />
+    <div class="flex flex-col lg:flex-row justify-between items-center md:gap-5 mx-[15%]">
+      <img :src="GFLogo" alt="Logo protezione" class="max-w-[40%] hidden lg:block" />
       <div class="flex flex-col max-w-[600px] gap-5">
-        <h1 class="font-bold text-xl text-center md:text-start md:text-2xl">IL NOSTRO PROGETTO</h1>
-        <p class="font-light text-md text-center md:text-lg md:text-start">
+        <h1 class="font-bold text-xl text-center lg:text-start md:text-2xl">IL NOSTRO PROGETTO</h1>
+        <p class="font-light text-md text-center md:text-lg lg:text-start">
           Guardian Flow è il risultato di una profonda ricerca e sviluppo nel
           campo della sicurezza informatica. Il nostro obiettivo è offrire alle
           aziende una difesa proattiva e intelligente contro minacce emergenti
@@ -26,8 +26,8 @@ import GFLogo from "@/assets/Falco_Bianco.png"
 
     <!-- TRE VANTAGGI -->
     <div class="flex flex-col">
-      <h1 class="text-center font-bold text-xl p-3">I nostri vantaggi</h1>
-      <div class="flex flex-col md:flex-row justify-between px-20 gap-12 mt-3">
+      <h1 class="text-center font-bold text-2xl p-3">I nostri vantaggi</h1>
+      <div class="flex flex-col lg:flex-row justify-between items-center gap-5 mx-[15%] mt-5">
         <div
           class="flex flex-col bg-white border shadow-md rounded-xl items-center max-w-[300px] hover:shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110"
         >
@@ -83,11 +83,11 @@ import GFLogo from "@/assets/Falco_Bianco.png"
     </div>
 
     <!-- SECONDA PARTE -->
-    <div class="flex flex-col-reverse md:flex-row-reverse mx-16 mt-3 justify-center items-center gap-5">
+    <div class="flex flex-col-reverse lg:flex-row-reverse mx-[15%] mt-5 justify-center items-center gap-5">
         <img :src="Sicurezza" alt="Immagine protezione" class="max-w-[40%]">
       <div class="flex flex-col justify-center max-w-[800px] gap-5">
-        <h1 class="font-bold text-xl text-center md:text-start md:text-2xl">Protezione senza confini</h1>
-        <p class="font-light text-md md:text-lg text-center md:text-start">
+        <h1 class="font-bold text-xl text-center lg:text-start md:text-2xl">Protezione senza confini</h1>
+        <p class="font-light text-md md:text-lg text-center lg:text-start">
           Il nostro sistema Guardian Flow si distingue per la sua capacità di
           monitorare il traffico di rete di un'azienda in tempo reale.
           Utilizzando un'IA non supervisionata, Guardian Flow va oltre i
