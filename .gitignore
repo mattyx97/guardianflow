@@ -3,3 +3,4 @@ ai/malicious_traffic.json
 ai/normal_traffic.json
 ai/guardianflow_model.joblib
 file/**
+ai/.env
