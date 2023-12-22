@@ -1,4 +1,8 @@
 <script setup lang="ts">
+const props = defineProps<{
+  prezzo: number;
+  id: number;
+}>();
 const user = useUser();
 
 
@@ -101,6 +105,7 @@ const handleSubmit = async (e: Event) => {
         emailAzienda: formData.get("emailAziendale"),
         p_iva: formData.get("pIva"),
         telefono: formData.get("telefono"),
+        id_piano: props.id,
       },
       redirect: "manual",
     });
@@ -261,7 +266,7 @@ const handleSubmit = async (e: Event) => {
             </div>
           </div>
           <div class="flex items-center gap-2 py-3">
-            <h1 class="text-2xl font-bold">Totale:</h1>
+            <h1 class="text-2xl font-bold">Totale:{{ $props.prezzo }}</h1>
             <h1>€</h1>
           </div>
         </div>

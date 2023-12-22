@@ -27,7 +27,7 @@ function openUrl() {
       <Card2FA class="col-span-3 md:col-span-2" />
     </div>
     <!-- table -->
-    <div class="-m-1.5 overflow-x-auto max-w-[1400px] mt-2 text-white">
+    <div v-if="user.permessi=='admin'" class="-m-1.5 overflow-x-auto max-w-[1400px] mt-2 text-white">
       <div class="p-1.5 min-w-full inline-block align-middle">
         <div class="overflow-hidden rounded-lg shadow bg-[#171717]">
           <div class="flex flex-row p-3">
@@ -46,7 +46,7 @@ function openUrl() {
                   scope="col"
                   class="px-6 py-3 text-xs font-medium text-white uppercase text-start"
                 >
-                  Mensltà
+                  Mensiltà
                 </th>
                 <th
                   scope="col"
@@ -73,11 +73,11 @@ function openUrl() {
             </thead>
             <tbody class="divide-y divide-gray-200">
               <tr class="cursor-pointer hover:bg-[#1f1f1f]">
-                <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">07/11/2023</td>
-                <td class="px-6 py-4 text-sm whitespace-nowrap">Ottobre</td>
-                <td class="px-6 py-4 text-sm whitespace-nowrap">394€</td>
+                <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">25/1/2024</td>
+                <td class="px-6 py-4 text-sm whitespace-nowrap">Gennaio</td>
+                <td class="px-6 py-4 text-sm whitespace-nowrap">156€</td>
                 <td class="px-6 py-4 text-sm whitespace-nowrap">Pagato</td>
-                <td class="px-6 py-4 text-sm whitespace-nowrap">Basic</td>
+                <td class="px-6 py-4 text-sm whitespace-nowrap">Medium</td>
                 <td class="px-6 py-4 text-sm font-medium whitespace-nowrap text-end">
                   <div class="hs-tooltip inline-block [--placement:right]">
                     <button

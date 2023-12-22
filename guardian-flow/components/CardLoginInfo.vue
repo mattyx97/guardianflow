@@ -5,14 +5,7 @@ const loginhistory = [
     data: "25 Gennaio 2024",
     esito: "Successo",
   },
-  {
-    data: "24 Gennaio 2024",
-    esito: "Fallito",
-  },
-  {
-    data: "23 Gennaio 2024",
-    esito: "Successo",
-  },
+  
 ];
 </script>
 

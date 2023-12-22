@@ -1,20 +1,16 @@
 <script setup lang="ts">
-const props = defineProps<{
-  title?: string;
-  description?: string;
-  priceMese?: number;
-  priceAnno?: number;
-}>();
+//@ts-nocheck
+const route = useRoute().query
 </script>
 <template>
   <div class="flex flex-col items-center justify-center m-5 gap-x-20 lg:flex-row lg:items-start">
     <div class="flex flex-col max-w-[600px]">
-      <h1 class="text-2xl font-bold">Procedi all'acquisto del piano {{ $props.title }}</h1>
+      <h1 class="text-2xl font-bold">Procedi all'acquisto del piano {{ route.titolo }}</h1>
       <h1>
-        {{ $props.description }}
+        {{ route.descrizioni }}
       </h1>
       <div>
-        <h1 class="text-2xl font-bold">Cosa include il piano {{ $props.title }}</h1>
+        <h1 class="text-2xl font-bold">Cosa include il piano {{ route.titolo }}</h1>
 
         <ul class="mt-3 space-y-3 p-2">
           <li class="flex items-center gap-2">
@@ -139,6 +135,6 @@ const props = defineProps<{
         </ul>
       </div>
     </div>
-    <CardPayment />
+    <CardPayment :prezzo="route.prezzo" :id="route.id"  />
   </div>
 </template>

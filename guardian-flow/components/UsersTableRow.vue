@@ -6,6 +6,7 @@ const Utente = defineProps<{
   userCognome?: string;
   userPermessi?: string;
 }>();
+console.log(Utente);
 const openModal = ref(false);
 const elimina = ref(false);
 const showAlertConfirm = ref();

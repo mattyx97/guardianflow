@@ -4,7 +4,7 @@ import * as mysql from "mysql2/promise";
 export default defineEventHandler(async event => {
   const resend = new Resend("re_GMGHNNfW_7yEcQE5PdPH3rip1Bu1Um8az");
 
-  const { username, password, nomeAzienda, emailAzienda, p_iva, telefono, nome, cognome } =
+  const { username, password, nomeAzienda, emailAzienda, p_iva, telefono, nome, cognome,id_piano } =
     await readBody<{
       username: string;
       password: unknown;
@@ -14,6 +14,7 @@ export default defineEventHandler(async event => {
       emailAzienda: string;
       p_iva: string;
       telefono: string;
+      id_piano: number;
     }>(event);
   // basic check
   if (typeof username !== "string" || username.length < 4 || username.length > 31) {
@@ -59,8 +60,8 @@ export default defineEventHandler(async event => {
     );
 
     await connection.execute(
-      "INSERT INTO azienda (nome,email,p_iva,telefono,id_piano) VALUES (?, ?, ?, ?, 1)",
-      [nomeAzienda, emailAzienda, p_iva, telefono]
+      "INSERT INTO azienda (nome,email,p_iva,telefono,id_piano) VALUES (?, ?, ?, ?, ?)",
+      [nomeAzienda, emailAzienda, p_iva, telefono,id_piano]
     );
     const [rows, fields] = await connection.execute("SELECT LAST_INSERT_ID()");
     console.log("rows", rows);

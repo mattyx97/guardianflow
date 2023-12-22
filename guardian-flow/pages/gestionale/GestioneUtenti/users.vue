@@ -17,6 +17,7 @@ const filteredUsers = computed(() => {
     user.username.toLowerCase().includes(search.value.toLowerCase())
   );
 });
+
 </script>
 
 <template>
@@ -88,8 +89,8 @@ const filteredUsers = computed(() => {
             </thead>
             <tbody class="divide-y divide-[#1e1e1e]">
               <UsersTableRow
-                v-for="user in filteredUsers"
-                :key="user.id"
+                v-for="user in users"
+                :user-key="user.id"
                 :user-Email="user.username"
                 :user-nome="user.nome"
                 :user-cognome="user.cognome"

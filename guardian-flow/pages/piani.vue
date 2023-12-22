@@ -57,24 +57,28 @@ const frequenza = ref("mensile");
               description="Il piano Small è la soluzione ideale per le piccole imprese. Con una capacità di analisi fino a 300 GB di traffico di rete al mese oppure 3TB annuali."
               :price="91"
               frequenza="mese"
+              :id="1"
             />
             <CardPiano
               title="Medium"
               description="Il piano Medium è progettato per le aziende in crescita. Con la capacità di analizzare fino a 500 GB di traffico di rete al mese oppure 6.5TB annuali."
               :price="156"
               frequenza="mese"
+              :id="2"
             />
             <CardPiano
               title="Big"
               description="Il piano Big è ottimizzato per aziende di medie dimensioni. Con una capacità di analisi fino a 700 GB di traffico di rete al mese oppure 9 TB annuali."
               :price="221"
               frequenza="mese"
+              :id="3"
             />
             <CardPiano
               title="Huge"
               description="Il piano Huge è la scelta perfetta per aziende su larga scala. Con una capacità di analisi fino a 1 TB di traffico di rete al mese oppure 14 TB annuali."
               :price="351"
               frequenza="mese"
+              :id="4"
             />
           </div>
         </div>
@@ -91,24 +95,28 @@ const frequenza = ref("mensile");
               description="Il piano Small è la soluzione ideale per le piccole imprese. Con una capacità di analisi fino a 300 GB di traffico di rete al mese oppure 3TB annuali."
               :price="1092"
               frequenza="anno"
+              :id="5"
             />
             <CardPiano
               title="Medium"
               description="Il piano Medium è progettato per le aziende in crescita. Con la capacità di analizzare fino a 500 GB di traffico di rete al mese oppure 6.5TB annuali."
               :price="1874"
               frequenza="anno"
+              :id="6"
             />
             <CardPiano
               title="Big"
               description="Il piano Big è ottimizzato per aziende di medie dimensioni. Con una capacità di analisi fino a 700 GB di traffico di rete al mese oppure 9 TB annuali."
               :price="2652"
               frequenza="anno"
+              :id="7"
             />
             <CardPiano
               title="Huge"
               description="Il piano Huge è la scelta perfetta per aziende su larga scala. Con una capacità di analisi fino a 1 TB di traffico di rete al mese oppure 14 TB annuali."
               :price="4212"
               frequenza="anno"
+              :id="8"
             />
           </div>
         </div>

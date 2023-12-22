@@ -14,7 +14,8 @@ const handleSubmit = async (e: Event) => {
         token2FA: formData.get("token2FA"),
       },
     });
-    await navigateTo("/"); // profile page
+    await navigateTo("/gestionale/dashboard"); // redirect to profile page
+
   } catch (e) {
     const { data: error } = e as {
       data: {

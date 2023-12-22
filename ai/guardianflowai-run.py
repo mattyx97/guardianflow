@@ -83,7 +83,7 @@ def send(data):
     ip_src, ip_dst, porta_src, porta_dst, protocollo = data
     id = str(uuid.uuid4())
     url = "http://localhost:3000/api/Dashboard/newVulnerability"
-    payload = {"id": id, "ip_source": ip_src, "ip_dest": ip_dst, "porta": porta_dst, "protocollo": protocollo,"id_azienda": "4"}
+    payload = {"id": id, "ip_source": ip_src, "ip_dest": ip_dst, "porta": porta_dst, "protocollo": protocollo,"id_azienda": "11"}
     headers = {
         'Content-Type': 'application/json'
     }

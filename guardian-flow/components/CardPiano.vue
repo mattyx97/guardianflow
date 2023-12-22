@@ -5,6 +5,7 @@ const props = defineProps<{
   description: string;
   price: number;
   frequenza: string;
+  id: number;
 }>();
 
 const stato = defineModel();
@@ -26,7 +27,7 @@ const stato = defineModel();
         {{ $props.description }}
       </p>
       <NuxtLink
-        to="/checkout"
+        :to="{ path: '/checkout', query: { titolo:$props.title,prezzo:$props.price,frequenza:$props.frequenza,descrizioni:$props.description,id:$props.id } }"
         class="inline-flex items-center shadow-md group-hover:text-black justify-center px-3 py-2 mt-5 text-sm font-semibold transition duration-150 rounded-lg group-hover:bg-white text-white bg-[#ED1C24] gap-x-2 !cursor-pointer"
       >
         Acquista

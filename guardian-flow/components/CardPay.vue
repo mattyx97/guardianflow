@@ -46,7 +46,7 @@ const user = useAuthenticatedUser();
     <div class="flex flex-col gap-2">
       <div class="flex flex-row items-center gap-5 font-bold">
         <h1>Prossima data di fatturazione</h1>
-        <h1>02/02/2023</h1>
+        <h1>25/02/2024</h1>
       </div>
 
       <h1>Il prossimo pagamento dovrà essere effettuato al seguente iban:</h1>
