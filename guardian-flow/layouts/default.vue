@@ -1,11 +1,30 @@
 <script setup lang="ts">
 import Falco_Bianco from "@/assets/Falco_Bianco.png";
+
+const navOptions = [
+  {
+    nome: "Home",
+    link: "/",
+  },
+  {
+    nome: "I nostri piani",
+    link: "/piani",
+  },
+  {
+    nome: "Chi siamo",
+    link: "/chisiamo",
+  },
+  {
+    nome: "Contattaci",
+    link: "/contatti",
+  },
+];
 </script>
 
 <template>
   <header class="z-50 flex flex-wrap w-full py-4 text-sm bg-white sm:justify-start sm:flex-nowrap">
     <nav
-      class="w-full px-4 mx-auto border-b sm:flex sm:items-center sm:justify-between"
+      class="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between"
       aria-label="Global"
     >
       <div class="flex items-center justify-between">
@@ -14,9 +33,9 @@ import Falco_Bianco from "@/assets/Falco_Bianco.png";
         <div class="sm:hidden">
           <button
             type="button"
-            class="inline-flex items-center justify-center p-2 text-gray-800 bg-white border rounded-md"
-            data-hs-collapse="#navbar-image-and-text-2"
-            aria-controls="navbar-image-and-text-2"
+            class="inline-flex items-center justify-center p-2 text-gray-800 bg-white border border-gray-200 rounded-lg shadow-sm hs-collapse-toggle gap-x-2 hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent"
+            data-hs-collapse="#navbar-image-and-text-1"
+            aria-controls="navbar-image-and-text-1"
             aria-label="Toggle navigation"
           >
             <svg
@@ -53,17 +72,19 @@ import Falco_Bianco from "@/assets/Falco_Bianco.png";
           </button>
         </div>
       </div>
+
       <div
-        id="navbar-image-and-text-2"
+        id="navbar-image-and-text-1"
         class="hidden overflow-hidden transition-all duration-300 hs-collapse basis-full grow sm:block"
       >
-        <div
-          class="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:mt-0 sm:justify-center"
-        >
-          <NuxtLink class="font-medium hover:font-bold" to="/"> Home </NuxtLink>
-          <NuxtLink class="font-medium hover:font-bold" to="/piani"> I nostri piani </NuxtLink>
-          <NuxtLink class="font-medium hover:font-bold" to="/chisiamo"> Chi siamo </NuxtLink>
-          <NuxtLink class="font-medium hover:font-bold" to="/contatti"> Contattaci </NuxtLink>
+        <div class="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:mt-0 sm:justify-center">
+          <NuxtLink
+            v-for="option in navOptions"
+            :to="option.link"
+            class="font-medium hover:font-bold"
+            aria-current="page"
+            >{{ option.nome }}</NuxtLink
+          >
         </div>
       </div>
     </nav>
