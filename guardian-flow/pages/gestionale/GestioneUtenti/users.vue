@@ -10,6 +10,7 @@ const search = ref("");
 
 const save = ref(false);
 
+/* funzione per cercare gli utenti */
 const filteredUsers = computed(() => {
   if (search.value === "") return users.value;
   return users.value?.filter((user) =>

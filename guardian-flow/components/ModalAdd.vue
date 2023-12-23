@@ -9,15 +9,17 @@ const emit = defineEmits<{
 const addUtente = ref(false);
 const showAlertConfirm = ref();
 const showAlertNotConfirm = ref();
-
+/* funzione per validare il nome */
 function validateName(name: string): boolean {
   const nameRegex = /^[a-zA-Z]+$/;
   return nameRegex.test(name);
 }
+/* funzione per validare cognome */
 function validateCognome(cognome: string): boolean {
   const cognomeRegex = /^[a-zA-Z]+$/;
   return cognomeRegex.test(cognome);
 }
+/* funzione per genereare una password  che verrà inviata tramite email */
 function generatePassword() {
   var length = 12,
     charset =
@@ -28,6 +30,7 @@ function generatePassword() {
   }
   return retVal;
 }
+/* funzione per inviare i dati del form */
 const handleSubmit = async (e: Event) => {
   if (!(e.target instanceof HTMLFormElement)) return;
   const formData = new FormData(e.target);
@@ -80,6 +83,7 @@ const handleSubmit = async (e: Event) => {
     }, 3000);
   }
 };
+/* notifica */
 if (addUtente.value == false) {
   showAlertNotConfirm.value = false;
   setTimeout(() => {

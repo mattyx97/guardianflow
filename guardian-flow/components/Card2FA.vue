@@ -14,6 +14,8 @@ const mostraDiv = ref(true);
 onMounted(() => {
   twoFactorEnabled.value = user.value.twoFactorEnabled;
 });
+
+/* funzione per fare il setup dell'autenticazione a due fattori */
 async function setup2FA() {
   mostraDiv.value = false;
   try {
@@ -30,7 +32,7 @@ async function setup2FA() {
     console.error("Errore nell'attivazione del 2FA:", error);
   }
 }
-
+/* funzione per verifcare il token */
 async function verifyToken() {
   try {
     // Invia il token inserito dall'utente al server per la verifica
@@ -62,7 +64,7 @@ async function verifyToken() {
   >
     <h1 class="font-bold">Autenticazione 2FA</h1>
 
-    <div class="flex md:flex-row justify-center gap-5 p-4">
+    <div class="flex justify-center gap-5 p-4 md:flex-row">
       <div>
         <img
           :src="auth"
@@ -95,7 +97,7 @@ async function verifyToken() {
       </div>
       <div
         v-if="qrCode"
-        class="flex flex-col justify-center items-center text-center gap-3"
+        class="flex flex-col items-center justify-center gap-3 text-center"
       >
         <p>Scansiona questo QR code con la tua app di autenticazione:</p>
 

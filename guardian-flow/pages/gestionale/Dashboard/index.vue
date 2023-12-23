@@ -22,7 +22,7 @@ const mesi = [
   "Nov",
   "Dic",
 ];
-
+/* impostazioni grafico */
 const options = {
   chart: {
     id: "vuechart-example",
@@ -72,6 +72,7 @@ const options = {
     enabled: false,
   },
 };
+/* dati grafico */
 const series = [
   {
     name: "Numero anomalie:",
@@ -79,7 +80,7 @@ const series = [
     color: "#2db5bb",
   },
 ];
-console.log("anomalieeee",anomalies.value);
+
 </script>
 
 <template>
@@ -94,7 +95,7 @@ console.log("anomalieeee",anomalies.value);
     </div>
 
     <div class="bg-[#171717] rounded-xl p-4">
-        <h1 class="text-2xl text-white font-bold">Resoconto anomalie</h1>
+        <h1 class="text-2xl font-bold text-white">Resoconto anomalie</h1>
       <ClientOnly>
         <VueApexCharts
           class="mt-7"

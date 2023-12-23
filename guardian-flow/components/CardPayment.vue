@@ -1,17 +1,19 @@
 <script setup lang="ts">
 const user = useUser();
 
+
 if (user.value) {
   await navigateTo("/"); // redirect to profile page
 }
 
 const errorMessage = ref<string | null>(null);
 
+/* funzione per validare il nome  */
 function validateNameIntestatario(name: string): boolean {
   const nameRegex = /^[a-zA-Z\s]+$/;
   return nameRegex.test(name);
 }
-
+/* funzione per validare il cognome */
 function validateCognome(cognome: string): boolean {
   const cognomeRegex = /^[a-zA-Z\s]+$/;
   return cognomeRegex.test(cognome);
@@ -23,6 +25,7 @@ function validateCardNumber(cardNumber: string): boolean {
   return cardNumberRegex.test(cardNumber);
 }
 
+/* funzione per validare la data */
 function validateExpirationDate(expirationDate: string): boolean {
   const today = new Date();
   const [month, year] = expirationDate.split("/");
@@ -33,11 +36,13 @@ function validateExpirationDate(expirationDate: string): boolean {
   return expiry > today;
 }
 
+/* funzione per validare il cvv 3 cifre */
 function validateCVV(cvv: string): boolean {
   const cvvRegex = /^[0-9]{3}$/;
   return cvvRegex.test(cvv);
 }
 
+/* funzione per generare la password */
 function generatePassword() {
   var length = 12,
     charset =
@@ -48,11 +53,12 @@ function generatePassword() {
   }
   return retVal;
 }
+/* funzione per validare il nome */
 function validateName(name: string): boolean {
   const nameRegex = /^[a-zA-Z\s]+$/;
   return nameRegex.test(name);
 }
-
+/* funzione per inviare i dati del form */
 const handleSubmit = async (e: Event) => {
   if (!(e.target instanceof HTMLFormElement)) return;
   const formData = new FormData(e.target);

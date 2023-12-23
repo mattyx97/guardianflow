@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Falco_Bianco from "@/assets/Falco_Bianco.png";
 
+/* array con impostazioni navbar */
 const navOptions = [
   {
     nome: "Home",

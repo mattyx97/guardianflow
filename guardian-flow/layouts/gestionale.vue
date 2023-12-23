@@ -2,7 +2,7 @@
 import Falco_Nero from "@/assets/Falco Nero.png";
 
 const newMessage = ref("");
-
+/* array per impostazioni navbar */
 const navOptions = [
   {
     name: "Dashboard",
@@ -44,7 +44,7 @@ const navOptionsAdmin = [
     link: "/gestionale/dashboard/anomalie",
   },
 ];
-
+/* array chatbot */
 const messages = ref([
   {
     type: "question",
@@ -185,11 +185,11 @@ const open = ref(false);
           <div
             class="p-4 space-y-2 bg-[#1e1e1e] border border-red-500 rounded-2xl"
           >
-            <h2 class="text-md font-bold text-white">
+            <h2 class="font-bold text-white text-md">
               {{ message.text }}
             </h2>
             <div class="space-y-1.5" v-if="message.suggestions">
-              <p class="text-md text-white">
+              <p class="text-white text-md">
                 Sono l'assistente automatico di GuardianFlow
               </p>
               <p class="text-sm text-white">
@@ -218,7 +218,7 @@ const open = ref(false);
     <!-- Input per scrivere nuovi messaggi -->
     <div class="flex justify-center">
       <div
-        class="flex justify-center items-center w-max p-3 bg-transparent gap-3"
+        class="flex items-center justify-center gap-3 p-3 bg-transparent w-max"
       >
         <div
           class="w-full rounded-md bg-gradient-to-r from-red-500 via-red-600 to-red-700 p-[1px] shadow-md"

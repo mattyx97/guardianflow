@@ -12,6 +12,7 @@ const falsoPositivo = ref(false);
 const showAlertConfirm = ref();
 const showAlertNotConfirm = ref();
 
+/* funzione per segnalare un falso positivo */
 function falsoPositivoFunction() {
   console.log(Anomaly.anomalyID);
   $fetch("/api/Dashboard/addFalsePositive", {

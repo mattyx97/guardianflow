@@ -10,7 +10,7 @@ const openModal = ref(false);
 const elimina = ref(false);
 const showAlertConfirm = ref();
 const showAlertNotConfirm = ref();
-
+/* funzione per eliminare le righe */
 function eliminaFunction() {
   $fetch("/api/utente/removeUser", {
     method: "POST",

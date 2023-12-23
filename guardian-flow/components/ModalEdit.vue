@@ -13,6 +13,7 @@ const email = ref(props.email);
 const permessi = ref(props.permessi);
 const errorMessage = ref("");
 
+/* funzione per editare */
 const editUser = async (e: Event) => {
   if (!(e.target instanceof HTMLFormElement)) return;
   const formData = new FormData(e.target);

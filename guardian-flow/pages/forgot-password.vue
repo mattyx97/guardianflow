@@ -10,24 +10,7 @@ if (user.value) {
   await navigateTo("/gestionale/dashboard"); // redirect to profile page
 }
 
-/* FUNCTIONS */
-/* function onSubmit() {
-  isLoading.value = true;
-  authStore
-    .login({
-      email: credentials.email,
-      password: credentials.password,
-    })
-    .then(() => {
-      useRouter().push("/gestionale/");
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => {
-      isLoading.value = false;
-    });
-} */
+
 
 const errorMessage = ref<string | null>(null);
 

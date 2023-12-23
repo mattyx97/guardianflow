@@ -15,11 +15,13 @@ const showAlertNotConfirm = ref(false);
 const frequenza = ref("mensile");
 const pianoPrice = ref(91);
 
+/* watch per cambiare il prezzo */
 watch(status, () => {
   console.log(status.value);
   pianoPrice.value = getPianoPrice();
 });
 
+/* funzione per ottenere il prezzo */
 function getPianoPrice(): number {
   if (frequenza.value === "mensile") {
     if (status.value === "Small") {
@@ -45,6 +47,7 @@ function getPianoPrice(): number {
   return 0;
 }
 
+/* funzione per id */
 function getPianoId() {
   if (frequenza.value === "mensile") {
     if (status.value === "Small") {
@@ -69,16 +72,18 @@ function getPianoId() {
   }
   return 0;
 }
+
+/* funzione per validare il nome nel campo input */
 function validateName(name: string): boolean {
   const nameRegex = /^[a-zA-Z\s]+$/;
   return nameRegex.test(name);
 }
-
+/* funzione per validare il numero di carta di 16 cifre */
 function validateCardNumber(cardNumber: string): boolean {
   const cardNumberRegex = /^[0-9]{16}$/;
   return cardNumberRegex.test(cardNumber);
 }
-
+/* funzione per validare la data di scadenza */
 function validateExpirationDate(expirationDate: string): boolean {
   const today = new Date();
   const [month, year] = expirationDate.split("/");
@@ -89,10 +94,13 @@ function validateExpirationDate(expirationDate: string): boolean {
   return expiry > today;
 }
 
+/* funzione per validare il cvv 3 cifre solo numeri */
 function validateCVV(cvv: string): boolean {
   const cvvRegex = /^[0-9]{3}$/;
   return cvvRegex.test(cvv);
 }
+
+/* funzione per inviare  dati dal form */
 const handleSubmit = async (e: Event) => {
   if (!(e.target instanceof HTMLFormElement)) return;
   const formData = new FormData(e.target);

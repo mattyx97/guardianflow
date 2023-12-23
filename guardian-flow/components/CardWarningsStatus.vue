@@ -3,6 +3,8 @@ import { type Anomalia } from "@/types";
 import VueApexCharts from "vue3-apexcharts";
 const { data: anomalies } = await useFetch("/api/Dashboard/getAllVulnerability");
 
+
+/* impostazioni grafico */
 const options = {
   chart: {
     width: 380,
@@ -23,6 +25,7 @@ const options = {
   
 };
 
+/* dati grafico */
 const series = computed(() => {
   const falsoPositivo =
     anomalies.value?.filter((anomalia) => anomalia.stato == true).length || 0;

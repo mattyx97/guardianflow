@@ -6,11 +6,13 @@ const showAlertNotConfirm = ref();
 const user = useAuthenticatedUser();
 
 const passChange = ref(false);
+
+/* funzione per aprire il modal */
 function open() {
   openModal.value = true;
   console.log(openModal.value);
 }
-
+/* funzione per cambiare la password  */
 async function onSave() {
   if (document.getElementById("password")?.value && document.getElementById("password2")?.value) {
     const password = document.getElementById("password").value;

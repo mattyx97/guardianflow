@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const errorMessage = ref<string | null>(null);
 
+
+/* funzione per inviare i dati */
 const handleSubmit = async (e: Event) => {
   if (!(e.target instanceof HTMLFormElement)) return;
   const formData = new FormData(e.target);
