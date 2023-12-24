@@ -4,7 +4,7 @@ import VueApexCharts from "vue3-apexcharts";
 const { data: anomalies } = await useFetch("/api/getAllVulnerability");
 
 const mesi = ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"];
-
+console.log(anomalies.value);
 const options = {
   chart: {
     width: 380,
