@@ -10,7 +10,7 @@ const props = defineProps<{
 <template>
   <div
     class="flex flex-col md:w-full max-w-[250px] lg:max-w-[300px] py-2 bg-white group hover:text-white border border-gray-300 shadow-md rounded-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:bg-[#ED1C24]"
-  >
+    >
     <div class="p-4 text-center lg:p-5">
       <h3 class="text-lg font-bold">{{ $props.title }}</h3>
       <div class="flex flex-col items-center mt-5 text-center">

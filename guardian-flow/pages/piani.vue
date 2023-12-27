@@ -34,7 +34,7 @@ const Piano = [
   <div
     class="flex flex-col gap-12 mt-[10%] p-5 md:flex-row justify-center items-center"
   >
-    <CardPiano title="Small" :priceMese="91" :priceAnno="1092" />
+    <CardPiano title="Small" description="" :priceMese="91" :priceAnno="1092" />
     <CardPiano
       title="Medium"
       description="ciao"

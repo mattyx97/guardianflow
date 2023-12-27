@@ -60,7 +60,7 @@ function onSave() {
         data-hs-overlay="#hs-sign-out-alert-small-window"
         @click="open()"
         type="button"
-        class="p-3 text-xs border-2 rounded-lg hover:bg-[#1e1e1e]  border-[#1e1e1e]"
+        class="p-3 text-sm border-2 rounded-lg hover:bg-[#1e1e1e]  border-[#1e1e1e]"
       >
         MODIFICA PASSWORD
       </button>
