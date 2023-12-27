@@ -97,7 +97,7 @@ const Utente = [
                 user-Email="edmondo888@gmail.com"
                 user-nome="Edmondo"
                 user-cognome="De Simone"
-                user-permessi="Utente Subordinato"
+                user-permessi="Moderatore"
               />
             </tbody>
           </table>
