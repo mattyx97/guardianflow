@@ -33,7 +33,7 @@ const navOptions = [
   <div class="flex justify-end p-2 lg:hidden">
     <button
       type="button"
-      class="inline-flex items-center justify-center p-2 text-gray-800 bg-white border border-gray-200 rounded-lg shadow-sm gap-x-2 hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-gray-700 dark:text-white dark:hover:bg-white/10 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+      class="inline-flex items-center justify-center p-2 text-black bg-white border border-gray-200 rounded-lg shadow-sm gap-x-2 hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
       data-hs-overlay="#sidebar-mini"
       aria-controls="sidebar-mini"
       aria-label="Toggle navigation"
