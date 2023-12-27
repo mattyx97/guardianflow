@@ -188,10 +188,10 @@ const Utente = [
             </thead>
             <tbody class="divide-y divide-gray-200">
               <UsersTableRow
-                user-Email="Utente"
-                user-nome="Ciao"
-                user-cognome="Ciao"
-                user-permessi="ciao"
+                user-Email="edmondo888@gmail.com"
+                user-nome="Edmondo"
+                user-cognome="De Simone"
+                user-permessi="Utente Subordinato"
               />
             </tbody>
           </table>
