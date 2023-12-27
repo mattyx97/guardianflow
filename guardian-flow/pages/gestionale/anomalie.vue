@@ -25,7 +25,7 @@ const Anomaly = [
         <div class="flex flex-row p-3">
           <h1 class="text-2xl">Anomalie</h1>
         </div>
-        <table class="min-w-full">
+        <table class="min-w-full overflow-auto">
           <thead class="p-2 border-b">
             <tr>
               <th
@@ -78,7 +78,7 @@ const Anomaly = [
               </th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-gray-200">
+          <tbody class="overflow-auto divide-y divide-gray-200">
             <AnomalieTableRow
               :anomalyID="1"
               anomalyDate="08/07/2023"
