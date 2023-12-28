@@ -23,6 +23,7 @@ const navOptions = [
   {
     name: "Logout",
     icon: "mdi:logout",
+    class: "hover:text-red-500",
     link: "/",
   },
 ];
@@ -31,10 +32,10 @@ const navOptions = [
 <template>
   <Body class="bg-[#1e1e1e]">
     <!-- Navigation Toggle -->
-    <div class="flex justify-end p-2 lg:hidden bg-[#0d1117]">
+    <div class="flex justify-end p-2 lg:hidden bg-[#171717]">
       <button
         type="button"
-        class="inline-flex items-center justify-center p-2 text-white bg-[#0d1117] border border-gray-200 rounded-lg shadow-sm gap-x-2 disabled:opacity-50 disabled:pointer-events-none"
+        class="inline-flex items-center justify-center p-2 text-white bg-[#171717] border border-gray-200 rounded-lg shadow-sm gap-x-2 disabled:opacity-50 disabled:pointer-events-none"
         data-hs-overlay="#sidebar-mini"
         aria-controls="sidebar-mini"
         aria-label="Toggle navigation"
@@ -68,6 +69,7 @@ const navOptions = [
         >
           <NuxtLink
             :to="option.link"
+            :class="option.class"
             class="hs-tooltip-toggle w-[2.375rem] h-[2.375rem] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-white"
           >
             <Icon :name="option.icon" size="20" />

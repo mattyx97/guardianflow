@@ -36,24 +36,23 @@ const Utente = [
           <div class="flex flex-row p-3">
             <h1 class="text-2xl">Utenti</h1>
             <div class="flex gap-2 m-auto">
-              <input
-                type="text"
-                class="p-2 border rounded-md ring-none bg-[#171717] text-white focus:border-2 focus:outline-black"
-                placeholder="Ricerca utente..."
-              />
+              <div class="w-full rounded-md bg-gradient-to-r from-red-500 via-red-600 to-red-700 p-[1px] shadow-md">
+                <input
+                  type="text"
+                  class="p-2 flex h-full w-full items-center justify-center bg-[#171717] rounded-md focus:outline-none text-white"
+                  placeholder="Ricerca utente..."
+                />
+              </div>
+
               <button
                 type="button"
-                class="items-center p-2 border rounded-md"
+                class="p-2 text-white bg-gradient-to-b from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:outline-none shadow-md font-medium rounded-lg text-center"
                 data-hs-overlay="#hs-vertically-centered-modal"
               >
-                <Icon
-                  name="ic:baseline-plus"
-                  size="25"
-                  class="transition duration-100 ease-in-out delay-50 hover:-translate-y-1 hover:scale-110"
-                />
+                <Icon name="ic:baseline-plus" size="25" />
               </button>
 
-             <ModalAdd :open="true"  />
+              <ModalAdd :open="true" />
             </div>
           </div>
           <!-- INIZIO TABELLA -->

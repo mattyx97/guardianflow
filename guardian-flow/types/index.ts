@@ -7,3 +7,9 @@ export interface Anomalia {
   ip_sorgente: string;
   ip_destinazione: string;
 }
+export interface Piano {
+  id: string;
+  nome: string;
+  descrizione: string;
+  prezzo: double;
+}

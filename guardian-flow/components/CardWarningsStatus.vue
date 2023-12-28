@@ -7,16 +7,20 @@ const options = {
   chart: {
     width: 380,
     type: "pie",
+    
   },
   labels: ["Falso Positivo", "Anomalia"],
-  colors: ["#32CD32", "#FF0000"],
+  colors: ["#32CD32", "#ED1C24"],
 
   grid: {
-    show: false,
+    show: false,  
   },
   dataLabels: {
-    enabled: false,
+    enabled: false,  
   },
+  
+  
+  
 };
 
 const series = computed(() => {
@@ -30,10 +34,11 @@ const series = computed(() => {
 
 <template>
   <div
-    class="flex flex-col p-4  bg-[#171717] shadow-sm rounded-xl md:p-5 lg:h-[250px]"
+    class="flex flex-col p-4   bg-[#171717] shadow-sm rounded-xl md:p-5 lg:h-[250px]"
   >
     <ClientOnly>
       <VueApexCharts
+      id="grafico"
         type="pie"
         height="200"
         :options="options"
@@ -43,3 +48,12 @@ const series = computed(() => {
     </ClientOnly>
   </div>
 </template>
+
+
+<style>
+
+.apexcharts-legend-text{
+  color: white !important;
+}
+
+</style>

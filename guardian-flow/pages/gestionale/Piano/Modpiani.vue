@@ -11,7 +11,8 @@ const frequenza = ref("mensile");
 
 <template>
   <div class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
-    <div class="flex flex-row justify-between p-10 gap-9">
+    <h1 class="text-white text-2xl font-bold">Modifica il tuo piano</h1>
+    <div class="flex md:flex-col lg:flex-row justify-between p-10 gap-9">
       <!-- INIZIO MENU -->
       <div>
         <div class="border-b-2 border-[#171717]">
@@ -23,7 +24,7 @@ const frequenza = ref("mensile");
           >
             <button
               type="button"
-              class="hs-tab-active:font-semibold hs-tab-active:border-red-600 hs-tab-active:text-red-600 py-4 px-1 inline-flex items-center gap-x-2 border-b-2 border-transparent whitespace-nowrap text-white hover:text-red-600 focus:outline-none focus:text-red-500 disabled:opacity-50 disabled:pointer-events-none active"
+              class="hs-tab-active:font-semibold hs-tab-active:border-[#ED1C24] hs-tab-active:text-[#ED1C24] py-4 px-1 inline-flex items-center gap-x-2 border-b-2 border-transparent whitespace-nowrap text-white hover:text-[#ED1C24] focus:outline-none focus:text-[#ED1C24] disabled:opacity-50 disabled:pointer-events-none active"
               id="horizontal-alignment-item-1"
               data-hs-tab="#horizontal-alignment-1"
               aria-controls="horizontal-alignment-1"
@@ -34,7 +35,7 @@ const frequenza = ref("mensile");
             </button>
             <button
               type="button"
-              class="hs-tab-active:font-semibold hs-tab-active:border-red-600 hs-tab-active:text-red-600 py-4 px-1 inline-flex items-center gap-x-2 border-b-2 border-transparent whitespace-nowrap text-white hover:text-red-600 focus:outline-none focus:text-red-500 disabled:opacity-50 disabled:pointer-events-none"
+              class="hs-tab-active:font-semibold hs-tab-active:border-[#ED1C24] hs-tab-active:text-[#ED1C24] py-4 px-1 inline-flex items-center gap-x-2 border-b-2 border-transparent whitespace-nowrap text-white hover:text-[#ED1C24] focus:outline-none focus:text-[#ED1C24] disabled:opacity-50 disabled:pointer-events-none"
               id="horizontal-alignment-item-2"
               data-hs-tab="#horizontal-alignment-2"
               aria-controls="horizontal-alignment-2"
@@ -126,7 +127,9 @@ const frequenza = ref("mensile");
       </div>
 
       <!-- CARD PAGAMENTO -->
-      <div class="rounded-lg text-white flex flex-col bg-[#171717] w-[40%] p-3">
+      <div
+        class="rounded-lg text-white flex flex-col bg-[#171717] w-full lg:w-[40%] p-3"
+      >
         <h1 class="text-xl font-bold py-2">Procedi all'acquisto</h1>
         <div class="text-white flex flex-col gap-5 mt-3">
           <div>
@@ -174,7 +177,7 @@ const frequenza = ref("mensile");
           </div>
           <div class="flex flex-row gap-2 text-white text-xl">
             <h1>Totale:</h1>
-            <h1 class="font-bold">300$</h1>
+            <h1 class="font-bold">1092€</h1>
           </div>
           <div class="flex justify-center mt-3">
             <button

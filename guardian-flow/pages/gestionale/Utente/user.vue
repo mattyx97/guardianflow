@@ -4,6 +4,9 @@ definePageMeta({
   layout: "gestionale",
   middleware: ["protected"],
 });
+
+const user = useAuthenticatedUser();
+console.log(user.value.userId);
 </script>
 
 <template>

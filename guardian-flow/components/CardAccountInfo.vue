@@ -60,9 +60,12 @@ function onSave() {
         data-hs-overlay="#hs-sign-out-alert-small-window"
         @click="open()"
         type="button"
-        class="p-3 text-sm border-2 rounded-lg hover:bg-[#1e1e1e]  border-[#1e1e1e]"
+        class="p-[1px] text-md rounded-md bg-gradient-to-r from-red-500 via-red-600 to-red-700 shadow-md"
       >
-        MODIFICA PASSWORD
+        <span
+          class="p-2 flex h-full w-full items-center justify-center bg-[#171717] rounded-md focus:outline-none text-white hover:bg-gradient-to-t ease-in hover:from-red-500 hover:via-red-600 hover:to-red-700"
+          >MODIFICA PASSWORD</span
+        >
       </button>
     </div>
     <!-- Modal -->
@@ -89,15 +92,13 @@ function onSave() {
           >
             <!-- End Icon -->
 
-            <h3 class="mb-2 text-xl font-bold">
-              Modifica la tua password
-            </h3>
+            <h3 class="mb-2 text-xl font-bold">Modifica la tua password</h3>
             <form @submit.prevent="onSave()" class="text-white">
               <label class="flex flex-col items-start justify-center gap-2">
                 <span class="text-sm">Password attuale</span>
                 <input
                   type="password"
-                  class="block w-full py-3 pl-2 text-sm bg-transparent border rounded-xl  focus:outline-none focus:border-2 focus:ring-0 disabled:pointer-events-none"
+                  class="block w-full py-3 pl-2 text-sm bg-transparent border rounded-xl focus:outline-none focus:border-2 focus:ring-0 disabled:pointer-events-none"
                   placeholder="Enter password"
                 />
               </label>
@@ -108,7 +109,7 @@ function onSave() {
                 <span class="text-sm">Nuova password</span>
                 <input
                   type="password"
-                  class="block w-full py-3 pl-2 text-sm bg-transparent border rounded-xl  focus:outline-none focus:border-2 focus:ring-0 disabled:pointer-events-none"
+                  class="block w-full py-3 pl-2 text-sm bg-transparent border rounded-xl focus:outline-none focus:border-2 focus:ring-0 disabled:pointer-events-none"
                   placeholder="Enter password"
                 />
               </label>
@@ -119,7 +120,7 @@ function onSave() {
                 <span class="text-sm">Conferma password</span>
                 <input
                   type="password"
-                  class="block w-full py-3 pl-2 text-sm bg-transparent border rounded-xl  focus:outline-none focus:border-2 focus:ring-0 disabled:pointer-events-none"
+                  class="block w-full py-3 pl-2 text-sm bg-transparent border rounded-xl focus:outline-none focus:border-2 focus:ring-0 disabled:pointer-events-none"
                   placeholder="Enter password"
                 />
               </label>

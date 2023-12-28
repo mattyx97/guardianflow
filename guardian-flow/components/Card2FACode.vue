@@ -32,7 +32,9 @@ const handleSubmit = async (e: Event) => {
     <div class="flex flex-col items-center">
       <Icon name="lucide:smartphone" size="40" />
       <div class="flex flex-row gap-3 items-center">
-        <h1 class="text-xl font-semibold tracking-tight">Autenticazione a due fattori</h1>
+        <h1 class="text-xl font-semibold tracking-tight">
+          Autenticazione a due fattori
+        </h1>
         <div class="hs-tooltip inline-block [--placement:right]">
           <button
             type="button"
@@ -61,9 +63,13 @@ const handleSubmit = async (e: Event) => {
         />
         <button
           type="submit"
-          class="bg-green-500 hover:bg-green-700 text-white py-2 px-4 w-full rounded-lg"
+          class="p-[1px] text-md rounded-md bg-gradient-to-r from-red-500 via-red-600 to-red-700 shadow-md"
         >
-          Verifica
+          <span
+            class="p-2 flex h-full w-full items-center justify-center bg-[#171717] rounded-md focus:outline-none text-white hover:bg-gradient-to-t ease-in hover:from-red-500 hover:via-red-600 hover:to-red-700"
+          >
+            Verifica
+          </span>
         </button>
       </div>
     </form>

@@ -15,12 +15,12 @@ function countDayFromDate(date: string) {
     class="flex flex-col p-4 text-white bg-[#171717] shadow-sm rounded-xl md:p-5 lg:h-[250px]"
   >
     <h3 class="text-2xl font-bold text-white">Ultime anomalie</h3>
-    <p class="mt-2">
+    <div class="mt-2">
       <div class="flex justify-between">
         <h1 class="text-md font-bold">ID anomalie</h1>
         <h1 class="font-bold">Età</h1>
       </div>
-      <ul class="flex flex-col gap-3">
+      <ul class=" flex flex-col gap-3 overflow-y-auto">
         <li v-for="anomalia in anomalies" class="flex items-center justify-between">
           <div class="flex items-center justify-center gap-3">
             <Icon name="fluent-emoji-flat:red-circle" v-if="anomalia.stato==0" size="10"/>
@@ -33,6 +33,6 @@ function countDayFromDate(date: string) {
        
        
       </ul>
-    </p>
+    </div>
   </div>
 </template>

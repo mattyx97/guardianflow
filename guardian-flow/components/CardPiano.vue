@@ -1,10 +1,13 @@
 <script setup lang="ts">
+
 const props = defineProps<{
-  title?: string;
-  description?: string;
-  priceMese?: number;
-  priceAnno?: number;
+  title: string;
+  description: string;
+  price: number;
+  frequenza: string;
 }>();
+
+const stato = defineModel();
 </script>
 
 <template>
@@ -15,17 +18,12 @@ const props = defineProps<{
       <h3 class="text-lg font-bold">{{ $props.title }}</h3>
       <div class="flex flex-col items-center mt-5 text-center">
         <div class="flex flex-row items-end">
-          <p class="mt-1 text-3xl font-bold">{{ $props.priceMese }}</p>
-          <p class="font-bold">€/mese</p>
-        </div>
-        <div class="flex flex-row items-end">
-          <p class="mt-1 text-3xl font-bold">{{ $props.priceAnno }}</p>
-          <p class="font-bold">€/anno</p>
+          <p class="mt-1 text-3xl font-bold">{{ $props.price }}€</p>
+          <p class="font-bold">/{{ $props.frequenza }}</p>
         </div>
       </div>
       <p class="mt-5 text-gray-500 group-hover:text-white">
-        Il piano Small è la soluzione ideale per le piccole imprese. Con una capacità di analisi
-        fino a 300 GB di traffico di rete al mese oppure 3TB annuali.
+        {{ $props.description }}
       </p>
       <NuxtLink
         to="/checkout"

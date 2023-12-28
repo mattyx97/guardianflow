@@ -64,12 +64,13 @@ async function verifyToken() {
 
     <div class="flex md:flex-row justify-center gap-5 p-4">
       <div>
-        <img :src="auth" alt="Autenticazione 2FA" class="w-[50px] hidden md:block" />
+        <img
+          :src="auth"
+          alt="Autenticazione 2FA"
+          class="w-[50px] hidden md:block"
+        />
       </div>
-      <div
-        class="flex items-center gap-2 px-3 py-1 border-2 border-[#1e1e1e] rounded-lg hover:bg-[#1e1e1e] hover:text-white"
-        :class="{ hidden: !mostraDiv }"
-      >
+      <div class="flex items-center gap-2" :class="{ hidden: !mostraDiv }">
         <!-- BOTTONE PER 2FA -->
         <button
           v-if="twoFactorEnabled"
@@ -81,11 +82,15 @@ async function verifyToken() {
 
         <button
           v-else
-          class="flex flex-row items-center gap-2"
+          class="p-[1px] text-md rounded-md bg-gradient-to-r from-red-500 via-red-600 to-red-700 shadow-md"
           @click="setup2FA"
         >
-          <Icon name="fluent-emoji-flat:red-circle" size="20" />
-          <h1>NON ATTIVA</h1>
+          <span
+            class="p-3 flex h-full w-full items-center justify-center bg-[#171717] rounded-md focus:outline-none text-white hover:bg-gradient-to-t ease-in hover:from-red-500 hover:via-red-600 hover:to-red-700"
+          >
+            <Icon name="fluent-emoji-flat:red-circle" size="20" />
+            <h1>NON ATTIVA</h1>
+          </span>
         </button>
       </div>
       <div
@@ -94,8 +99,7 @@ async function verifyToken() {
       >
         <p>Scansiona questo QR code con la tua app di autenticazione:</p>
 
-          <img :src="qrCode" class="lg:max-w-[25%]"/>
-
+        <img :src="qrCode" class="lg:max-w-[25%]" />
 
         <div class="flex flex-col gap-3">
           <input
@@ -106,9 +110,13 @@ async function verifyToken() {
           />
           <button
             @click="verifyToken"
-            class="bg-green-500 hover:bg-green-600 text-white px-2 py-2 rounded-lg"
+            class="p-[1px] text-md rounded-md bg-gradient-to-r from-red-500 via-red-600 to-red-700 shadow-md"
           >
-            Verifica Token
+            <span
+              class="p-2 flex h-full w-full items-center justify-center bg-[#171717] rounded-md focus:outline-none text-white hover:bg-gradient-to-t ease-in hover:from-red-500 hover:via-red-600 hover:to-red-700"
+            >
+              Verifica Token
+            </span>
           </button>
         </div>
       </div>

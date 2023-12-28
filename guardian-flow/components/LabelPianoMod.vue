@@ -12,7 +12,7 @@ const stato = defineModel();
 
 <template>
   <!-- CARD -->
-  <div class="flex bg-[#171717] p-3 rounded-lg items-center gap-3">
+  <div class="flex flex-col md:flex-row bg-[#171717] p-3 rounded-lg items-center gap-3">
     <label
       class="relative flex items-center p-3 rounded-full cursor-pointer"
       htmlFor="red"
@@ -22,10 +22,10 @@ const stato = defineModel();
         :value="props.title"
         name="color"
         type="radio"
-        class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 text-red-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-red-500 checked:before:bg-red-500 hover:before:opacity-10"
+        class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 text-[#ED1C24] transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-[#ED1C24] checked:before:bg-[#ED1C24] hover:before:opacity-10"
       />
       <span
-        class="absolute text-red-500 transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100"
+        class="absolute text-[#ED1C24] transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

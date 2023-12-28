@@ -77,6 +77,7 @@ const options = {
     },
   },
   xaxis: {
+    
     categories: [
       "Gen",
       "Feb",
@@ -91,10 +92,23 @@ const options = {
       "Nov",
       "Dic",
     ],
+    labels: {
+      style: {
+        colors:"#FFFFFF",
+      },
+    },
+  },
+  yaxis: {
+    labels: {
+      style: {
+        colors:"#FFFFFF",
+      },
+    },
   },
   
   grid: {
     borderColor: "#FFFFFF",
+    
     lineStyle: {
       dotted: true,  // Imposta le linee della griglia come tratteggiate
     },

@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const { data: piano } = await useFetch("/api/Piano/getPiano");
+
+
+</script>
 
 <template>
   <div
@@ -6,11 +10,11 @@
   >
     <div class="flex flex-col">
       <h1 class="mb-3 font-bold">Il tuo piano</h1>
-      <div class="flex flex-row items-center gap-20">
+      <div class="flex flex-col md:flex-row items-center gap-5 md:gap-20">
         <div class="flex flex-row gap-7">
           <div class="flex flex-col">
             <div class="flex items-center gap-2">
-              <h1 class="text-xl">Organization</h1>
+              <h1 class="text-4xl">Small</h1>
               <!-- STATO PIANO -->
               <!-- <div class="flex items-center gap-2 px-1 border border-black rounded-lg">
               <Icon name="fluent-emoji-flat:green-circle" size="20" />
@@ -20,14 +24,21 @@
             <!-- descrizione piano -->
           </div>
           <div class="flex flex-row items-baseline">
-            <h1 class="text-5xl">50€</h1>
-            <h1 class="text-xs">al mese</h1>
+            <h1 class="text-5xl">91€</h1>
+            <h1 class="text-xs">/al mese</h1>
           </div>
         </div>
 
         <div>
-          <NuxtLink to="../Piano/Modpiani" class="text-sm px-3 py-3 border-2 border-[#1e1e1e] hover:bg-[#1e1e1e] rounded-lg">
-            MODIFICA PIANO
+          <NuxtLink
+            to="../Piano/Modpiani"
+            class="py-[9px] px-[1px] text-sm text-md rounded-md bg-gradient-to-r from-red-500 via-red-600 to-red-700 shadow-md"
+          >
+            <span
+              class="p-2 items-center justify-center bg-[#171717] rounded-md focus:outline-none text-white hover:bg-gradient-to-t ease-in hover:from-red-500 hover:via-red-600 hover:to-red-700"
+            >
+              MODIFICA PIANO
+            </span>
           </NuxtLink>
         </div>
       </div>
