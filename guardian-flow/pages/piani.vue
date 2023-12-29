@@ -76,7 +76,7 @@ const frequenza = ref("mensile");
           role="tabpanel"
           aria-labelledby="horizontal-alignment-item-1"
         >
-          <div class="flex flex-row gap-5" v-if="frequenza === 'mensile'">
+          <div class="flex flex-col md:flex-row gap-5" v-if="frequenza === 'mensile'">
             <CardPiano
               title="Small"
               description="Il piano Small è la soluzione ideale per le piccole imprese. Con una capacità di analisi fino a 300 GB di traffico di rete al mese oppure 3TB annuali."
@@ -110,7 +110,7 @@ const frequenza = ref("mensile");
           role="tabpanel"
           aria-labelledby="horizontal-alignment-item-2"
         >
-          <div class="flex flex-row gap-5" v-if="frequenza === 'annuale'">
+          <div class="flex flex-col md:flex-row gap-5" v-if="frequenza === 'annuale'">
             <CardPiano
               title="Small"
               description="Il piano Small è la soluzione ideale per le piccole imprese. Con una capacità di analisi fino a 300 GB di traffico di rete al mese oppure 3TB annuali."
