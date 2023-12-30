@@ -1,10 +1,21 @@
 <script setup lang="ts">
 const user = useUser();
+
 if (user.value) {
   await navigateTo("/"); // redirect to profile page
 }
 
 const errorMessage = ref<string | null>(null);
+
+function validateNameIntestatario(name: string): boolean {
+  const nameRegex = /^[a-zA-Z\s]+$/;
+  return nameRegex.test(name);
+}
+
+function validateCognome(cognome: string): boolean {
+  const cognomeRegex = /^[a-zA-Z\s]+$/;
+  return cognomeRegex.test(cognome);
+}
 
 //function that generate a random secure password
 function validateCardNumber(cardNumber: string): boolean {
@@ -13,8 +24,13 @@ function validateCardNumber(cardNumber: string): boolean {
 }
 
 function validateExpirationDate(expirationDate: string): boolean {
-  const expirationDateRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
-  return expirationDateRegex.test(expirationDate);
+  const today = new Date();
+  const [month, year] = expirationDate.split("/");
+  // Il mese restituito da JavaScript è basato su 0 (0 per gennaio, 11 per dicembre)
+  // quindi sottraiamo 1 dal valore del mese inserito dall'utente.
+  const expiry = new Date(parseInt("20" + year), parseInt(month) - 1, 1);
+
+  return expiry > today;
 }
 
 function validateCVV(cvv: string): boolean {
@@ -32,20 +48,40 @@ function generatePassword() {
   }
   return retVal;
 }
+function validateName(name: string): boolean {
+  const nameRegex = /^[a-zA-Z\s]+$/;
+  return nameRegex.test(name);
+}
 
 const handleSubmit = async (e: Event) => {
   if (!(e.target instanceof HTMLFormElement)) return;
   const formData = new FormData(e.target);
   const password = generatePassword();
+  const cardNumber = formData.get("cardNumber") as string;
+  const expirationDate = formData.get("expirationDate") as string;
+  const cvv = formData.get("cvv") as string;
+  const username = formData.get("username") as string;
+  const nome = formData.get("nome") as string;
+  const cognome = formData.get("cognome") as string;
+  const intestatario = formData.get("intestatario") as string;
+  if (
+    !validateName(nome) ||
+    !validateCognome(cognome) ||
+    !validateNameIntestatario(intestatario)
+  ) {
+    errorMessage.value = "Si prega di inserire i dati correttamente.";
+    return;
+  }
 
-  // if (
-  //   !validateCardNumber(cardNumber) ||
-  //   !validateExpirationDate(expirationDate) ||
-  //   !validateCVV(cvv)
-  // ) {
-  //   errorMessage.value = "Si prega di inserire informazioni valide per il pagamento.";
-  //   return;
-  // }
+  if (
+    !validateCardNumber(cardNumber) ||
+    !validateExpirationDate(expirationDate) ||
+    !validateCVV(cvv)
+  ) {
+    errorMessage.value =
+      "Si prega di inserire informazioni valide per il pagamento.";
+    return;
+  }
 
   try {
     await $fetch("/api/utente/signup", {
@@ -77,18 +113,31 @@ const handleSubmit = async (e: Event) => {
   <!-- Card Section -->
   <div class="max-w-[500px]">
     <!-- Card -->
-    <div class="p-4 bg-white border border-gray-300 shadow-md rounded-xl sm:p-7">
+    <div
+      class="p-4 bg-white border border-gray-300 shadow-md rounded-xl sm:p-7"
+    >
       <div class="mb-8 text-center">
-        <h2 class="text-2xl font-bold text-gray-800 md:text-3xl">Procedi all'acquisto</h2>
+        <h2 class="text-2xl font-bold text-gray-800 md:text-3xl">
+          Procedi all'acquisto
+        </h2>
         <p class="text-sm text-gray-600 dark:text-gray-400">
           Inserisci i dati utili al completamento dell'acquisto
         </p>
       </div>
 
-      <form method="post" action="/api/utente/signup" @submit.prevent="handleSubmit">
+      <form
+        method="post"
+        action="/api/utente/signup"
+        @submit.prevent="handleSubmit"
+      >
         <!-- Section -->
-        <div class="py-6 border-t border-gray-200 first:pt-0 last:pb-0 first:border-transparent">
-          <label for="af-payment-billing-contact" class="inline-block text-sm font-medium">
+        <div
+          class="py-6 border-t border-gray-200 first:pt-0 last:pb-0 first:border-transparent"
+        >
+          <label
+            for="af-payment-billing-contact"
+            class="inline-block text-sm font-medium"
+          >
             I tuoi dati
           </label>
 
@@ -118,8 +167,13 @@ const handleSubmit = async (e: Event) => {
         <!-- End Section -->
 
         <!-- Section -->
-        <div class="py-6 border-t border-gray-200 first:pt-0 last:pb-0 first:border-transparent">
-          <label for="af-payment-billing-address" class="inline-block text-sm font-medium">
+        <div
+          class="py-6 border-t border-gray-200 first:pt-0 last:pb-0 first:border-transparent"
+        >
+          <label
+            for="af-payment-billing-address"
+            class="inline-block text-sm font-medium"
+          >
             Informazioni aziendali
           </label>
 
@@ -157,8 +211,13 @@ const handleSubmit = async (e: Event) => {
         <!-- End Section -->
 
         <!-- Section -->
-        <div class="py-6 border-t border-gray-200 first:pt-0 last:pb-0 first:border-transparent">
-          <label for="af-payment-payment-method" class="inline-block text-sm font-medium">
+        <div
+          class="py-6 border-t border-gray-200 first:pt-0 last:pb-0 first:border-transparent"
+        >
+          <label
+            for="af-payment-payment-method"
+            class="inline-block text-sm font-medium"
+          >
             Metodo di pagamento
           </label>
 
@@ -168,22 +227,30 @@ const handleSubmit = async (e: Event) => {
               type="text"
               class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg disabled:pointer-events-none"
               placeholder="Intestatario carta*"
+              name="intestatario"
+              required
             />
             <input
-              type="text"
+              type="string"
               class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg disabled:pointer-events-none"
               placeholder="Numero carta*"
+              name="cardNumber"
+              required
             />
             <div class="grid gap-3 sm:flex">
               <input
-                type="text"
+                type="month"
                 class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg disabled:pointer-events-none"
                 placeholder="Data di scadenza*"
+                name="expirationDate"
+                required
               />
               <input
-                type="text"
+                type="number"
                 class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg disabled:pointer-events-none"
                 placeholder="CVV*"
+                name="cvv"
+                required
               />
             </div>
           </div>

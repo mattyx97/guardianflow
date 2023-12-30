@@ -10,7 +10,8 @@ const { data: piano } = await useFetch("/api/Piano/getPiano");
 const status = ref(piano.value?.[0]?.nome?.split(" ")[0] ?? "Small");
 
 const errorMessage = ref<string | null>(null);
-
+const showAlertConfirm = ref(false);
+const showAlertNotConfirm = ref(false);
 const frequenza = ref("mensile");
 const pianoPrice = ref(91);
 
@@ -68,11 +69,55 @@ function getPianoId() {
   }
   return 0;
 }
+function validateName(name: string): boolean {
+  const nameRegex = /^[a-zA-Z\s]+$/;
+  return nameRegex.test(name);
+}
 
+function validateCardNumber(cardNumber: string): boolean {
+  const cardNumberRegex = /^[0-9]{16}$/;
+  return cardNumberRegex.test(cardNumber);
+}
+
+function validateExpirationDate(expirationDate: string): boolean {
+  const today = new Date();
+  const [month, year] = expirationDate.split("/");
+  // Il mese restituito da JavaScript è basato su 0 (0 per gennaio, 11 per dicembre)
+  // quindi sottraiamo 1 dal valore del mese inserito dall'utente.
+  const expiry = new Date(parseInt("20" + year), parseInt(month) - 1, 1);
+
+  return expiry > today;
+}
+
+function validateCVV(cvv: string): boolean {
+  const cvvRegex = /^[0-9]{3}$/;
+  return cvvRegex.test(cvv);
+}
 const handleSubmit = async (e: Event) => {
   if (!(e.target instanceof HTMLFormElement)) return;
   const formData = new FormData(e.target);
+  const cardNumber = formData.get("cardNumber") as string;
+  const expirationDate = formData.get("expirationDate") as string;
+  const cvv = formData.get("cvv") as string;
+  const name = formData.get("name") as string;
 
+  if (!validateName(name)) {
+    showAlertNotConfirm.value = true; // Mostra l'alert di errore
+    setTimeout(() => {
+      showAlertNotConfirm.value = false;
+    }, 3000);
+    return;
+  }
+
+  if (
+    !validateCardNumber(cardNumber) ||
+    !validateExpirationDate(expirationDate) ||
+    !validateCVV(cvv)
+  ) {
+    errorMessage.value =
+      "Si prega di inserire informazioni valide per il pagamento.";
+    return;
+  }
   try {
     $fetch("/api/Piano/editPiano", {
       method: "POST",
@@ -93,11 +138,9 @@ const handleSubmit = async (e: Event) => {
 </script>
 
 <template>
-  <div class="mx-auto max-w-[85rem] px-4 md:py-10 sm:px-6 lg:px-8 lg:py-14">
-    <h1 class="text-white text-2xl font-bold">Modifica il tuo piano</h1>
-    <div
-      class="flex flex-col md:flex-row justify-between p-10 gap-9 items-center"
-    >
+  <div class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+    <h1 class="text-2xl font-bold text-white">Modifica il tuo piano</h1>
+    <div class="flex justify-between p-10 md:flex-col lg:flex-row gap-9">
       <!-- INIZIO MENU -->
       <div class="md:w-[50%]">
         <div class="border-b-2 border-[#171717]">
@@ -221,66 +264,74 @@ const handleSubmit = async (e: Event) => {
 
       <!-- CARD PAGAMENTO -->
       <div
-        class="rounded-lg text-white flex flex-col bg-[#171717] w-full lg:w-[40%] p-3 md:h-max lg:h-full"
+        class="rounded-lg text-white flex flex-col bg-[#171717] w-full lg:w-[40%] p-3"
       >
-        <h1 class="text-xl font-bold py-2">Procedi all'acquisto</h1>
+        <h1 class="py-2 text-xl font-bold">Procedi all'acquisto</h1>
         <form
           method="post"
           action="/api/Piano/editPiano"
           @submit.prevent="handleSubmit"
         >
-          <div class="text-white flex flex-col gap-5 mt-3">
+          <div class="flex flex-col gap-5 mt-3 text-white">
             <div>
-              <label for="input-label" class="block text-sm font-medium mb-2"
+              <label for="input-label" class="block mb-2 text-sm font-medium"
                 >Nome e Cognome</label
               >
               <input
                 type="text"
+                name="name"
                 id="input-label"
                 class="py-3 px-4 w-full bg-[#1e1e1e] rounded-lg text-sm focus:border-none"
                 placeholder="Nome e Cognome"
+                required
               />
             </div>
             <div>
-              <label for="input-label" class="block text-sm font-medium mb-2">
+              <label for="input-label" class="block mb-2 text-sm font-medium">
                 Numero della carta
               </label>
               <input
-                type="text"
+                type="number"
                 id="input-label"
                 class="py-3 px-4 w-full bg-[#1e1e1e] rounded-lg text-sm focus:border-none"
-                placeholder="1111 - 2222 - 3333 - 4444"
+                placeholder="5555 5555 5555 5555"
+                name="cardNumber"
+                required
               />
             </div>
             <div>
-              <label for="input-label" class="block text-sm font-medium mb-2">
+              <label for="input-label" class="block mb-2 text-sm font-medium">
                 Data di scadenza
               </label>
               <input
-                type="text"
+                type="month"
+                name="expirationDate"
                 id="input-label"
+                required
                 class="py-3 px-4 w-full bg-[#1e1e1e] rounded-lg text-sm focus:border-none text-white"
                 placeholder="Data di scadenza"
               />
             </div>
             <div>
-              <label for="input-label" class="block text-sm font-medium mb-2"
+              <label for="input-label" class="block mb-2 text-sm font-medium"
                 >CVV</label
               >
               <input
-                type="text"
+                type="number"
+                name="cvv"
+                required
                 id="input-label"
                 class="py-3 px-4 w-full bg-[#1e1e1e] rounded-lg text-sm focus:border-none text-white"
                 placeholder="CVV"
               />
             </div>
-            <div class="flex flex-row gap-2 text-white text-xl">
+            <div class="flex flex-row gap-2 text-xl text-white">
               <h1>Totale:</h1>
               <h1 class="font-bold">{{ pianoPrice }}€</h1>
             </div>
             <div class="flex justify-center mt-3">
               <button
-                class="bg-red-700 hover:bg-red-800 text-white p-3 rounded-lg"
+                class="p-3 text-white bg-red-700 rounded-lg hover:bg-red-800"
               >
                 ACQUISTA
               </button>
@@ -290,4 +341,93 @@ const handleSubmit = async (e: Event) => {
       </div>
     </div>
   </div>
+  <!-- alert -->
+  <div class="fixed top-0 right-0">
+    <div
+      v-if="showAlertConfirm"
+      class="p-4 bg-green-400 border-t-2 border-teal-500 rounded-lg"
+      role="alert"
+    >
+      <div class="flex">
+        <div class="">
+          <!-- Icon -->
+          <span
+            class="inline-flex items-center justify-center w-8 h-8 text-teal-800 bg-green-400 border-4 border-teal-100 rounded-full"
+          >
+            <svg
+              class="flex-shrink-0 w-4 h-4"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"
+              />
+              <path d="m9 12 2 2 4-4" />
+            </svg>
+          </span>
+          <!-- End Icon -->
+        </div>
+        <div class="ms-3">
+          <h3 class="font-semibold text-gray-800 dark:text-white">
+            Successfully updated.
+          </h3>
+          <p class="text-sm text-gray-700 dark:text-gray-400">
+            Utente aggiunto.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      v-if="showAlertNotConfirm"
+      class="p-4 bg-red-500 border-red-500 border-s-4"
+      role="alert"
+    >
+      <div class="flex">
+        <div class="">
+          <!-- Icon -->
+          <span
+            class="inline-flex items-center justify-center w-8 h-8 text-red-800 bg-red-200 border-4 border-red-100 rounded-full dark:border-red-900 dark:bg-red-800 dark:text-red-400"
+          >
+            <svg
+              class="flex-shrink-0 w-4 h-4"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </span>
+          <!-- End Icon -->
+        </div>
+        <div class="ms-3">
+          <h3 class="font-semibold text-gray-800 dark:text-white">Error!</h3>
+          <p class="text-sm text-gray-700 dark:text-gray-400">
+            Pagamento non effettuato.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
+
+<style scoped>
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+</style>

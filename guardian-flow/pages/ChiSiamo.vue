@@ -83,9 +83,9 @@ import GFLogo from "@/assets/Falco_Bianco.png"
     </div>
 
     <!-- SECONDA PARTE -->
-    <div class="flex flex-col-reverse lg:flex-row-reverse mx-[15%] mt-5 justify-center items-center gap-5">
-        <img :src="Sicurezza" alt="Immagine protezione" class="w-[200px] md:max-w-[40%]">
-      <div class="flex flex-col justify-center max-w-[800px] gap-5">
+    <div class="flex flex-col-reverse lg:flex-row-reverse mt-7 justify-center items-center gap-16 ">
+        <img :src="Sicurezza" alt="Immagine protezione" class="w-[200px] md:w-[30%]">
+      <div class="flex flex-col justify-center max-w-[800px] gap-5 md:gap-">
         <h1 class="font-bold text-xl text-center lg:text-start md:text-2xl">Protezione senza confini</h1>
         <p class="font-light text-md md:text-lg text-center lg:text-start">
           Il nostro sistema Guardian Flow si distingue per la sua capacità di
