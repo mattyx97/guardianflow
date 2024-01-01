@@ -121,7 +121,7 @@ function falsoPositivoFunction() {
             Aggiornamento effettuato.
           </h3>
           <p class="text-sm text-gray-700 dark:text-gray-400">
-            You have successfully updated your email preferences.
+            L'anomalia è stata aggiornata.
           </p>
         </div>
       </div>

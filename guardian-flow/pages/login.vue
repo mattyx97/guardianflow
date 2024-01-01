@@ -7,7 +7,7 @@ const open = ref(false);
 
 const user = useUser();
 if (user.value) {
-  await navigateTo("/"); // redirect to profile page
+  await navigateTo("/login"); // redirect to profile page
 }
 
 /* FUNCTIONS */
@@ -42,7 +42,7 @@ const handleSubmit = async (e: Event) => {
         password: formData.get("password"),
       },
     });
-    await navigateTo(response.body.redirectTo);
+    await navigateTo("/gestionale/dashboard"); // redirect to profile page
   } catch (e) {
     const { data: error } = e as {
       data: {

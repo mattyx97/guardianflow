@@ -121,7 +121,7 @@ function eliminaFunction() {
         <div class="ms-3">
           <h3 class="font-semibold text-gray-800 dark:text-white">Successfully updated.</h3>
           <p class="text-sm text-gray-700 dark:text-gray-400">
-            You have successfully updated your email preferences.
+            Hai rimosso correttamente l'utente.
           </p>
         </div>
       </div>
@@ -153,7 +153,7 @@ function eliminaFunction() {
         </div>
         <div class="ms-3">
           <h3 class="font-semibold text-gray-800 dark:text-white">Error!</h3>
-          <p class="text-sm text-gray-700 dark:text-gray-400">Your purchase has been declined.</p>
+          <p class="text-sm text-gray-700 dark:text-gray-400">La tua richiestà è stata rifiutata.</p>
         </div>
       </div>
     </div>

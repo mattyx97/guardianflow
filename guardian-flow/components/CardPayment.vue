@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import getPiano from '~/server/api/Piano/getPiano';
+
 const user = useUser();
 if (user.value) {
   await navigateTo("/"); // redirect to profile page
@@ -47,9 +49,9 @@ const handleSubmit = async (e: Event) => {
   <!-- Card Section -->
   <div class="max-w-[500px]">
     <!-- Card -->
-    <div class="bg-white rounded-xl border border-gray-300 shadow-md p-4 sm:p-7">
-      <div class="text-center mb-8">
-        <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Procedi all'acquisto</h2>
+    <div class="p-4 bg-white border border-gray-300 shadow-md rounded-xl sm:p-7">
+      <div class="mb-8 text-center">
+        <h2 class="text-2xl font-bold text-gray-800 md:text-3xl">Procedi all'acquisto</h2>
         <p class="text-sm text-gray-600 dark:text-gray-400">
           Inserisci i dati utili al completamento dell'acquisto
         </p>
@@ -57,7 +59,7 @@ const handleSubmit = async (e: Event) => {
 
       <form method="post" action="/api/utente/signup" @submit.prevent="handleSubmit">
         <!-- Section -->
-        <div class="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200">
+        <div class="py-6 border-t border-gray-200 first:pt-0 last:pb-0 first:border-transparent">
           <label for="af-payment-billing-contact" class="inline-block text-sm font-medium">
             I tuoi dati
           </label>
@@ -66,17 +68,17 @@ const handleSubmit = async (e: Event) => {
             <input
               id="af-payment-billing-contact"
               type="text"
-              class="py-2 px-3 w-full border border-gray-200 text-sm rounded-lg disabled:pointer-events-none"
+              class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg disabled:pointer-events-none"
               placeholder="Nome*"
             />
             <input
               type="text"
-              class="py-2 px-3 w-full border border-gray-200 text-sm rounded-lg disabled:pointer-events-none"
+              class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg disabled:pointer-events-none"
               placeholder="Cognome*"
             />
             <input
               type="text"
-              class="py-2 px-3 w-full border border-gray-200 text-sm rounded-lg disabled:pointer-events-none"
+              class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg disabled:pointer-events-none"
               placeholder="Email*"
               name="username"
               id="username"
@@ -86,7 +88,7 @@ const handleSubmit = async (e: Event) => {
         <!-- End Section -->
 
         <!-- Section -->
-        <div class="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200">
+        <div class="py-6 border-t border-gray-200 first:pt-0 last:pb-0 first:border-transparent">
           <label for="af-payment-billing-address" class="inline-block text-sm font-medium">
             Informazioni aziendali
           </label>
@@ -95,25 +97,25 @@ const handleSubmit = async (e: Event) => {
             <input
               id="af-payment-billing-address"
               type="text"
-              class="py-2 px-3 w-full border border-gray-200 text-sm rounded-lg disabled:pointer-events-none"
+              class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg disabled:pointer-events-none"
               placeholder="Nome azienda*"
             />
             <input
               id="af-payment-billing-address"
               type="text"
-              class="py-2 px-3 w-full border border-gray-200 text-sm rounded-lg disabled:pointer-events-none"
+              class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg disabled:pointer-events-none"
               placeholder="P.IVA*"
             />
             <input
               id="af-payment-billing-address"
               type="text"
-              class="py-2 px-3 w-full border border-gray-200 text-sm rounded-lg disabled:pointer-events-none"
+              class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg disabled:pointer-events-none"
               placeholder="Email aziendale*"
             />
             <input
               id="af-payment-billing-address"
               type="text"
-              class="py-2 px-3 w-full border border-gray-200 text-sm rounded-lg disabled:pointer-events-none"
+              class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg disabled:pointer-events-none"
               placeholder="Numero di telefono*"
             />
           </div>
@@ -121,7 +123,7 @@ const handleSubmit = async (e: Event) => {
         <!-- End Section -->
 
         <!-- Section -->
-        <div class="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200">
+        <div class="py-6 border-t border-gray-200 first:pt-0 last:pb-0 first:border-transparent">
           <label for="af-payment-payment-method" class="inline-block text-sm font-medium">
             Metodo di pagamento
           </label>
@@ -130,34 +132,34 @@ const handleSubmit = async (e: Event) => {
             <input
               id="af-payment-payment-method"
               type="text"
-              class="py-2 px-3 w-full border border-gray-200 text-sm rounded-lg disabled:pointer-events-none"
+              class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg disabled:pointer-events-none"
               placeholder="Intestatario carta*"
             />
             <input
               type="text"
-              class="py-2 px-3 w-full border border-gray-200 text-sm rounded-lg disabled:pointer-events-none"
+              class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg disabled:pointer-events-none"
               placeholder="Numero carta*"
             />
-            <div class="grid sm:flex gap-3">
+            <div class="grid gap-3 sm:flex">
               <input
                 type="text"
-                class="py-2 px-3 w-full border border-gray-200 text-sm rounded-lg disabled:pointer-events-none"
+                class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg disabled:pointer-events-none"
                 placeholder="Data di scadenza*"
               />
               <input
                 type="text"
-                class="py-2 px-3 w-full border border-gray-200 text-sm rounded-lg disabled:pointer-events-none"
+                class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg disabled:pointer-events-none"
                 placeholder="CVV*"
               />
             </div>
           </div>
-          <div class="flex py-3 gap-2 items-center">
+          <div class="flex items-center gap-2 py-3">
             <h1 class="text-2xl font-bold">Totale:</h1>
-            <h1>prezzo€</h1>
+            <h1>€</h1>
           </div>
         </div>
         <!-- End Section -->
-        <div class="mt-3 flex justify-center gap-x-2">
+        <div class="flex justify-center mt-3 gap-x-2">
           <button
             type="submit"
             class="text-sm font-bold rounded-lg bg-[#ED1C24] text-white shadow-md w-full inline-flex justify-center py-3 px-4 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 disabled:pointer-events-none"

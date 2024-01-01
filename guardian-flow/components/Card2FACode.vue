@@ -31,18 +31,18 @@ const handleSubmit = async (e: Event) => {
     <!-- HEADER -->
     <div class="flex flex-col items-center">
       <Icon name="lucide:smartphone" size="40" />
-      <div class="flex flex-row gap-3 items-center">
+      <div class="flex flex-row items-center gap-3">
         <h1 class="text-xl font-semibold tracking-tight">
           Autenticazione a due fattori
         </h1>
         <div class="hs-tooltip inline-block [--placement:right]">
           <button
             type="button"
-            class="hs-tooltip-toggle w-10 h-10 inline-flex justify-center items-center gap-2"
+            class="inline-flex items-center justify-center w-10 h-10 gap-2 hs-tooltip-toggle"
           >
             <Icon name="material-symbols:info-outline-rounded" size="20" />
             <span
-              class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute bg-white z-10 py-1 px-2 text-xs font-medium rounded shadow-md"
+              class="absolute z-10 inline-block px-2 py-1 text-xs font-medium transition-opacity bg-white rounded shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible"
               role="tooltip"
             >
               Apri l'app di autenticazione a due fattori
@@ -56,7 +56,7 @@ const handleSubmit = async (e: Event) => {
       <div class="flex flex-col gap-5">
         <input
           type="text"
-          class="py-2 px-4 w-full border border-gray-200 rounded-lg text-sm"
+          class="w-full px-4 py-2 text-sm border border-gray-200 rounded-lg"
           placeholder="XXXXX"
           name="token2FA"
           id="token2FA"

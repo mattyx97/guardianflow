@@ -6,6 +6,10 @@ const props = defineProps<{
 const emit = defineEmits<{
   "update:open": [open: boolean];
 }>();
+const addUtente = ref(false);
+const showAlertConfirm = ref();
+const showAlertNotConfirm = ref();
+
 function generatePassword() {
   var length = 12,
     charset =
@@ -21,29 +25,55 @@ const handleSubmit = async (e: Event) => {
   const formData = new FormData(e.target);
   const password = generatePassword();
   const azienda = user.value?.aziendaId;
-
   console.log(formData.get("ruolo"));
 
   try {
-    $fetch("/api/utente/addUtente", {
-      method: "POST",
-      body: {
-        username: formData.get("email"),
-        nome: formData.get("nome"),
-        cognome: formData.get("cognome"),
-        ruolo: formData.get("ruolo"),
-        password: password,
-        azienda_id: azienda,
-      },
-    });
-  } catch (e) {
-    const { data: error } = e as {
-      data: {
-        message: string;
-      };
-    };
+  const response = await $fetch("/api/utente/addUtente", {
+    method: "POST",
+    body: {
+      username: formData.get("email"),
+      nome: formData.get("nome"),
+      cognome: formData.get("cognome"),
+      ruolo: formData.get("ruolo"),
+      password: password,
+      azienda_id: azienda,
+    },
+  });
+
+  if (response.statusCode === 200) {
+    addUtente.value = true;
+    showAlertConfirm.value = true; // Mostra l'alert di conferma
+    setTimeout(() => {
+      addUtente.value = false;
+    }, 3000);
+  } else {
+    addUtente.value = false;
+    showAlertNotConfirm.value = true; // Mostra l'alert di errore
+    setTimeout(() => {
+      showAlertNotConfirm.value = false;
+    }, 3000);
   }
-};
+} catch (e) {
+  const { data: error } = e as { data: { message: string } };
+  // Gestisci l'errore qui se necessario
+  showAlertNotConfirm.value = true; // Mostra l'alert di errore
+  setTimeout(() => {
+    showAlertNotConfirm.value = false;
+  }, 3000);
+}
+  }
+  if (addUtente.value == false) {
+      showAlertNotConfirm.value = false;
+      setTimeout(() => {
+        showAlertNotConfirm.value = null;
+      }, 3000);
+    } else {
+      showAlertConfirm.value = true;
+      setTimeout(() => {
+        showAlertConfirm.value = null;
+      }, 3000);
+    }
+
 </script>
 
 <template>
@@ -56,8 +86,8 @@ const handleSubmit = async (e: Event) => {
     <div
       class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto min-h-[calc(100%-3.5rem)] flex items-center"
     >
-      <form method="post" action="/api/Piano/editPiano" @submit.prevent="handleSubmit">
-        <div class="flex flex-col w-full bg-[#171717] shadow-sm rounded-xl">
+      <div class="flex flex-col w-full bg-[#171717] shadow-sm rounded-xl">
+        <form method="post" action="/api/Piano/editPiano" @submit.prevent="handleSubmit">
           <div class="flex items-center justify-between px-4 py-3">
             <h3 class="font-bold text-white">Aggiungi utente</h3>
             <button
@@ -138,8 +168,81 @@ const handleSubmit = async (e: Event) => {
               Salva
             </button>
           </div>
+        </form>
+      </div>
+    </div>
+    <!-- alert -->
+    <div class="fixed top-0 right-0">
+      <div
+        v-if="showAlertConfirm"
+        class="p-4 bg-green-400 border-t-2 border-teal-500 rounded-lg"
+        role="alert"
+      >
+        <div class="flex">
+          <div class="">
+            <!-- Icon -->
+            <span
+              class="inline-flex items-center justify-center w-8 h-8 text-teal-800 bg-green-400 border-4 border-teal-100 rounded-full"
+            >
+              <svg
+                class="flex-shrink-0 w-4 h-4"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"
+                />
+                <path d="m9 12 2 2 4-4" />
+              </svg>
+            </span>
+            <!-- End Icon -->
+          </div>
+          <div class="ms-3">
+            <h3 class="font-semibold text-gray-800 dark:text-white">Successfully updated.</h3>
+            <p class="text-sm text-gray-700 dark:text-gray-400">
+              Utente aggiunto.
+            </p>
+          </div>
         </div>
-      </form>
+      </div>
+      <div v-if="showAlertNotConfirm" class="p-4 bg-red-500 border-red-500 border-s-4" role="alert">
+        <div class="flex">
+          <div class="">
+            <!-- Icon -->
+            <span
+              class="inline-flex items-center justify-center w-8 h-8 text-red-800 bg-red-200 border-4 border-red-100 rounded-full dark:border-red-900 dark:bg-red-800 dark:text-red-400"
+            >
+              <svg
+                class="flex-shrink-0 w-4 h-4"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M18 6 6 18" />
+                <path d="m6 6 12 12" />
+              </svg>
+            </span>
+            <!-- End Icon -->
+          </div>
+          <div class="ms-3">
+            <h3 class="font-semibold text-gray-800 dark:text-white">Error!</h3>
+            <p class="text-sm text-gray-700 dark:text-gray-400">Utente non aggiunto.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <!-- FINE MODAL -->
