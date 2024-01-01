@@ -3,7 +3,6 @@ import { type Anomalia } from "@/types";
 import VueApexCharts from "vue3-apexcharts";
 const { data: anomalies } = await useFetch("/api/getAllVulnerability");
 
-const mattia = "x";
 const options = {
   chart: {
     width: 380,

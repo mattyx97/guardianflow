@@ -2,6 +2,7 @@
 const openModal = ref(false);
 const showAlertConfirm = ref();
 const showAlertNotConfirm = ref();
+const user = useAuthenticatedUser();
 
 const passChange = ref(false);
 function open() {
@@ -35,19 +36,19 @@ function onSave() {
         <li>
           <div class="flex gap-2">
             <h1>Nome e Cognome:</h1>
-            <h1>Giuseppe Cerella</h1>
+            <h1>{{ user.nome }} {{ user.cognome }}</h1>
           </div>
         </li>
         <li>
           <div class="flex gap-2">
             <h1>Email:</h1>
-            <h1>g.cerella@gmail.com</h1>
+            <h1>{{ user.username }}</h1>
           </div>
         </li>
         <li>
           <div class="flex gap-2">
             <h1>Permessi:</h1>
-            <h1>Admin</h1>
+            <h1>{{ user.permessi }}</h1>
           </div>
         </li>
       </ul>
