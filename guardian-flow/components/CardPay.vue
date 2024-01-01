@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const { data: piano } = useFetch("/api/Piano/getPiano");
-//@ts-ignore
 </script>
 
 <template>

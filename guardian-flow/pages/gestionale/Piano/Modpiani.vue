@@ -1,13 +1,16 @@
 <script setup lang="ts">
 /* layout */
+//@ts-nocheck
 definePageMeta({
   layout: "gestionale",
   middleware: ["protected"],
 });
+const { data: piano } = await useFetch("/api/Piano/getPiano");
+
+const status = ref(piano.value?.[0]?.nome?.split(" ")[0] ?? "Small");
 
 const errorMessage = ref<string | null>(null);
 
-const status = ref("Small");
 const frequenza = ref("mensile");
 const pianoPrice = ref(91);
 
