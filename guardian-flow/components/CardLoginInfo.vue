@@ -1,9 +1,11 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="flex flex-col gap-3 p-4 bg-white border shadow-sm rounded-xl md:p-5">
+  <div
+    class="flex flex-col gap-3 p-4 text-white bg-[#171717] shadow-sm rounded-xl md:p-5"
+  >
     <h1 class="font-bold">Login history</h1>
-    <div class=" flex justify-center overflow-x-auto max-h-[200px] w-full ">
+    <div class="flex justify-center overflow-x-auto max-h-[200px] w-full">
       <table class="">
         <thead>
           <tr>

@@ -2,7 +2,7 @@
 
 <template>
   <div
-    class="flex flex-col gap-3 p-4 bg-white border shadow-sm rounded-xl md:p-5"
+    class="flex flex-col gap-3 p-4 text-white bg-[#171717] shadow-sm rounded-xl md:p-5"
   >
     <div class="flex flex-col">
       <h1 class="mb-3 font-bold">Il tuo piano</h1>

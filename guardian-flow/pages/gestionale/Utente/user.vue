@@ -22,61 +22,67 @@ definePageMeta({
       <Card2FA class="col-span-3 md:col-span-2" />
     </div>
     <!-- table -->
-    <div class="-m-1.5 overflow-x-auto max-w-[1400px] mt-2">
-      <div class="p-1.5 min-w-full inline-block align-middle">
-        <div class="overflow-hidden border rounded-lg shadow">
+    <div
+      class="-m-1.5 overflow-x-auto max-w-[1400px] mt-2 text-white "
+    >
+      <div class="p-1.5 min-w-full inline-block align-middle ">
+        <div class="overflow-hidden  rounded-lg shadow bg-[#171717]">
           <div class="flex flex-row p-3">
             <h1 class="text-2xl">Storico pagamenti</h1>
           </div>
-          <table class="min-w-full">
-            <thead class="p-2 border-b">
+          <table class="min-w-full ">
+            <thead class="p-2 border-b border-[#30363D]">
               <tr>
                 <th
                   scope="col"
-                  class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start"
+                  class="px-6 py-3 text-xs font-medium text-white uppercase text-start"
                 >
                   Data pagamento
                 </th>
                 <th
                   scope="col"
-                  class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start"
+                  class="px-6 py-3 text-xs font-medium text-white uppercase text-start"
                 >
                   Mensltà
                 </th>
                 <th
                   scope="col"
-                  class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start"
+                  class="px-6 py-3 text-xs font-medium text-white uppercase text-start"
                 >
                   Totale
                 </th>
                 <th
                   scope="col"
-                  class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start"
+                  class="px-6 py-3 text-xs font-medium text-white uppercase text-start"
                 >
                   Esito
                 </th>
                 <th
                   scope="col"
-                  class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start"
+                  class="px-6 py-3 text-xs font-medium text-white uppercase text-start"
                 >
                   Tipo piano
                 </th>
                 <th
                   scope="col"
-                  class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-end"
+                  class="px-6 py-3 text-xs font-medium text-white uppercase text-end"
                 >
                   Opzioni
                 </th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
-              <tr class="cursor-pointer hover:bg-gray-100">
-                <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">07/11/2023</td>
+              <tr class="cursor-pointer hover:bg-[#1f1f1f]">
+                <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">
+                  07/11/2023
+                </td>
                 <td class="px-6 py-4 text-sm whitespace-nowrap">Ottobre</td>
                 <td class="px-6 py-4 text-sm whitespace-nowrap">394€</td>
                 <td class="px-6 py-4 text-sm whitespace-nowrap">Pagato</td>
                 <td class="px-6 py-4 text-sm whitespace-nowrap">Basic</td>
-                <td class="px-6 py-4 text-sm font-medium whitespace-nowrap text-end">
+                <td
+                  class="px-6 py-4 text-sm font-medium whitespace-nowrap text-end"
+                >
                   <div class="hs-tooltip inline-block [--placement:right]">
                     <button
                       type="button"
@@ -84,7 +90,7 @@ definePageMeta({
                     >
                       <Icon name="tabler:file-invoice" size="20" />
                       <span
-                        class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute bg-white z-10 py-1 px-2 text-xs font-medium rounded shadow-md"
+                        class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute bg-[#171717] text-white z-10 py-1 px-2 text-xs font-medium rounded shadow-md"
                         role="tooltip"
                       >
                         Scarica fattura

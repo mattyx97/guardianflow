@@ -24,7 +24,7 @@ const handleSubmit = async (e: Event) => {
   const password = generatePassword();
   console.log(password);
   try {
-    await $fetch("/api/signup", {
+    await $fetch("/api/utente/signup", {
       method: "POST",
       body: {
         username: formData.get("username"),

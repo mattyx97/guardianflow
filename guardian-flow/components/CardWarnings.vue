@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data: anomalies } = useFetch("/api/getLatestVulnerability");
+const { data: anomalies } = useFetch("/api/Dashboard/getLatestVulnerability");
 
 function countDayFromDate(date: string) {
   const today = new Date();
@@ -12,23 +12,23 @@ function countDayFromDate(date: string) {
 
 <template>
   <div
-    class="flex flex-col p-4 text-black bg-white border shadow-sm rounded-xl md:p-5"
+    class="flex flex-col p-4 text-white bg-[#171717] shadow-sm rounded-xl md:p-5 lg:h-[250px]"
   >
-    <h3 class="text-lg font-bold text-gray-800">Security warnings</h3>
+    <h3 class="text-2xl font-bold text-white">Ultime anomalie</h3>
     <p class="mt-2">
       <div class="flex justify-between">
-        <h1 class="font-bold">Ultimi warnings</h1>
-        <h1 class="font-bold">Age</h1>
+        <h1 class="text-md font-bold">ID anomalie</h1>
+        <h1 class="font-bold">Età</h1>
       </div>
-      <ul>
+      <ul class="flex flex-col gap-3">
         <li v-for="anomalia in anomalies" class="flex items-center justify-between">
-          <div class="flex items-center justify-center gap-2">
+          <div class="flex items-center justify-center gap-3">
             <Icon name="fluent-emoji-flat:red-circle" v-if="anomalia.stato==0" size="10"/>
             <Icon name="fluent-emoji-flat:green-circle" v-else-if="anomalia.stato==1" size="10"/>
             <Icon name="fluent-emoji-flat:orange-circle" v-else size="10"/>
-          <h1 class="text-[10px]">{{ anomalia.id }}</h1>
+          <h1 class="text-xs">{{ anomalia.id }}</h1>
         </div>
-        <h1 class="">{{ countDayFromDate(anomalia.data) }} days</h1>
+        <h1 class="">{{ countDayFromDate(anomalia.data) }} giorni</h1>
         </li>
        
        

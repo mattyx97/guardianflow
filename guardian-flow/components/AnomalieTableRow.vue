@@ -14,7 +14,7 @@ const showAlertNotConfirm = ref();
 
 function falsoPositivoFunction() {
   console.log(Anomaly.anomalyID);
-  $fetch("/api/addFalsePositive", {
+  $fetch("/api/Dashboard/addFalsePositive", {
     method: "POST",
     body: {
       id: Anomaly.anomalyID,
@@ -37,7 +37,7 @@ function falsoPositivoFunction() {
 </script>
 
 <template>
-  <tr class="cursor-pointer hover:bg-gray-100">
+  <tr class="cursor-pointer hover:bg-gray-100 bg-[#171717]">
     <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">{{ $props.anomalyID }}</td>
     <td class="px-6 py-4 text-sm whitespace-nowrap">
       {{ $props.anomalyDate?.toLocaleDateString("it-IT") }}
@@ -52,18 +52,18 @@ function falsoPositivoFunction() {
         <button
           id="hs-dropdown-custom-icon-trigger-2"
           type="button"
-          class="flex items-center justify-center text-sm font-semibold text-gray-800 hs-dropdown-toggle disabled:opacity-50 disabled:pointer-events-none"
+          class="flex items-center justify-center text-sm font-semibold text-white bg-[#171717] hover:bg-[#1e1e1e] hs-dropdown-toggle disabled:opacity-50 disabled:pointer-events-none"
         >
           <Icon name="humbleicons:dots-horizontal" size="20" />
         </button>
 
         <div
-          class="z-50 hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[15rem] bg-white shadow-md rounded-lg p-2 mt-2"
+          class="z-50 hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[15rem] bg-[#171717] shadow-md rounded-lg p-2 mt-2"
           aria-labelledby="hs-dropdown-custom-icon-trigger-2"
         >
           <button
             @click="falsoPositivoFunction()"
-            class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 focus:outline-none focus:bg-gray-100 hover:bg-red-500 hover:text-white w-full"
+            class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-white bg-[#171717] focus:outline-none  hover:bg-red-500  w-full"
           >
             Falso positivo
           </button>
@@ -103,7 +103,7 @@ function falsoPositivoFunction() {
           <!-- End Icon -->
         </div>
         <div class="ms-3">
-          <h3 class="font-semibold text-gray-800 dark:text-white">Successfully updated.</h3>
+          <h3 class="font-semibold text-gray-800 dark:text-white">Aggiornamento effettuato.</h3>
           <p class="text-sm text-gray-700 dark:text-gray-400">
             You have successfully updated your email preferences.
           </p>
@@ -136,8 +136,8 @@ function falsoPositivoFunction() {
           <!-- End Icon -->
         </div>
         <div class="ms-3">
-          <h3 class="font-semibold text-gray-800 dark:text-white">Error!</h3>
-          <p class="text-sm text-gray-700 dark:text-gray-400">Your purchase has been declined.</p>
+          <h3 class="font-semibold text-gray-800 dark:text-white">Errore</h3>
+          <p class="text-sm text-gray-700 dark:text-gray-400">La tua richiesta è stata rifiutata.</p>
         </div>
       </div>
     </div>

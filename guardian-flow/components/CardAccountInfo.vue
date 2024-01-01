@@ -29,7 +29,9 @@ function onSave() {
 </script>
 
 <template>
-  <div class="flex flex-col gap-3 p-4 bg-white border shadow-sm rounded-xl md:p-5">
+  <div
+    class="flex flex-col gap-3 p-4 text-white bg-[#171717] shadow-sm rounded-xl md:p-5"
+  >
     <h1 class="font-bold">Il tuo account</h1>
     <div>
       <ul>
@@ -58,7 +60,7 @@ function onSave() {
         data-hs-overlay="#hs-sign-out-alert-small-window"
         @click="open()"
         type="button"
-        class="p-2 text-xs border border-black rounded-lg hover:bg-black hover:text-white"
+        class="p-3 text-xs border-2 rounded-lg hover:bg-[#1e1e1e]  border-[#1e1e1e]"
       >
         MODIFICA PASSWORD
       </button>
@@ -66,12 +68,12 @@ function onSave() {
     <!-- Modal -->
     <div
       id="hs-sign-out-alert-small-window"
-      class="hs-overlay hidden w-full h-full mt-[10%] fixed top-0 start-0 z-[60] overflow-x-hidden overflow-y-auto"
+      class="hs-overlay hs-overlay-backdrop-open:bg-gray-700/20 hidden w-full h-full fixed top-0 start-0 z-[60] overflow-x-hidden overflow-y-auto"
     >
       <div
         class="m-3 mt-0 lg:min-w-[25%] transition-all ease-out opacity-0 hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 sm:max-w-xs sm:w-full sm:mx-auto"
       >
-        <div class="relative flex flex-col bg-white shadow-lg rounded-xl">
+        <div class="relative flex flex-col bg-[#171717] shadow-lg rounded-xl">
           <div class="absolute top-2 end-2">
             <button
               type="button"
@@ -82,34 +84,42 @@ function onSave() {
             </button>
           </div>
 
-          <div class="flex flex-col gap-5 p-4 overflow-y-auto text-center sm:p-10">
+          <div
+            class="flex flex-col gap-5 p-4 overflow-y-auto text-center sm:p-10 text-white"
+          >
             <!-- End Icon -->
 
-            <h3 class="mb-2 text-xl font-bold text-black">Modifica la tua password</h3>
-            <form @submit.prevent="onSave()">
+            <h3 class="mb-2 text-xl font-bold">
+              Modifica la tua password
+            </h3>
+            <form @submit.prevent="onSave()" class="text-white">
               <label class="flex flex-col items-start justify-center gap-2">
-                <span class="text-sm text-black">Password attuale</span>
+                <span class="text-sm">Password attuale</span>
                 <input
                   type="password"
-                  class="block w-full py-3 pl-2 text-sm bg-transparent border rounded-xl focus:border-red-500 focus:outline-none focus:border-2 focus:ring-0 disabled:pointer-events-none"
+                  class="block w-full py-3 pl-2 text-sm bg-transparent border rounded-xl  focus:outline-none focus:border-2 focus:ring-0 disabled:pointer-events-none"
                   placeholder="Enter password"
                 />
               </label>
 
-              <label class="flex flex-col items-start justify-center gap-2 mt-2">
-                <span class="text-sm text-black">Nuova password</span>
+              <label
+                class="flex flex-col items-start justify-center gap-2 mt-2"
+              >
+                <span class="text-sm">Nuova password</span>
                 <input
                   type="password"
-                  class="block w-full py-3 pl-2 text-sm bg-transparent border rounded-xl focus:border-red-500 focus:outline-none focus:border-2 focus:ring-0 disabled:pointer-events-none"
+                  class="block w-full py-3 pl-2 text-sm bg-transparent border rounded-xl  focus:outline-none focus:border-2 focus:ring-0 disabled:pointer-events-none"
                   placeholder="Enter password"
                 />
               </label>
 
-              <label class="flex flex-col items-start justify-center gap-2 mt-2">
-                <span class="text-sm text-black">Conferma password</span>
+              <label
+                class="flex flex-col items-start justify-center gap-2 mt-2"
+              >
+                <span class="text-sm">Conferma password</span>
                 <input
                   type="password"
-                  class="block w-full py-3 pl-2 text-sm bg-transparent border rounded-xl focus:border-red-500 focus:outline-none focus:border-2 focus:ring-0 disabled:pointer-events-none"
+                  class="block w-full py-3 pl-2 text-sm bg-transparent border rounded-xl  focus:outline-none focus:border-2 focus:ring-0 disabled:pointer-events-none"
                   placeholder="Enter password"
                 />
               </label>
@@ -117,7 +127,7 @@ function onSave() {
               <div class="grid mt-6 gap-y-2">
                 <button
                   type="submit"
-                  class="py-2.5 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border text-white bg-red-500 shadow-md disabled:pointer-events-none transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105"
+                  class="py-2.5 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg text-white bg-red-500 shadow-md disabled:pointer-events-none transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105"
                   data-hs-overlay="#hs-sign-out-alert-small-window"
                 >
                   Conferma
@@ -162,14 +172,20 @@ function onSave() {
             <!-- End Icon -->
           </div>
           <div class="ms-3">
-            <h3 class="font-semibold text-gray-800 dark:text-white">Successfully updated.</h3>
+            <h3 class="font-semibold text-gray-800 dark:text-white">
+              Successfully updated.
+            </h3>
             <p class="text-sm text-gray-700 dark:text-gray-400">
               You have successfully updated your email preferences.
             </p>
           </div>
         </div>
       </div>
-      <div v-if="showAlertNotConfirm" class="p-4 bg-red-500 border-red-500 border-s-4" role="alert">
+      <div
+        v-if="showAlertNotConfirm"
+        class="p-4 bg-red-500 border-red-500 border-s-4"
+        role="alert"
+      >
         <div class="flex">
           <div class="">
             <!-- Icon -->
@@ -196,7 +212,9 @@ function onSave() {
           </div>
           <div class="ms-3">
             <h3 class="font-semibold text-gray-800 dark:text-white">Error!</h3>
-            <p class="text-sm text-gray-700 dark:text-gray-400">Your purchase has been declined.</p>
+            <p class="text-sm text-gray-700 dark:text-gray-400">
+              Your purchase has been declined.
+            </p>
           </div>
         </div>
       </div>

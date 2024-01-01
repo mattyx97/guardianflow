@@ -1,6 +1,6 @@
 <script setup lang="ts">
 //@ts-nocheck
-import auth from "@/assets/2fa.png";
+import auth from "@/assets/2faWhite.png";
 
 const qrCode = ref<string | null>(null);
 const token = ref<string | null>(null);
@@ -15,10 +15,10 @@ onMounted(() => {
   twoFactorEnabled.value = user.value.twoFactorEnabled;
 });
 async function setup2FA() {
-    mostraDiv.value = false;
+  mostraDiv.value = false;
   try {
     // Richiedi al server di iniziare il processo di setup del 2FA
-    const response = await $fetch("/api/2fa/setup", {
+    const response = await $fetch("/api/utente/2fa/setup", {
       method: "POST",
       body: {
         uid: user.value.userId,
@@ -34,7 +34,7 @@ async function setup2FA() {
 async function verifyToken() {
   try {
     // Invia il token inserito dall'utente al server per la verifica
-    const response = await $fetch("/api/2fa/verify", {
+    const response = await $fetch("/api/utente/2fa/verify", {
       method: "POST",
       body: {
         token: token.value,
@@ -57,34 +57,59 @@ async function verifyToken() {
 </script>
 
 <template>
-  <div class="flex flex-col gap-3 p-4 bg-white border shadow-sm rounded-xl md:p-5">
+  <div
+    class="flex flex-col gap-3 p-4 text-white bg-[#171717] shadow-sm rounded-xl md:p-5"
+  >
     <h1 class="font-bold">Autenticazione 2FA</h1>
 
-    <div class="flex flex-row justify-center gap-5 p-4"  >
+    <div class="flex md:flex-row justify-center gap-5 p-4">
       <div>
-        <img :src="auth" alt="Autenticazione 2FA" class="w-[50px]" />
+        <img :src="auth" alt="Autenticazione 2FA" class="w-[50px] hidden md:block" />
       </div>
       <div
-        class="flex items-center gap-2 px-3 py-1 border border-black rounded-lg hover:bg-black hover:text-white "
-        :class="{'hidden': !mostraDiv}"
+        class="flex items-center gap-2 px-3 py-1 border-2 border-[#1e1e1e] rounded-lg hover:bg-[#1e1e1e] hover:text-white"
+        :class="{ hidden: !mostraDiv }"
       >
         <!-- BOTTONE PER 2FA -->
-        <button v-if="twoFactorEnabled" class="flex flex-row items-center gap-2 cursor-none">
+        <button
+          v-if="twoFactorEnabled"
+          class="flex flex-row items-center gap-2 cursor-none"
+        >
           <Icon v-elese name="fluent-emoji-flat:green-circle" size="20" />
           <h1>ATTIVA</h1>
         </button>
 
-        <button v-else class="flex flex-row items-center gap-2" @click="setup2FA" >
+        <button
+          v-else
+          class="flex flex-row items-center gap-2"
+          @click="setup2FA"
+        >
           <Icon name="fluent-emoji-flat:red-circle" size="20" />
           <h1>NON ATTIVA</h1>
         </button>
       </div>
-      <div v-if="qrCode" class="flex flex-col justify-center items-center text-center">
+      <div
+        v-if="qrCode"
+        class="flex flex-col justify-center items-center text-center gap-3"
+      >
         <p>Scansiona questo QR code con la tua app di autenticazione:</p>
-        <img :src="qrCode" />
+
+          <img :src="qrCode" class="lg:max-w-[25%]"/>
+
+
         <div class="flex flex-col gap-3">
-          <input class="px-2 py-3 border rounded-lg" type="text" v-model="token" placeholder="Inserisci il tuo token 2FA" />
-          <button @click="verifyToken" class="bg-green-500 hover:bg-green-600 text-white px-2 py-2 rounded-lg">Verifica Token</button>
+          <input
+            class="px-2 py-3 border-2 border-[#2b2b2b] bg-[#171717] rounded-lg"
+            type="text"
+            v-model="token"
+            placeholder="Inserisci il tuo token 2FA"
+          />
+          <button
+            @click="verifyToken"
+            class="bg-green-500 hover:bg-green-600 text-white px-2 py-2 rounded-lg"
+          >
+            Verifica Token
+          </button>
         </div>
       </div>
     </div>

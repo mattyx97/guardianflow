@@ -6,7 +6,7 @@ const handleSubmit = async (e: Event) => {
   const formData = new FormData(e.target);
 
   try {
-    await $fetch("/api/2fa", {
+    await $fetch("/api/utente/2fa", {
       method: "POST",
       body: {
         token2FA: formData.get("token2FA"),
