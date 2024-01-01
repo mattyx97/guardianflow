@@ -80,6 +80,7 @@ const handleSubmit = async (e: Event) => {
         id_piano: getPianoId(),
       },
     });
+    navigateTo("/gestionale/Utente/user");
   } catch (e) {
     const { data: error } = e as {
       data: {
