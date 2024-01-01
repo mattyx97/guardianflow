@@ -22,7 +22,7 @@ const handleSubmit = async (e: Event) => {
   if (!(e.target instanceof HTMLFormElement)) return;
   const formData = new FormData(e.target);
   const password = generatePassword();
-  console.log(password);
+
   try {
     await $fetch("/api/utente/signup", {
       method: "POST",
@@ -47,31 +47,18 @@ const handleSubmit = async (e: Event) => {
   <!-- Card Section -->
   <div class="max-w-[500px]">
     <!-- Card -->
-    <div
-      class="bg-white rounded-xl border border-gray-300 shadow-md p-4 sm:p-7"
-    >
+    <div class="bg-white rounded-xl border border-gray-300 shadow-md p-4 sm:p-7">
       <div class="text-center mb-8">
-        <h2 class="text-2xl md:text-3xl font-bold text-gray-800">
-          Procedi all'acquisto
-        </h2>
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Procedi all'acquisto</h2>
         <p class="text-sm text-gray-600 dark:text-gray-400">
           Inserisci i dati utili al completamento dell'acquisto
         </p>
       </div>
 
-      <form
-        method="post"
-        action="/api/utente/signup"
-        @submit.prevent="handleSubmit"
-      >
+      <form method="post" action="/api/utente/signup" @submit.prevent="handleSubmit">
         <!-- Section -->
-        <div
-          class="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200"
-        >
-          <label
-            for="af-payment-billing-contact"
-            class="inline-block text-sm font-medium"
-          >
+        <div class="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200">
+          <label for="af-payment-billing-contact" class="inline-block text-sm font-medium">
             I tuoi dati
           </label>
 
@@ -99,13 +86,8 @@ const handleSubmit = async (e: Event) => {
         <!-- End Section -->
 
         <!-- Section -->
-        <div
-          class="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200"
-        >
-          <label
-            for="af-payment-billing-address"
-            class="inline-block text-sm font-medium"
-          >
+        <div class="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200">
+          <label for="af-payment-billing-address" class="inline-block text-sm font-medium">
             Informazioni aziendali
           </label>
 
@@ -139,13 +121,8 @@ const handleSubmit = async (e: Event) => {
         <!-- End Section -->
 
         <!-- Section -->
-        <div
-          class="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200"
-        >
-          <label
-            for="af-payment-payment-method"
-            class="inline-block text-sm font-medium"
-          >
+        <div class="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200">
+          <label for="af-payment-payment-method" class="inline-block text-sm font-medium">
             Metodo di pagamento
           </label>
 

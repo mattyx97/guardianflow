@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const Utente = defineProps<{
+  userKey?: string;
   userEmail?: string;
   userNome?: string;
   userCognome?: string;
@@ -11,6 +12,13 @@ const showAlertConfirm = ref();
 const showAlertNotConfirm = ref();
 
 function eliminaFunction() {
+  $fetch("/api/utente/removeUser", {
+    method: "POST",
+    body: JSON.stringify({
+      user_id: Utente.userKey,
+    }),
+  });
+
   elimina.value = true;
   if (elimina.value == true) {
     showAlertConfirm.value = true;
@@ -56,7 +64,7 @@ function eliminaFunction() {
         >
           <button
             type="button"
-            class="flex w-full items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm  focus:outline-none hover:bg-[#1e1e1e]"
+            class="flex w-full items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm focus:outline-none hover:bg-[#1e1e1e]"
             data-hs-overlay="#hs-vertically-centered-modal1"
           >
             Modifica
@@ -99,29 +107,21 @@ function eliminaFunction() {
               stroke-linecap="round"
               stroke-linejoin="round"
             >
-              <path
-                d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"
-              />
+              <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
               <path d="m9 12 2 2 4-4" />
             </svg>
           </span>
           <!-- End Icon -->
         </div>
         <div class="ms-3">
-          <h3 class="font-semibold text-gray-800 dark:text-white">
-            Successfully updated.
-          </h3>
+          <h3 class="font-semibold text-gray-800 dark:text-white">Successfully updated.</h3>
           <p class="text-sm text-gray-700 dark:text-gray-400">
             You have successfully updated your email preferences.
           </p>
         </div>
       </div>
     </div>
-    <div
-      v-if="showAlertNotConfirm"
-      class="p-4 bg-red-500 border-red-500 border-s-4"
-      role="alert"
-    >
+    <div v-if="showAlertNotConfirm" class="p-4 bg-red-500 border-red-500 border-s-4" role="alert">
       <div class="flex">
         <div class="">
           <!-- Icon -->
@@ -148,9 +148,7 @@ function eliminaFunction() {
         </div>
         <div class="ms-3">
           <h3 class="font-semibold text-gray-800 dark:text-white">Error!</h3>
-          <p class="text-sm text-gray-700 dark:text-gray-400">
-            Your purchase has been declined.
-          </p>
+          <p class="text-sm text-gray-700 dark:text-gray-400">Your purchase has been declined.</p>
         </div>
       </div>
     </div>

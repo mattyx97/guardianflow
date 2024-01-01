@@ -1,11 +1,20 @@
 import { Resend } from "resend";
+
 export default defineEventHandler(async event => {
   const resend = new Resend("re_GMGHNNfW_7yEcQE5PdPH3rip1Bu1Um8az");
 
-  const { username, password } = await readBody<{
-    username: unknown;
-    password: unknown;
+  const { username, password, nome, cognome, permessi, azienda_id } = await readBody<{
+    username: string;
+    password: string;
+    nome: string;
+    cognome: string;
+    permessi: string;
+    azienda_id: number;
   }>(event);
+  const two_factor = false;
+  const two_factor_token = "";
+  console.log("username", username);
+  console.log("password", password);
   // basic check
   if (typeof username !== "string" || username.length < 4 || username.length > 31) {
     throw createError({
@@ -28,14 +37,14 @@ export default defineEventHandler(async event => {
       },
       attributes: {
         username,
+        two_factor,
+        two_factor_token,
+        nome,
+        cognome,
+        permessi,
+        azienda_id,
       },
     });
-    const session = await auth.createSession({
-      userId: user.userId,
-      attributes: {},
-    });
-    const authRequest = auth.handleRequest(event);
-    authRequest.setSession(session);
 
     (async function () {
       const { data, error } = await resend.emails.send({
@@ -55,7 +64,12 @@ export default defineEventHandler(async event => {
       console.log({ data });
     })();
 
-    return sendRedirect(event, "/"); // redirect to profile page
+    return {
+      statusCode: 200,
+      body: {
+        message: `User ${user.username} created`,
+      },
+    };
   } catch (e: any) {
     // check for unique constraint error in user table
 
