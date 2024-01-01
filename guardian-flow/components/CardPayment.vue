@@ -9,6 +9,22 @@ if (user.value) {
 const errorMessage = ref<string | null>(null);
 
 //function that generate a random secure password
+function validateCardNumber(cardNumber: string): boolean {
+  const cardNumberRegex = /^[0-9]{16}$/;
+  return cardNumberRegex.test(cardNumber);
+}
+
+function validateExpirationDate(expirationDate: string): boolean {
+  const expirationDateRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
+  return expirationDateRegex.test(expirationDate);
+}
+
+function validateCVV(cvv: string): boolean {
+  const cvvRegex = /^[0-9]{3}$/;
+  return cvvRegex.test(cvv);
+}
+
+
 function generatePassword() {
   var length = 12,
     charset =
@@ -24,6 +40,19 @@ const handleSubmit = async (e: Event) => {
   if (!(e.target instanceof HTMLFormElement)) return;
   const formData = new FormData(e.target);
   const password = generatePassword();
+
+  const cardNumberInput = (e.target as HTMLFormElement).querySelector('#af-payment-payment-method') as HTMLInputElement;
+  const expirationDateInput = (e.target as HTMLFormElement).querySelector('#expiration-date') as HTMLInputElement;
+  const cvvInput = (e.target as HTMLFormElement).querySelector('#cvv') as HTMLInputElement;
+
+  const cardNumber = cardNumberInput.value;
+  const expirationDate = expirationDateInput.value;
+  const cvv = cvvInput.value;
+
+  if (!validateCardNumber(cardNumber) || !validateExpirationDate(expirationDate) || !validateCVV(cvv)) {
+    errorMessage.value = 'Si prega di inserire informazioni valide per il pagamento.';
+    return;
+  }
 
   try {
     await $fetch("/api/utente/signup", {
@@ -44,6 +73,8 @@ const handleSubmit = async (e: Event) => {
     errorMessage.value = error.message;
   }
 };
+
+
 </script>
 <template>
   <!-- Card Section -->
