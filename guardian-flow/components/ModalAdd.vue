@@ -50,7 +50,7 @@ const handleSubmit = async (e: Event) => {
   <!-- MODAL AGGIUNGI UTENTE -->
   <div
     :open="open"
-    id="hs-vertically-centered-modal"
+    id="hs-modal"
     class="hs-overlay hs-overlay-backdrop-open:bg-black/50 hidden w-full h-full fixed top-0 start-0 z-[60] overflow-x-hidden overflow-y-auto"
   >
     <div
@@ -63,7 +63,7 @@ const handleSubmit = async (e: Event) => {
             <button
               type="button"
               class="flex items-center justify-center text-sm font-semibold text-red-500 rounded-full cursor-pointer hover:scale-125"
-              data-hs-overlay="#hs-vertically-centered-modal"
+              data-hs-overlay="#hs-modal"
             >
               <Icon name="material-symbols-light:close-small-outline-rounded" size="35" />
             </button>

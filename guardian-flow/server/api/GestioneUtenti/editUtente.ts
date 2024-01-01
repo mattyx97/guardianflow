@@ -7,9 +7,12 @@ export default defineEventHandler(async event => {
   const id = body.id;
   const email = body.email;
   const permessi = body.permessi;
-  const uid = body.uid;
 
-  console.log("id: ", uid);
+  const authRequest = auth.handleRequest(event);
+  const session = await authRequest.validate();
+  const uid = session?.user.userId;
+  console.log("id: ", id);
+  if (!uid) throw createError({ message: "Invalid session", statusCode: 400 });
 
   try {
     // Crea la connessione al database
@@ -19,8 +22,11 @@ export default defineEventHandler(async event => {
 
     // Esegui qui le operazioni desiderate con la connessione al database
     //add id to vulnerability table
-    await connection.execute("UPDATE user SET email = ? or permessi = ? WHERE user.id = ?", [uid, email, permessi]);
-    console.log("id: ", id);
+    await connection.execute("UPDATE user SET username = ?,permessi = ? WHERE user.id = ?", [
+      email,
+      permessi,
+      id,
+    ]);
 
     // Chiudi la connessione dopo aver eseguito le operazioni necessarie
     await connection.end();
@@ -37,4 +43,3 @@ export default defineEventHandler(async event => {
 });
 
 // server/api/hello.ts
-

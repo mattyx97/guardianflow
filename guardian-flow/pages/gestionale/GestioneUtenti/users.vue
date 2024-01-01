@@ -5,6 +5,7 @@ definePageMeta({
   layout: "gestionale",
 });
 const { data: users } = useFetch("/api/utente/getUtenti");
+
 console.log(users);
 
 const save = ref(false);
@@ -52,7 +53,7 @@ const Utente = [
               <button
                 type="button"
                 class="p-2 text-white bg-gradient-to-b from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:outline-none shadow-md font-medium rounded-lg text-center"
-                data-hs-overlay="#hs-vertically-centered-modal"
+                data-hs-overlay="#hs-modal"
               >
                 <Icon name="ic:baseline-plus" size="25" />
               </button>

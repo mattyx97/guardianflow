@@ -5,6 +5,7 @@ import * as mysql from "mysql2/promise";
 export default defineEventHandler(async event => {
   const body = await readBody(event);
   const id_piano = body.id_piano;
+  
   const authRequest = auth.handleRequest(event);
   const session = await authRequest.validate();
   const uid = session?.user.userId;

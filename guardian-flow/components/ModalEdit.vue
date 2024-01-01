@@ -3,13 +3,14 @@ const props = defineProps<{
   open: boolean;
   email?: string;
   permessi?: string;
+  id?: string;
 }>();
 const emit = defineEmits<{
   "update:open": [open: boolean];
 }>();
 const modifica = ref(false);
-const email = ref("");
-const permessi = ref("");
+const email = ref(props.email);
+const permessi = ref(props.permessi);
 const errorMessage = ref("");
 
 const editUser = async (e: Event) => {
@@ -20,8 +21,9 @@ const editUser = async (e: Event) => {
     $fetch("/api/GestioneUtenti/editUtente", {
       method: "POST",
       body: {
-        email: formData.get("email"),
-        permessi: formData.get("permessi"),
+        email: email.value,
+        permessi: permessi.value,
+        id: props.id,
       },
     });
     navigateTo("/gestionale/GestioneUtenti/users");
@@ -40,7 +42,7 @@ const editUser = async (e: Event) => {
   <!-- MODAL AGGIUNGI UTENTE -->
   <div
     :open="open"
-    id="hs-vertically-centered-modal1"
+    :id="'id' + props.id"
     class="hs-overlay hs-overlay-backdrop-open:bg-black/50 hidden w-full h-full fixed top-0 start-0 z-[60] overflow-x-hidden overflow-y-auto"
   >
     <div
@@ -52,7 +54,7 @@ const editUser = async (e: Event) => {
           <button
             type="button"
             class="flex items-center justify-center text-sm font-semibold text-red-500 rounded-full cursor-pointer hover:scale-125"
-            data-hs-overlay="#hs-vertically-centered-modal"
+            :data-hs-overlay="'#id' + props.id"
           >
             <Icon name="material-symbols-light:close-small-outline-rounded" size="35" />
           </button>
@@ -71,8 +73,9 @@ const editUser = async (e: Event) => {
                 <label
                   for="hs-floating-input-email"
                   class="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent peer-disabled:opacity-50 peer-disabled:pointer-events-none peer-focus:text-xs peer-focus:-translate-y-1.5 peer-focus:text-gray-500 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:-translate-y-1.5 peer-[:not(:placeholder-shown)]:text-gray-500"
-                  >{{ $props.email }}</label
                 >
+                  {{ email }}
+                </label>
               </div>
 
               <select

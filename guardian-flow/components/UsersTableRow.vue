@@ -32,7 +32,6 @@ function eliminaFunction() {
     }, 3000);
   }
 }
-
 </script>
 
 <template>
@@ -66,7 +65,7 @@ function eliminaFunction() {
           <button
             type="button"
             class="flex w-full items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm focus:outline-none hover:bg-[#1e1e1e]"
-            data-hs-overlay="#hs-vertically-centered-modal1"
+            :data-hs-overlay="'#id' + Utente.userKey"
           >
             Modifica
           </button>
@@ -82,7 +81,12 @@ function eliminaFunction() {
     </td>
   </tr>
 
-  <ModalEdit :open="true" :email="$props.userEmail" :permessi="$props.userPermessi" />
+  <ModalEdit
+    :open="true"
+    :email="Utente.userEmail"
+    :permessi="Utente.userPermessi"
+    :id="Utente.userKey"
+  />
   <!-- alert -->
   <div class="fixed top-0 right-0">
     <div
