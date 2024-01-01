@@ -2,9 +2,36 @@ import joblib
 import numpy as np
 import hashlib
 import json
+import uuid
+import requests
 from sklearn.preprocessing import StandardScaler
 
 campi_desiderati = ["_source,layers,eth,eth.dst", "_source,layers,eth,eth.dst_tree,eth.addr", "_source,layers,ip,ip.src", "_source,layers,ip,ip.dst", "_source,layers,tcp,tcp.dstport", "_source,layers,tcp,tcp.flags_tree,tcp.flags.reset", "_source,layers,tcp,tcp.flags_tree,tcp.flags.syn"]
+
+
+def get_original_data(data, idx):
+    """Restituisce i dati originali per un dato indice."""
+    if idx < 0 or idx >= len(data):
+        print(f"Indice {idx} non valido.")
+        return None
+    return data[idx]
+
+def estrai_info_pacchetto(pacchetto):
+    try:
+        # Estrai i campi dal pacchetto
+        ip_src = pacchetto['_source']['layers']['ip']['ip.src']
+        ip_dst = pacchetto['_source']['layers']['ip']['ip.dst']
+        porta_src = pacchetto['_source']['layers']['tcp']['tcp.srcport']
+        porta_dst = pacchetto['_source']['layers']['tcp']['tcp.dstport']
+        protocollo = pacchetto['_source']['layers']['frame']['frame.protocols']
+
+        # Stampa i risultati
+        return ip_src, ip_dst, porta_src, porta_dst, protocollo
+       
+    except KeyError as e:
+        print(f"Chiave non trovata: {e}")
+
+
 
 
 # Assicurati che queste funzioni siano coerenti con quelle del tuo script di addestramento
@@ -51,6 +78,16 @@ def carica_dati(nome_file):
         print(f"Errore durante il caricamento del file {nome_file}: {e}")
         return []
 
+def send(data):
+    ip_src, ip_dst, porta_src, porta_dst, protocollo = data
+    id = str(uuid.uuid4())
+    url = "http://localhost:3000/api/Dashboard/newVulnerability"
+    payload = {"id": id, "ip_source": ip_src, "ip_dest": ip_dst, "porta": porta_dst, "protocollo": protocollo,"id_azienda": "4"}
+    headers = {
+        'Content-Type': 'application/json'
+    }
+    response = requests.post(url, json=payload, headers=headers)
+    print(response.text)
 
 
 def prepara_dati(X):
@@ -58,14 +95,28 @@ def prepara_dati(X):
     X_scaled = scaler.fit_transform(np.array(X))
     return X_scaled
 
-def test_modello(clf, X_scaled):
+def test_modello(clf, X_scaled,nome_file_test):
     predictions = clf.predict(X_scaled)
     contatore = sum(val == -1 for val in predictions)
     print(f"Predizioni di anomalie: {contatore} su {len(predictions)}")
+ 
+    # Prendi le prime 10 anomalie (o tutte se ce ne sono meno di 10)
+    anomalie = [idx for idx, val in enumerate(predictions) if val == -1]
+    prime_dieci_anomalie = anomalie[:10]
+
+    # Esegui la richiesta API per ogni anomalia trovata
+    for idx in prime_dieci_anomalie:
+        dato_anomalo = idx
+      
+       
+        send(estrai_info_pacchetto(get_original_data(carica_dati(nome_file_test), dato_anomalo)))
+
+    
+    
 
 def main():
     # Carica il modello
-    clf = joblib.load('isolation_forest_model.joblib')
+    clf = joblib.load('guardianflow_model.joblib')
     
     # Carica o definisci qui i tuoi nuovi dati per il test
     nome_file_test = "normal_traffic.json"
@@ -74,7 +125,7 @@ def main():
     X_test_scaled = prepara_dati(test_features)
 
     # Testa il modello
-    test_modello(clf, X_test_scaled)
+    test_modello(clf, X_test_scaled,nome_file_test)
 
 if __name__ == "__main__":
     main()

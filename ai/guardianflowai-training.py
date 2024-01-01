@@ -90,7 +90,7 @@ def main():
 
     if clf is not None and X_scaled is not None:
         valuta_modello(clf, X_scaled, normal_features)
-        joblib.dump(clf, 'isolation_forest_model.joblib')
+        joblib.dump(clf, 'guardianflow_model.joblib')
 
 if __name__ == "__main__":
     main()

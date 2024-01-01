@@ -1,4 +1,4 @@
 ai/http.json
 ai/malicious_traffic.json
 ai/normal_traffic.json
-ai/isolation_forest_model.joblib
+ai/guardianflow_model.joblib
