@@ -11,7 +11,7 @@ function open() {
   console.log(openModal.value);
 }
 
-function onSave() {
+async function onSave() {
   if (document.getElementById("password")?.value && document.getElementById("password2")?.value) {
     const password = document.getElementById("password").value;
     const password2 = document.getElementById("password2").value;
@@ -25,7 +25,24 @@ function onSave() {
       return;
     }
 
-    
+    try {
+      const response = await fetch("/api/utente/editPassword", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          password,
+        }),
+      });
+      if (response.status == 200) {
+        passChange.value = true;
+      } else {
+        passChange.value = false;
+      }
+    } catch (error) {
+      passChange.value = false;
+    }
 
     if (passChange.value == false) {
       showAlertNotConfirm.value = false;
