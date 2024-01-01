@@ -22,7 +22,6 @@ const navOptions = [
     icon: "mingcute:warning-fill",
     link: "/gestionale/dashboard/anomalie",
   },
- 
 ];
 
 const messages = ref([
@@ -41,12 +40,15 @@ const messages = ref([
   },
 ]);
 
-function logout() {
-  $fetch("/api/utente/logout", {
+const handleLogout = async () => {
+  console.log("logout");
+  // if (!(e.target instanceof HTMLFormElement)) return;
+  await $fetch("/api/utente/logout", {
     method: "POST",
+    redirect: "manual",
   });
-  navigateTo("/login");
-}
+  await navigateTo("/login");
+};
 
 function sendMessage() {
   if (newMessage.value.trim() !== "") {
@@ -109,21 +111,20 @@ const open = ref(false);
               {{ option.name }}
             </span>
           </NuxtLink>
-          
         </div>
         <NuxtLink
-            to="/"
-            @click="logout()"
-            class="hs-tooltip-toggle w-[2.375rem] h-[2.375rem] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-white"
+          to="/"
+          @click="handleLogout()"
+          class="hs-tooltip-toggle w-[2.375rem] h-[2.375rem] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-white"
+        >
+          <Icon name="mdi:logout" size="20" />
+          <span
+            class="hover:text-red-500 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 inline-block absolute invisible z-20 py-1.5 px-2.5 bg-[#171717] text-xs text-white rounded-lg whitespace-nowrap"
+            role="tooltip"
           >
-            <Icon name="mdi:logout" size="20" />
-            <span
-              class="hover:text-red-500 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 inline-block absolute invisible z-20 py-1.5 px-2.5 bg-[#171717] text-xs text-white rounded-lg whitespace-nowrap"
-              role="tooltip"
-            >
-              Logout
-            </span>
-          </NuxtLink>
+            Logout
+          </span>
+        </NuxtLink>
       </div>
     </div>
 
