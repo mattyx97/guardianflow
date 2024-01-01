@@ -1,12 +1,15 @@
 // server/api/hello.ts
 
 import * as mysql from "mysql2/promise";
-import { type Piano } from "@/types";
 
 export default defineEventHandler(async event => {
+  const body = await readBody(event);
+  const id_piano = body.id_piano;
   const authRequest = auth.handleRequest(event);
   const session = await authRequest.validate();
   const uid = session?.user.userId;
+
+  console.log("id_piano: ", id_piano);
   if (!uid) throw createError({ message: "Invalid session", statusCode: 400 });
 
   try {
@@ -15,19 +18,23 @@ export default defineEventHandler(async event => {
       'mysql://c5lv9jv7jcocax04gncj:pscale_pw_zr6YE9l2OQpSSM6XXSz8yXSJht6rEbSO4toNsRMBQup@aws.connect.psdb.cloud/guardianflow?ssl={"rejectUnauthorized":true}'
     );
 
-    console.log("Connected to PlanetScale!");
-
     // Esegui qui le operazioni desiderate con la connessione al database
-    console.log("uid: ", uid);
-    const [rows, fields] = await connection.execute(
-      "SELECT piano_abbonamento.* FROM piano_abbonamento INNER JOIN azienda ON azienda.id_piano = piano_abbonamento.id INNER JOIN user ON  azienda.id = user.azienda_id  WHERE user.id  = ?",
-      [uid]
+    //add id to vulnerability table
+    await connection.execute(
+      "UPDATE azienda INNER JOIN user ON azienda.id = user.azienda_id SET id_piano = ? WHERE user.id  = ?",
+      [id_piano, uid]
     );
+
     // Chiudi la connessione dopo aver eseguito le operazioni necessarie
     await connection.end();
 
-    return rows as Piano[];
-  } catch (error) {
+    return {
+      message: "Vulnerability added!",
+    };
+  } catch (error: any) {
     console.error("Error connecting to the database:", error);
+    return {
+      error: error.code,
+    };
   }
 });

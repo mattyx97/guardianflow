@@ -11,5 +11,5 @@ export interface Piano {
   id: string;
   nome: string;
   descrizione: string;
-  prezzo: double;
+  prezzo: number;
 }

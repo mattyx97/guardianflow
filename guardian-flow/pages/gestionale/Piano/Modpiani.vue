@@ -5,8 +5,87 @@ definePageMeta({
   middleware: ["protected"],
 });
 
+const errorMessage = ref<string | null>(null);
+
 const status = ref("Small");
 const frequenza = ref("mensile");
+const pianoPrice = ref(91);
+
+watch(status, () => {
+  console.log(status.value);
+  pianoPrice.value = getPianoPrice();
+});
+
+function getPianoPrice(): number {
+  if (frequenza.value === "mensile") {
+    if (status.value === "Small") {
+      return 91;
+    } else if (status.value === "Medium") {
+      return 156;
+    } else if (status.value === "Big") {
+      return 221;
+    } else if (status.value === "Huge") {
+      return 351;
+    }
+  } else if (frequenza.value === "annuale") {
+    if (status.value === "Small") {
+      return 1092;
+    } else if (status.value === "Medium") {
+      return 1874;
+    } else if (status.value === "Big") {
+      return 2652;
+    } else if (status.value === "Huge") {
+      return 4212;
+    }
+  }
+  return 0;
+}
+
+function getPianoId() {
+  if (frequenza.value === "mensile") {
+    if (status.value === "Small") {
+      return 1;
+    } else if (status.value === "Medium") {
+      return 2;
+    } else if (status.value === "Big") {
+      return 3;
+    } else if (status.value === "Huge") {
+      return 4;
+    }
+  } else if (frequenza.value === "annuale") {
+    if (status.value === "Small") {
+      return 5;
+    } else if (status.value === "Medium") {
+      return 6;
+    } else if (status.value === "Big") {
+      return 7;
+    } else if (status.value === "Huge") {
+      return 8;
+    }
+  }
+  return 0;
+}
+
+const handleSubmit = async (e: Event) => {
+  if (!(e.target instanceof HTMLFormElement)) return;
+  const formData = new FormData(e.target);
+
+  try {
+    $fetch("/api/Piano/editPiano", {
+      method: "POST",
+      body: {
+        id_piano: getPianoId(),
+      },
+    });
+  } catch (e) {
+    const { data: error } = e as {
+      data: {
+        message: string;
+      };
+    };
+    errorMessage.value = error.message;
+  }
+};
 </script>
 
 <template>
@@ -60,6 +139,7 @@ const frequenza = ref("mensile");
                 description="Il piano Small è la soluzione ideale per le piccole imprese. Con una capacità di analisi fino a 300 GB di traffico di rete al mese oppure 3TB annuali."
                 :price="91"
                 frequenza="mese"
+                :id="1"
                 v-model="status"
               />
               <LabelPianoMod
@@ -68,6 +148,7 @@ const frequenza = ref("mensile");
                 :price="156"
                 frequenza="mese"
                 v-model="status"
+                :id="2"
               />
               <LabelPianoMod
                 title="Big"
@@ -75,6 +156,7 @@ const frequenza = ref("mensile");
                 :price="221"
                 frequenza="mese"
                 v-model="status"
+                :id="3"
               />
               <LabelPianoMod
                 title="Huge"
@@ -82,6 +164,7 @@ const frequenza = ref("mensile");
                 :price="351"
                 frequenza="mese"
                 v-model="status"
+                :id="4"
               />
             </div>
           </div>
@@ -99,6 +182,7 @@ const frequenza = ref("mensile");
                 :price="1092"
                 frequenza="anno"
                 v-model="status"
+                :id="5"
               />
               <LabelPianoMod
                 title="Medium"
@@ -106,6 +190,7 @@ const frequenza = ref("mensile");
                 :price="1874"
                 frequenza="anno"
                 v-model="status"
+                :id="6"
               />
               <LabelPianoMod
                 title="Big"
@@ -113,6 +198,7 @@ const frequenza = ref("mensile");
                 :price="2652"
                 frequenza="anno"
                 v-model="status"
+                :id="7"
               />
               <LabelPianoMod
                 title="Huge"
@@ -120,6 +206,7 @@ const frequenza = ref("mensile");
                 :price="4212"
                 frequenza="anno"
                 v-model="status"
+                :id="8"
               />
             </div>
           </div>
@@ -127,66 +214,60 @@ const frequenza = ref("mensile");
       </div>
 
       <!-- CARD PAGAMENTO -->
-      <div
-        class="rounded-lg text-white flex flex-col bg-[#171717] w-full lg:w-[40%] p-3"
-      >
+      <div class="rounded-lg text-white flex flex-col bg-[#171717] w-full lg:w-[40%] p-3">
         <h1 class="text-xl font-bold py-2">Procedi all'acquisto</h1>
-        <div class="text-white flex flex-col gap-5 mt-3">
-          <div>
-            <label for="input-label" class="block text-sm font-medium mb-2"
-              >Nome e Cognome</label
-            >
-            <input
-              type="email"
-              id="input-label"
-              class="py-3 px-4 w-full bg-[#1e1e1e] rounded-lg text-sm focus:border-none"
-              placeholder="Nome e Cognome"
-            />
+        <form method="post" action="/api/Piano/editPiano" @submit.prevent="handleSubmit">
+          <div class="text-white flex flex-col gap-5 mt-3">
+            <div>
+              <label for="input-label" class="block text-sm font-medium mb-2">Nome e Cognome</label>
+              <input
+                type="email"
+                id="input-label"
+                class="py-3 px-4 w-full bg-[#1e1e1e] rounded-lg text-sm focus:border-none"
+                placeholder="Nome e Cognome"
+              />
+            </div>
+            <div>
+              <label for="input-label" class="block text-sm font-medium mb-2">
+                Numero della carta
+              </label>
+              <input
+                type="email"
+                id="input-label"
+                class="py-3 px-4 w-full bg-[#1e1e1e] rounded-lg text-sm focus:border-none"
+                placeholder="5555 5555 5555 5555"
+              />
+            </div>
+            <div>
+              <label for="input-label" class="block text-sm font-medium mb-2">
+                Data di scadenza
+              </label>
+              <input
+                type="date"
+                id="input-label"
+                class="py-3 px-4 w-full bg-[#1e1e1e] rounded-lg text-sm focus:border-none text-white"
+              />
+            </div>
+            <div>
+              <label for="input-label" class="block text-sm font-medium mb-2">CVV</label>
+              <input
+                type="text"
+                id="input-label"
+                class="py-3 px-4 w-full bg-[#1e1e1e] rounded-lg text-sm focus:border-none text-white"
+                placeholder="CVV"
+              />
+            </div>
+            <div class="flex flex-row gap-2 text-white text-xl">
+              <h1>Totale:</h1>
+              <h1 class="font-bold">{{ pianoPrice }}€</h1>
+            </div>
+            <div class="flex justify-center mt-3">
+              <button class="bg-red-700 hover:bg-red-800 text-white p-3 rounded-lg">
+                ACQUISTA
+              </button>
+            </div>
           </div>
-          <div>
-            <label for="input-label" class="block text-sm font-medium mb-2"
-              >Numero della carta
-            </label>
-            <input
-              type="email"
-              id="input-label"
-              class="py-3 px-4 w-full bg-[#1e1e1e] rounded-lg text-sm focus:border-none"
-              placeholder="5555 5555 5555 5555"
-            />
-          </div>
-          <div>
-            <label for="input-label" class="block text-sm font-medium mb-2"
-              >Data di scadenza
-            </label>
-            <input
-              type="date"
-              id="input-label"
-              class="py-3 px-4 w-full bg-[#1e1e1e] rounded-lg text-sm focus:border-none text-white"
-            />
-          </div>
-          <div>
-            <label for="input-label" class="block text-sm font-medium mb-2"
-              >CVV
-            </label>
-            <input
-              type="text"
-              id="input-label"
-              class="py-3 px-4 w-full bg-[#1e1e1e] rounded-lg text-sm focus:border-none text-white"
-              placeholder="CVV"
-            />
-          </div>
-          <div class="flex flex-row gap-2 text-white text-xl">
-            <h1>Totale:</h1>
-            <h1 class="font-bold">1092€</h1>
-          </div>
-          <div class="flex justify-center mt-3">
-            <button
-              class="bg-red-700 hover:bg-red-800 text-white p-3 rounded-lg"
-            >
-              ACQUISTA
-            </button>
-          </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
