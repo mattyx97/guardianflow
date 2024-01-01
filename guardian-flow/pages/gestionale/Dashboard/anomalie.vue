@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { type Anomalia } from "@/types";
+
 /* layout */
 definePageMeta({
   layout: "gestionale",
   middleware: ["protected"],
 });
 const { data: anomalies } = useFetch("/api/Dashboard/getAllVulnerability");
+
+
 </script>
 
 <template>

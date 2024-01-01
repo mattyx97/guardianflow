@@ -8,7 +8,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "inst_pkgs": "pnpm install"
+    "inst_pkgs": "pnpm install",
+    "test": "vitest run --coverage"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
@@ -16,8 +17,10 @@
     "@pinia/nuxt": "^0.5.1",
     "@types/qrcode": "^1.5.5",
     "@types/speakeasy": "^2.0.10",
+    "@vitest/coverage-v8": "^1.2.1",
     "@vueuse/nuxt": "^10.6.1",
     "nuxt": "^3.9.0",
+    "vitest": "^1.2.1",
     "vue": "^3.4.5",
     "vue-router": "^4.2.5"
   },
@@ -27,6 +30,7 @@
     "@nuxtjs/dotenv": "^1.4.1",
     "@planetscale/database": "^1.13.0",
     "@types/crypto-js": "^4.2.1",
+    "@vitejs/plugin-vue": "^5.0.3",
     "apexcharts": "^3.44.0",
     "crypto-js": "^4.2.0",
     "dotenv": "^16.3.1",
