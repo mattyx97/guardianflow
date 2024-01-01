@@ -5,6 +5,11 @@ import * as mysql from "mysql2/promise";
 export default defineEventHandler(async event => {
   const body = await readBody(event);
   const id = body.id;
+  const email = body.email;
+  const permessi = body.permessi;
+  const uid = body.uid;
+
+  console.log("id: ", uid);
 
   try {
     // Crea la connessione al database
@@ -14,14 +19,14 @@ export default defineEventHandler(async event => {
 
     // Esegui qui le operazioni desiderate con la connessione al database
     //add id to vulnerability table
-    await connection.execute("UPDATE user SET email = ? or permessi = ? WHERE id = ?", [id]);
+    await connection.execute("UPDATE user SET email = ? or permessi = ? WHERE user.id = ?", [uid, email, permessi]);
     console.log("id: ", id);
 
     // Chiudi la connessione dopo aver eseguito le operazioni necessarie
     await connection.end();
 
     return {
-      message: "Vulnerability added!",
+      message: "Utente Modificato!",
     };
   } catch (error: any) {
     console.error("Error connecting to the database:", error);
@@ -30,3 +35,6 @@ export default defineEventHandler(async event => {
     };
   }
 });
+
+// server/api/hello.ts
+

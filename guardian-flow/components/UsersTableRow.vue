@@ -32,6 +32,7 @@ function eliminaFunction() {
     }, 3000);
   }
 }
+
 </script>
 
 <template>
@@ -81,7 +82,7 @@ function eliminaFunction() {
     </td>
   </tr>
 
-  <ModalEdit :open="true" />
+  <ModalEdit :open="true" :email="$props.userEmail" :permessi="$props.userPermessi" />
   <!-- alert -->
   <div class="fixed top-0 right-0">
     <div

@@ -87,13 +87,13 @@ const navOptions = [
             aria-current="page"
             >{{ option.nome }}</NuxtLink
           >
-          <NuxtLink to="/login" class="font-medium hover:font-bold hover:text-red-600 sm:hidden   " aria-current="page">
+          <NuxtLink to="/login" class="font-medium hover:font-bold hover:text-red-600 sm:hidden " aria-current="page">
             <h1 class="">Login</h1>
           </NuxtLink>
         </div>
       </div>
-      <NuxtLink to="/login" class="hidden hover:text-red-700 sm:block rounded-full border-2 p-2">
-        <Icon name="iconoir:log-in" size="20" />
+      <NuxtLink to="/login" class="hidden p-2 border-2 rounded-full hover:text-red-700 sm:block">
+        <Icon name="tdesign:login" size="20" />
       </NuxtLink>
     </nav>
   </header>
