@@ -9,6 +9,12 @@ const search = ref("");
 
 const save = ref(false);
 
+const filteredUsers = computed(() => {
+  if (search.value === "") return users.value;
+  return users.value?.filter((user) =>
+    user.username.toLowerCase().includes(search.value.toLowerCase())
+  );
+});
 </script>
 
 <template>
@@ -33,7 +39,7 @@ const save = ref(false);
 
               <button
                 type="button"
-                class="p-2 text-white bg-gradient-to-b from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:outline-none shadow-md font-medium rounded-lg text-center"
+                class="p-2 font-medium text-center text-white rounded-lg shadow-md bg-gradient-to-b from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:outline-none"
                 data-hs-overlay="#hs-modal"
               >
                 <Icon name="ic:baseline-plus" size="25" />
