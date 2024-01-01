@@ -5,6 +5,8 @@ const props = defineProps<{
   priceMese?: number;
   priceAnno?: number;
 }>();
+
+
 </script>
 <template>
   <div

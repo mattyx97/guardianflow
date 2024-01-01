@@ -17,6 +17,16 @@ async function onSave() {
     const password2 = document.getElementById("password2").value;
     openModal.value = false;
 
+    // Controllo della complessità della password
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!passwordRegex.test(password)) {
+      showAlertNotConfirm.value = true;
+      setTimeout(() => {
+        showAlertNotConfirm.value = null;
+      }, 3000);
+      return;
+    }
+
     if (password != password2) {
       showAlertNotConfirm.value = true;
       setTimeout(() => {
@@ -63,6 +73,7 @@ async function onSave() {
     }, 3000);
   }
 }
+
 </script>
 
 <template>
@@ -123,7 +134,7 @@ async function onSave() {
             </button>
           </div>
 
-          <div class="flex flex-col gap-5 p-4 overflow-y-auto text-center sm:p-10 text-white">
+          <div class="flex flex-col gap-5 p-4 overflow-y-auto text-center text-white sm:p-10">
             <!-- End Icon -->
 
             <h3 class="mb-2 text-xl font-bold">Modifica la tua password</h3>
@@ -198,7 +209,7 @@ async function onSave() {
           <div class="ms-3">
             <h3 class="font-semibold text-gray-800 dark:text-white">Successfully updated.</h3>
             <p class="text-sm text-gray-700 dark:text-gray-400">
-              You have successfully updated your email preferences.
+              Password cambiata.
             </p>
           </div>
         </div>
@@ -230,7 +241,7 @@ async function onSave() {
           </div>
           <div class="ms-3">
             <h3 class="font-semibold text-gray-800 dark:text-white">Error!</h3>
-            <p class="text-sm text-gray-700 dark:text-gray-400">Your purchase has been declined.</p>
+            <p class="text-sm text-gray-700 dark:text-gray-400">Password non cambiata.</p>
           </div>
         </div>
       </div>
