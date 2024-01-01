@@ -68,11 +68,40 @@ function getPianoId() {
   }
   return 0;
 }
+function validateCardNumber(cardNumber: string): boolean {
+  const cardNumberRegex = /^[0-9]{16}$/;
+  return cardNumberRegex.test(cardNumber);
+}
 
+function validateExpirationDate(expirationDate: string): boolean {
+  const today = new Date();
+  const [month, year] = expirationDate.split("/");
+  // Il mese restituito da JavaScript è basato su 0 (0 per gennaio, 11 per dicembre)
+  // quindi sottraiamo 1 dal valore del mese inserito dall'utente.
+  const expiry = new Date(parseInt("20" + year), parseInt(month) - 1, 1);
+
+  return expiry > today;
+}
+
+function validateCVV(cvv: string): boolean {
+  const cvvRegex = /^[0-9]{3}$/;
+  return cvvRegex.test(cvv);
+}
 const handleSubmit = async (e: Event) => {
   if (!(e.target instanceof HTMLFormElement)) return;
   const formData = new FormData(e.target);
+  const cardNumber = formData.get("cardNumber") as string;
+  const expirationDate = formData.get("expirationDate") as string;
+  const cvv = formData.get("cvv") as string;
 
+  if (
+    !validateCardNumber(cardNumber) ||
+    !validateExpirationDate(expirationDate) ||
+    !validateCVV(cvv)
+  ) {
+    errorMessage.value = "Si prega di inserire informazioni valide per il pagamento.";
+    return;
+  }
   try {
     $fetch("/api/Piano/editPiano", {
       method: "POST",
@@ -94,8 +123,8 @@ const handleSubmit = async (e: Event) => {
 
 <template>
   <div class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
-    <h1 class="text-white text-2xl font-bold">Modifica il tuo piano</h1>
-    <div class="flex md:flex-col lg:flex-row justify-between p-10 gap-9">
+    <h1 class="text-2xl font-bold text-white">Modifica il tuo piano</h1>
+    <div class="flex justify-between p-10 md:flex-col lg:flex-row gap-9">
       <!-- INIZIO MENU -->
       <div>
         <div class="border-b-2 border-[#171717]">
@@ -219,54 +248,61 @@ const handleSubmit = async (e: Event) => {
 
       <!-- CARD PAGAMENTO -->
       <div class="rounded-lg text-white flex flex-col bg-[#171717] w-full lg:w-[40%] p-3">
-        <h1 class="text-xl font-bold py-2">Procedi all'acquisto</h1>
+        <h1 class="py-2 text-xl font-bold">Procedi all'acquisto</h1>
         <form method="post" action="/api/Piano/editPiano" @submit.prevent="handleSubmit">
-          <div class="text-white flex flex-col gap-5 mt-3">
+          <div class="flex flex-col gap-5 mt-3 text-white">
             <div>
-              <label for="input-label" class="block text-sm font-medium mb-2">Nome e Cognome</label>
+              <label for="input-label" class="block mb-2 text-sm font-medium">Nome e Cognome</label>
               <input
-                type="email"
+                type="text"
                 id="input-label"
                 class="py-3 px-4 w-full bg-[#1e1e1e] rounded-lg text-sm focus:border-none"
                 placeholder="Nome e Cognome"
+                required
               />
             </div>
             <div>
-              <label for="input-label" class="block text-sm font-medium mb-2">
+              <label for="input-label" class="block mb-2 text-sm font-medium">
                 Numero della carta
               </label>
               <input
-                type="email"
+                type="number"
                 id="input-label"
                 class="py-3 px-4 w-full bg-[#1e1e1e] rounded-lg text-sm focus:border-none"
                 placeholder="5555 5555 5555 5555"
+                name="cardNumber"
+                required
               />
             </div>
             <div>
-              <label for="input-label" class="block text-sm font-medium mb-2">
+              <label for="input-label" class="block mb-2 text-sm font-medium">
                 Data di scadenza
               </label>
               <input
-                type="date"
+                type="month"
+                name="expirationDate"
                 id="input-label"
+                required
                 class="py-3 px-4 w-full bg-[#1e1e1e] rounded-lg text-sm focus:border-none text-white"
               />
             </div>
             <div>
-              <label for="input-label" class="block text-sm font-medium mb-2">CVV</label>
+              <label for="input-label" class="block mb-2 text-sm font-medium">CVV</label>
               <input
-                type="text"
+                type="number"
+                name="cvv"
+                required
                 id="input-label"
                 class="py-3 px-4 w-full bg-[#1e1e1e] rounded-lg text-sm focus:border-none text-white"
                 placeholder="CVV"
               />
             </div>
-            <div class="flex flex-row gap-2 text-white text-xl">
+            <div class="flex flex-row gap-2 text-xl text-white">
               <h1>Totale:</h1>
               <h1 class="font-bold">{{ pianoPrice }}€</h1>
             </div>
             <div class="flex justify-center mt-3">
-              <button class="bg-red-700 hover:bg-red-800 text-white p-3 rounded-lg">
+              <button class="p-3 text-white bg-red-700 rounded-lg hover:bg-red-800">
                 ACQUISTA
               </button>
             </div>
@@ -276,3 +312,11 @@ const handleSubmit = async (e: Event) => {
     </div>
   </div>
 </template>
+
+<style scoped>
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+</style>

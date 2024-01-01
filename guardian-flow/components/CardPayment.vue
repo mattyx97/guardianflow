@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const user = useUser();
+
 if (user.value) {
   await navigateTo("/"); // redirect to profile page
 }
@@ -13,8 +14,13 @@ function validateCardNumber(cardNumber: string): boolean {
 }
 
 function validateExpirationDate(expirationDate: string): boolean {
-  const expirationDateRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
-  return expirationDateRegex.test(expirationDate);
+  const today = new Date();
+  const [month, year] = expirationDate.split('/');
+  // Il mese restituito da JavaScript è basato su 0 (0 per gennaio, 11 per dicembre)
+  // quindi sottraiamo 1 dal valore del mese inserito dall'utente.
+  const expiry = new Date(parseInt('20' + year), parseInt(month) - 1, 1);
+
+  return expiry > today;
 }
 
 function validateCVV(cvv: string): boolean {
@@ -37,15 +43,19 @@ const handleSubmit = async (e: Event) => {
   if (!(e.target instanceof HTMLFormElement)) return;
   const formData = new FormData(e.target);
   const password = generatePassword();
+  const cardNumber = formData.get("cardNumber") as string ;
+  const expirationDate = formData.get("expirationDate") as string;
+  const cvv = formData.get("cvv")   as string ;
 
-  // if (
-  //   !validateCardNumber(cardNumber) ||
-  //   !validateExpirationDate(expirationDate) ||
-  //   !validateCVV(cvv)
-  // ) {
-  //   errorMessage.value = "Si prega di inserire informazioni valide per il pagamento.";
-  //   return;
-  // }
+  
+   if (
+    !validateCardNumber(cardNumber) ||  
+    !validateExpirationDate(expirationDate) ||
+    !validateCVV(cvv)
+   ) {
+     errorMessage.value = "Si prega di inserire informazioni valide per il pagamento.";
+    return;
+  }
 
   try {
     await $fetch("/api/utente/signup", {
@@ -168,22 +178,30 @@ const handleSubmit = async (e: Event) => {
               type="text"
               class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg disabled:pointer-events-none"
               placeholder="Intestatario carta*"
+              required
             />
             <input
-              type="text"
+              type="string"
               class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg disabled:pointer-events-none"
               placeholder="Numero carta*"
+              name="cardNumber"
+              required
             />
             <div class="grid gap-3 sm:flex">
               <input
-                type="text"
+                type="month"
                 class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg disabled:pointer-events-none"
                 placeholder="Data di scadenza*"
+                name="expirationDate"
+                required
               />
               <input
-                type="text"
+            
+                type="number"
                 class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg disabled:pointer-events-none"
                 placeholder="CVV*"
+                name="cvv"
+                required
               />
             </div>
           </div>
