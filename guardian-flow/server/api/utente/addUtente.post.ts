@@ -54,7 +54,7 @@ export default defineEventHandler(async event => {
         html:
           "La tua password è: " +
           password +
-          " <br> <a href='http://localhost:3000'>Clicca qui per accedere</a>",
+          " <br> <a href='http://localhost:3000/gestionale/dashboard'>Clicca qui per accedere</a>",
       });
 
       if (error) {
