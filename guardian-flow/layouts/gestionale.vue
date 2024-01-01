@@ -59,7 +59,7 @@ function sendMessage() {
     newMessage.value = "";
   }
 }
-console.log(messages);
+
 const open = ref(false);
 </script>
 

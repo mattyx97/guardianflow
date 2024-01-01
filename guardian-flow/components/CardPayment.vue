@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import getPiano from '~/server/api/Piano/getPiano';
-
 const user = useUser();
 if (user.value) {
   await navigateTo("/"); // redirect to profile page
@@ -24,7 +22,6 @@ function validateCVV(cvv: string): boolean {
   return cvvRegex.test(cvv);
 }
 
-
 function generatePassword() {
   var length = 12,
     charset =
@@ -41,16 +38,24 @@ const handleSubmit = async (e: Event) => {
   const formData = new FormData(e.target);
   const password = generatePassword();
 
-  const cardNumberInput = (e.target as HTMLFormElement).querySelector('#af-payment-payment-method') as HTMLInputElement;
-  const expirationDateInput = (e.target as HTMLFormElement).querySelector('#expiration-date') as HTMLInputElement;
-  const cvvInput = (e.target as HTMLFormElement).querySelector('#cvv') as HTMLInputElement;
+  const cardNumberInput = (e.target as HTMLFormElement).querySelector(
+    "#af-payment-payment-method"
+  ) as HTMLInputElement;
+  const expirationDateInput = (e.target as HTMLFormElement).querySelector(
+    "#expiration-date"
+  ) as HTMLInputElement;
+  const cvvInput = (e.target as HTMLFormElement).querySelector("#cvv") as HTMLInputElement;
 
   const cardNumber = cardNumberInput.value;
   const expirationDate = expirationDateInput.value;
   const cvv = cvvInput.value;
 
-  if (!validateCardNumber(cardNumber) || !validateExpirationDate(expirationDate) || !validateCVV(cvv)) {
-    errorMessage.value = 'Si prega di inserire informazioni valide per il pagamento.';
+  if (
+    !validateCardNumber(cardNumber) ||
+    !validateExpirationDate(expirationDate) ||
+    !validateCVV(cvv)
+  ) {
+    errorMessage.value = "Si prega di inserire informazioni valide per il pagamento.";
     return;
   }
 
@@ -73,8 +78,6 @@ const handleSubmit = async (e: Event) => {
     errorMessage.value = error.message;
   }
 };
-
-
 </script>
 <template>
   <!-- Card Section -->
