@@ -14,6 +14,25 @@ const navOptions = [
     icon: "mdi:account",
     link: "/gestionale/Utente/user",
   },
+ 
+  {
+    name: "Anomalie",
+    icon: "mingcute:warning-fill",
+    link: "/gestionale/dashboard/anomalie",
+  },
+];
+
+const navOptionsAdmin = [
+  {
+    name: "Dashboard",
+    icon: "svg-spinners:blocks-scale",
+    link: "/gestionale/dashboard",
+  },
+  {
+    name: "Profilo",
+    icon: "mdi:account",
+    link: "/gestionale/Utente/user",
+  },
   {
     name: "Gestione utenti",
     icon: "mdi:account-group",
@@ -37,6 +56,7 @@ const messages = ref([
     ],
   },
 ]);
+const utente = useUser();
 
 const handleLogout = async () => {
   console.log("logout");
@@ -96,7 +116,7 @@ const open = ref(false);
     >
       <div class="flex flex-col items-center justify-center py-4 gap-y-2">
         <div
-          v-for="option in navOptions"
+          v-for="option in utente?.permessi=='admin' ? navOptionsAdmin :navOptions"
           class="hs-tooltip inline-block [--placement:right]"
         >
           <NuxtLink

@@ -5,6 +5,7 @@ const { data: anomalies } = await useFetch("/api/Dashboard/getNumAnomalie");
 /* layout */
 definePageMeta({
   layout: "gestionale",
+  middleware: ["protected"],
 });
 const user = useAuthenticatedUser();
 const mesi = [

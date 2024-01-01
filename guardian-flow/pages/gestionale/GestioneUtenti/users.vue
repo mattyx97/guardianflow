@@ -3,6 +3,7 @@ import type { Header, Item } from "vue3-easy-data-table";
 /* layout */
 definePageMeta({
   layout: "gestionale",
+  middleware: ["protected-user"],
 });
 const { data: users } = useFetch("/api/utente/getUtenti");
 const search = ref("");

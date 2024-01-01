@@ -30,16 +30,18 @@ if (user.value) {
 } */
 
 const errorMessage = ref<string | null>(null);
+const route = useRoute()
+
 
 const handleSubmit = async (e: Event) => {
   if (!(e.target instanceof HTMLFormElement)) return;
   const formData = new FormData(e.target);
   try {
-    const response = await $fetch("/api/utente/login", {
+    const response = await $fetch("/api/utente/validateResetPassword", {
       method: "POST",
       body: {
-        username: formData.get("email"),
-        password: formData.get("password"),
+        password: formData.get("email"),
+        token: route.query.token,
       },
     });
     await navigateTo("/gestionale/dashboard"); // redirect to profile page
@@ -67,40 +69,30 @@ function openModal() {
     >
       <!-- HEADER -->
       <div class="mb-4 text-center">
-        <h1 class="text-2xl font-semibold tracking-tight">Area Riservata</h1>
-        <p class="text-sm text-muted-foreground">Inserisci i tuoi dati</p>
+        <h1 class="text-2xl font-semibold tracking-tight">Password dimenticata</h1>
+        <p class="text-sm text-muted-foreground">Inserisci la nuova password</p>
       </div>
 
       <!-- FORM -->
       <form
         class="flex flex-col w-full gap-2"
         method="post"
-        action="/api/utente/login"
+    
         @submit.prevent="handleSubmit"
       >
         <label class="flex flex-col space-y-1">
-          <span>Email</span>
+          <span>Password</span>
           <input
-            type="email"
+            type="password"
             class="p-2 border rounded-md focus:border-2 focus:outline-black"
             :disabled="isLoading"
             required
             id="email"
             name="email"
+
           />
         </label>
 
-        <label class="flex flex-col space-y-1">
-          <span>Password</span>
-          <input
-            type="password"
-            class="p-2 border rounded-md ring-none focus:border-2 focus:outline-black"
-            :disabled="isLoading"
-            required
-            id="password"
-            name="password"
-          />
-        </label>
 
         <button
           class="w-full p-2 mt-5 text-white bg-red-500 border rounded-md hover:bg-red-700"
@@ -108,14 +100,11 @@ function openModal() {
           :class="{ 'bg-gray-400': isLoading }"
         >
           <Icon v-if="isLoading" name="svg-spinners:90-ring" size="20" />
-          <span v-else>Accedi</span>
+          <span v-else>Invia email</span>
         </button>
       </form>
       <!-- LINK RESET PSW -->
-      <p class="error">{{ errorMessage }}</p>
-      <button class="mt-5 text-sm font-bold" @click="openModal()">
-        Hai dimenticato la password?
-      </button>
+     
     </div>
   </div>
 </template>

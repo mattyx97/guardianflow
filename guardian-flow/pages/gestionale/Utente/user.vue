@@ -6,6 +6,9 @@ definePageMeta({
 });
 
 const user = useAuthenticatedUser();
+function openUrl() {
+  window.open('https://firebasestorage.googleapis.com/v0/b/events-5a52c.appspot.com/o/Fattura.pdf?alt=media&token=8780b19c-323a-40ff-a31a-1f21f5508e9f', '_blank')
+}
 </script>
 
 <template>
@@ -80,6 +83,7 @@ const user = useAuthenticatedUser();
                     <button
                       type="button"
                       class="hs-tooltip-toggle w-10 h-10 inline-flex justify-center items-center gap-2"
+                      @click="openUrl()"
                     >
                       <Icon name="tabler:file-invoice" size="20" />
                       <span
@@ -89,6 +93,7 @@ const user = useAuthenticatedUser();
                         Scarica fattura
                       </span>
                     </button>
+             
                   </div>
                 </td>
               </tr>

@@ -82,7 +82,7 @@ def send(data):
     ip_src, ip_dst, porta_src, porta_dst, protocollo = data
     id = str(uuid.uuid4())
     url = "http://localhost:3000/api/Dashboard/newVulnerability"
-    payload = {"id": id, "ip_source": ip_src, "ip_dest": ip_dst, "porta": porta_dst, "protocollo": protocollo,"id_azienda": "4"}
+    payload = {"id": id, "ip_source": ip_src, "ip_dest": ip_dst, "porta": porta_dst, "protocollo": protocollo,"id_azienda": "7"}
     headers = {
         'Content-Type': 'application/json'
     }
@@ -102,7 +102,7 @@ def test_modello(clf, X_scaled,nome_file_test):
  
     # Prendi le prime 10 anomalie (o tutte se ce ne sono meno di 10)
     anomalie = [idx for idx, val in enumerate(predictions) if val == -1]
-    prime_dieci_anomalie = anomalie[:10]
+    prime_dieci_anomalie = anomalie[:1]
 
     # Esegui la richiesta API per ogni anomalia trovata
     for idx in prime_dieci_anomalie:
