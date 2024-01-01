@@ -55,7 +55,7 @@ const handleSubmit = async (e: Event) => {
         </p>
       </div>
 
-      <form method="post" action="/api/signup" @submit.prevent="handleSubmit">
+      <form method="post" action="/api/utente/signup" @submit.prevent="handleSubmit">
         <!-- Section -->
         <div class="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200">
           <label for="af-payment-billing-contact" class="inline-block text-sm font-medium">

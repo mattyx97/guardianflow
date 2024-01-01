@@ -50,7 +50,7 @@ const handleSubmit = async (e: Event) => {
       </div>
     </div>
 
-    <form method="post" action="/api/2fa" @submit.prevent="handleSubmit">
+    <form method="post" action="/api/utente/2fa" @submit.prevent="handleSubmit">
       <div class="flex flex-col gap-5">
         <input
           type="text"

@@ -9,7 +9,7 @@ const user = useAuthenticatedUser();
 const handleLogout = async (e: Event) => {
   console.log("logout");
   // if (!(e.target instanceof HTMLFormElement)) return;
-  await $fetch("/api/logout", {
+  await $fetch("/api/utente/logout", {
     method: "POST",
     redirect: "manual",
   });

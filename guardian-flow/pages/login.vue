@@ -35,7 +35,7 @@ const handleSubmit = async (e: Event) => {
   if (!(e.target instanceof HTMLFormElement)) return;
   const formData = new FormData(e.target);
   try {
-    const response = await $fetch("/api/login", {
+    const response = await $fetch("/api/utente/login", {
       method: "POST",
       body: {
         username: formData.get("email"),
@@ -75,7 +75,7 @@ function openModal() {
       <form
         class="flex flex-col w-full gap-2"
         method="post"
-        action="/api/login"
+        action="/api/utente/login"
         @submit.prevent="handleSubmit"
       >
         <label class="flex flex-col space-y-1">

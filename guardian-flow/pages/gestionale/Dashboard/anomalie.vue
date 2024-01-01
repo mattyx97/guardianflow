@@ -4,7 +4,7 @@ import { type Anomalia } from "@/types";
 definePageMeta({
   layout: "gestionale",
 });
-const { data: anomalies } = useFetch("/api/getAllVulnerability");
+const { data: anomalies } = useFetch("/api/Dashboard/getAllVulnerability");
 </script>
 
 <template>
@@ -61,10 +61,7 @@ const { data: anomalies } = useFetch("/api/getAllVulnerability");
                 >
                   Stato
                 </th>
-                <th
-                  scope="col"
-                  class="px-6 py-3 text-xs font-medium text-white uppercase text-end"
-                >
+                <th scope="col" class="px-6 py-3 text-xs font-medium text-white uppercase text-end">
                   Opzioni
                 </th>
               </tr>
