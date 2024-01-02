@@ -27,6 +27,10 @@
     "nuxt-icon": "^0.6.6",
     "preline": "^2.0.2",
     "vue3-apexcharts": "^1.4.4",
-    "vue3-easy-data-table": "^1.5.47"
+    "vue3-easy-data-table": "^1.5.47",
+    "@lucia-auth/adapter-mysql": "^2.1.0",
+    "@lucia-auth/adapter-sqlite": "latest",
+    "@planetscale/database": "^1.13.0",
+    "lucia": "latest"
   }
 }

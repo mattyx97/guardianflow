@@ -1,29 +1,62 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const user = useUser();
+if (user.value) {
+  await navigateTo("/"); // redirect to profile page
+}
+
+const errorMessage = ref<string | null>(null);
+
+//function that generate a random secure password
+function generatePassword() {
+  var length = 12,
+    charset =
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=",
+    retVal = "";
+  for (var i = 0, n = charset.length; i < length; ++i) {
+    retVal += charset.charAt(Math.floor(Math.random() * n));
+  }
+  return retVal;
+}
+
+const handleSubmit = async (e: Event) => {
+  if (!(e.target instanceof HTMLFormElement)) return;
+  const formData = new FormData(e.target);
+  try {
+    await $fetch("/api/signup", {
+      method: "POST",
+      body: {
+        username: formData.get("username"),
+        password: generatePassword(),
+      },
+      redirect: "manual",
+    });
+    await navigateTo("/"); // profile page
+  } catch (e) {
+    const { data: error } = e as {
+      data: {
+        message: string;
+      };
+    };
+    errorMessage.value = error.message;
+  }
+};
+</script>
 <template>
   <!-- Card Section -->
   <div class="max-w-[500px]">
     <!-- Card -->
-    <div
-      class="bg-white rounded-xl border border-gray-300 shadow-md p-4 sm:p-7"
-    >
+    <div class="bg-white rounded-xl border border-gray-300 shadow-md p-4 sm:p-7">
       <div class="text-center mb-8">
-        <h2 class="text-2xl md:text-3xl font-bold text-gray-800">
-          Procedi all'acquisto
-        </h2>
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Procedi all'acquisto</h2>
         <p class="text-sm text-gray-600 dark:text-gray-400">
           Inserisci i dati utili al completamento dell'acquisto
         </p>
       </div>
 
-      <form>
+      <form method="post" action="/api/signup" @submit.prevent="handleSubmit">
         <!-- Section -->
-        <div
-          class="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200"
-        >
-          <label
-            for="af-payment-billing-contact"
-            class="inline-block text-sm font-medium"
-          >
+        <div class="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200">
+          <label for="af-payment-billing-contact" class="inline-block text-sm font-medium">
             I tuoi dati
           </label>
 
@@ -43,19 +76,16 @@
               type="text"
               class="py-2 px-3 w-full border border-gray-200 text-sm rounded-lg disabled:pointer-events-none"
               placeholder="Email*"
+              name="username"
+              id="username"
             />
           </div>
         </div>
         <!-- End Section -->
 
         <!-- Section -->
-        <div
-          class="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200"
-        >
-          <label
-            for="af-payment-billing-address"
-            class="inline-block text-sm font-medium"
-          >
+        <div class="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200">
+          <label for="af-payment-billing-address" class="inline-block text-sm font-medium">
             Informazioni aziendali
           </label>
 
@@ -89,13 +119,8 @@
         <!-- End Section -->
 
         <!-- Section -->
-        <div
-          class="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200"
-        >
-          <label
-            for="af-payment-payment-method"
-            class="inline-block text-sm font-medium"
-          >
+        <div class="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200">
+          <label for="af-payment-payment-method" class="inline-block text-sm font-medium">
             Metodo di pagamento
           </label>
 
@@ -126,16 +151,16 @@
           </div>
         </div>
         <!-- End Section -->
+        <div class="mt-5 flex justify-center gap-x-2">
+          <button
+            type="submit"
+            class="text-sm font-bold rounded-lg bg-[#ED1C24] text-white shadow-md w-full inline-flex justify-center py-3 px-4 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 disabled:pointer-events-none"
+          >
+            Paga Ora
+          </button>
+        </div>
       </form>
-
-      <div class="mt-5 flex justify-center gap-x-2">
-        <button
-          type="button"
-          class="inline-flex text-sm font-bold rounded-lg bg-[#ED1C24] text-white shadow-md w-full inline-flex justify-center py-3 px-4 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 disabled:pointer-events-none"
-        >
-          Paga Ora
-        </button>
-      </div>
+      <p class="error">{{ errorMessage }}</p>
     </div>
     <!-- End Card -->
   </div>
