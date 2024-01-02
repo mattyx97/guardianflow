@@ -1,3 +1,7 @@
 <script setup lang="ts"></script>
 
-<template></template>
+<template>
+  <div class="flex justify-center items-center">
+    <Card2FACode />
+  </div>
+</template>

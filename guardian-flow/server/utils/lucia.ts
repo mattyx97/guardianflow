@@ -23,6 +23,7 @@ export const auth = lucia({
     return {
       username: data.username,
       twoFactorEnabled: data.two_factor,
+      twoFactorToken: data.two_factor_token,
     };
   },
 });

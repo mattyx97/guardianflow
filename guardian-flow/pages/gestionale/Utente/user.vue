@@ -2,6 +2,7 @@
 /* layout */
 definePageMeta({
   layout: "gestionale",
+  middleware: ["protected"],
 });
 </script>
 
@@ -70,20 +71,16 @@ definePageMeta({
             </thead>
             <tbody class="divide-y divide-gray-200">
               <tr class="cursor-pointer hover:bg-gray-100">
-                <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">
-                  07/11/2023
-                </td>
+                <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">07/11/2023</td>
                 <td class="px-6 py-4 text-sm whitespace-nowrap">Ottobre</td>
                 <td class="px-6 py-4 text-sm whitespace-nowrap">394€</td>
                 <td class="px-6 py-4 text-sm whitespace-nowrap">Pagato</td>
                 <td class="px-6 py-4 text-sm whitespace-nowrap">Basic</td>
-                <td
-                  class="px-6 py-4 text-sm font-medium whitespace-nowrap text-end"
-                >
+                <td class="px-6 py-4 text-sm font-medium whitespace-nowrap text-end">
                   <div class="hs-tooltip inline-block [--placement:right]">
                     <button
                       type="button"
-                      class="hs-tooltip-toggle w-10 h-10 inline-flex justify-center items-center gap-2 "
+                      class="hs-tooltip-toggle w-10 h-10 inline-flex justify-center items-center gap-2"
                     >
                       <Icon name="tabler:file-invoice" size="20" />
                       <span
