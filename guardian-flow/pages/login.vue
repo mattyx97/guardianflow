@@ -35,15 +35,14 @@ const handleSubmit = async (e: Event) => {
   if (!(e.target instanceof HTMLFormElement)) return;
   const formData = new FormData(e.target);
   try {
-    await $fetch("/api/login", {
+    const response = await $fetch("/api/login", {
       method: "POST",
       body: {
         username: formData.get("email"),
         password: formData.get("password"),
       },
-      redirect: "manual",
     });
-    await navigateTo("/"); // profile page
+    await navigateTo(response.body.redirectTo);
   } catch (e) {
     const { data: error } = e as {
       data: {
@@ -86,6 +85,8 @@ function openModal() {
             class="p-2 border rounded-md focus:border-2 focus:outline-black"
             :disabled="isLoading"
             required
+            id="email"
+            name="email"
           />
         </label>
 
@@ -96,6 +97,8 @@ function openModal() {
             class="p-2 border rounded-md ring-none focus:border-2 focus:outline-black"
             :disabled="isLoading"
             required
+            id="password"
+            name="password"
           />
         </label>
 

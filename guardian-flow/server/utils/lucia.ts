@@ -22,6 +22,7 @@ export const auth = lucia({
   getUserAttributes: data => {
     return {
       username: data.username,
+      twoFactorEnabled: data.two_factor,
     };
   },
 });

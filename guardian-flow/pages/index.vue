@@ -7,7 +7,8 @@ import logo from "@/assets/Falco_Bianco.png";
 const user = useAuthenticatedUser();
 
 const handleLogout = async (e: Event) => {
-  if (!(e.target instanceof HTMLFormElement)) return;
+  console.log("logout");
+  // if (!(e.target instanceof HTMLFormElement)) return;
   await $fetch("/api/logout", {
     method: "POST",
     redirect: "manual",
@@ -19,7 +20,7 @@ const handleLogout = async (e: Event) => {
 <template>
   <div class="flex flex-col-reverse md:flex-row items-center justify-center">
     <div class="flex flex-col p-3 md:max-w-[50%] gap-5">
-      <h1 class="text-xl md:text-2xl font-bold text-center md:text-start">
+      <h1 class="text-xl md:text-2xl font-bold text-center md:text-start" @click="handleLogout">
         La Tua Difesa Intelligente
       </h1>
       <p class="font-light text-gray-500 text-md text-center md:text-start md:text-lg">

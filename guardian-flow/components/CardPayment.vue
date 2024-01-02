@@ -21,12 +21,14 @@ function generatePassword() {
 const handleSubmit = async (e: Event) => {
   if (!(e.target instanceof HTMLFormElement)) return;
   const formData = new FormData(e.target);
+  const password = generatePassword();
+  console.log(password);
   try {
     await $fetch("/api/signup", {
       method: "POST",
       body: {
         username: formData.get("username"),
-        password: generatePassword(),
+        password: password,
       },
       redirect: "manual",
     });
