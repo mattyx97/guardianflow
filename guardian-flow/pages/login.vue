@@ -66,7 +66,7 @@ function openModal() {
         </label>
 
         <button
-          class="w-full p-2 border rounded-md hover:bg-black hover:text-white"
+          class="w-full mt-5 p-2 border rounded-md bg-green-500 hover:bg-green-700 text-white"
           :disabled="isLoading"
           :class="{ 'bg-gray-400': isLoading }"
         >
@@ -75,9 +75,11 @@ function openModal() {
         </button>
       </form>
       <!-- LINK RESET PSW -->
-      <button class="mt-5 text-sm font-bold" @click="openModal()">
-        Hai dimenticato la password?
-      </button>
+      <div class="flex justify-center">
+        <button class="mt-5 text-sm font-bold m-auto" @click="openModal()">
+          Hai dimenticato la password?
+        </button>
+      </div>
     </div>
   </div>
 </template>
