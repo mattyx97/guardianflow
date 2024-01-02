@@ -5,6 +5,11 @@ definePageMeta({
 const isLoading = ref(false);
 const open = ref(false);
 
+const user = useUser();
+if (user.value) {
+  await navigateTo("/"); // redirect to profile page
+}
+
 /* FUNCTIONS */
 /* function onSubmit() {
   isLoading.value = true;
@@ -24,6 +29,30 @@ const open = ref(false);
     });
 } */
 
+const errorMessage = ref<string | null>(null);
+
+const handleSubmit = async (e: Event) => {
+  if (!(e.target instanceof HTMLFormElement)) return;
+  const formData = new FormData(e.target);
+  try {
+    await $fetch("/api/login", {
+      method: "POST",
+      body: {
+        username: formData.get("email"),
+        password: formData.get("password"),
+      },
+      redirect: "manual",
+    });
+    await navigateTo("/"); // profile page
+  } catch (e) {
+    const { data: error } = e as {
+      data: {
+        message: string;
+      };
+    };
+    errorMessage.value = error.message;
+  }
+};
 function openModal() {
   open.value = true;
   console.log(open.value);
@@ -44,7 +73,12 @@ function openModal() {
       </div>
 
       <!-- FORM -->
-      <form class="flex flex-col w-full gap-2">
+      <form
+        class="flex flex-col w-full gap-2"
+        method="post"
+        action="/api/login"
+        @submit.prevent="handleSubmit"
+      >
         <label class="flex flex-col space-y-1">
           <span>Email</span>
           <input
@@ -75,6 +109,7 @@ function openModal() {
         </button>
       </form>
       <!-- LINK RESET PSW -->
+      <p class="error">{{ errorMessage }}</p>
       <button class="mt-5 text-sm font-bold" @click="openModal()">
         Hai dimenticato la password?
       </button>
