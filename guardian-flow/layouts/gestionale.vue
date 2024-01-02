@@ -8,17 +8,17 @@ const navOptions = [
   {
     name: "Profilo",
     icon: "mdi:account",
-    link: "/gestionale/user",
+    link: "/gestionale/Utente/user",
   },
   {
     name: "Gestione utenti",
     icon: "mdi:account-group",
-    link: "/gestionale/users",
+    link: "/gestionale/GestioneUtenti/users",
   },
   {
     name: "Anomalie",
     icon: "mingcute:warning-fill",
-    link: "/gestionale/anomalie",
+    link: "/gestionale/dashboard/anomalie",
   },
   {
     name: "Logout",

@@ -7,17 +7,23 @@ const props = defineProps<{
 }>();
 </script>
 <template>
-  <div class="flex flex-col items-center justify-center gap-x-20 m-5 lg:flex-row lg:items-start">
+  <div
+    class="flex flex-col items-center justify-center m-5 gap-x-20 lg:flex-row lg:items-start"
+  >
     <div class="flex flex-col max-w-[600px]">
-      <h1 class="text-2xl font-bold">Procedi all'acquisto del piano {{ $props.title }}</h1>
+      <h1 class="text-2xl font-bold">
+        Procedi all'acquisto del piano {{ $props.title }}
+      </h1>
       <h1>
         {{ $props.description }}
       </h1>
       <div>
-        <h1 class="text-2xl font-bold">Cosa include il piano {{ $props.title }}</h1>
+        <h1 class="text-2xl font-bold">
+          Cosa include il piano {{ $props.title }}
+        </h1>
 
-        <ul class="space-y-3 mt-3">
-          <li class="flex gap-2 items-center">
+        <ul class="mt-3 space-y-3">
+            <li class="flex items-center gap-2">
             <svg
               class="flex-shrink-0 h-4 w-4 mt-0.5 text-green-500"
               xmlns="http://www.w3.org/2000/svg"
@@ -32,9 +38,9 @@ const props = defineProps<{
             >
               <polyline points="20 6 9 17 4 12" />
             </svg>
-            <span>Baseline personalizzata</span>
+            <span>Baseline personalizzata </span>
           </li>
-          <li class="flex gap-2 items-center">
+            <li class="flex items-center gap-2">
             <svg
               class="flex-shrink-0 h-4 w-4 mt-0.5 text-green-500"
               xmlns="http://www.w3.org/2000/svg"
@@ -49,9 +55,9 @@ const props = defineProps<{
             >
               <polyline points="20 6 9 17 4 12" />
             </svg>
-            <span>Analisi del traffico</span>
+            <span> Analisi del traffico </span>
           </li>
-          <li class="flex gap-2 items-center">
+          <li class="flex items-center gap-2">
             <svg
               class="flex-shrink-0 h-4 w-4 mt-0.5 text-green-500"
               xmlns="http://www.w3.org/2000/svg"
@@ -66,9 +72,9 @@ const props = defineProps<{
             >
               <polyline points="20 6 9 17 4 12" />
             </svg>
-            <span>Notifica anomalie</span>
+            <span> Notifica anomalie </span>
           </li>
-          <li class="flex gap-2 items-center">
+          <li class="flex items-center gap-2">
             <svg
               class="flex-shrink-0 h-4 w-4 mt-0.5 text-green-500"
               xmlns="http://www.w3.org/2000/svg"
@@ -83,9 +89,9 @@ const props = defineProps<{
             >
               <polyline points="20 6 9 17 4 12" />
             </svg>
-            <span>Dashboard interattiva</span>
+            <span> Dashboard interattiva </span>
           </li>
-          <li class="flex gap-2 items-center">
+          <li class="flex items-center gap-2">
             <svg
               class="flex-shrink-0 h-4 w-4 mt-0.5 text-green-500"
               xmlns="http://www.w3.org/2000/svg"
@@ -100,9 +106,9 @@ const props = defineProps<{
             >
               <polyline points="20 6 9 17 4 12" />
             </svg>
-            <span>Gestione utenti subordinati</span>
+            <span> Gestione utenti subordinati </span>
           </li>
-          <li class="flex gap-2 items-center">
+          <li class="flex items-center gap-2">
             <svg
               class="flex-shrink-0 h-4 w-4 mt-0.5 text-green-500"
               xmlns="http://www.w3.org/2000/svg"
@@ -117,9 +123,9 @@ const props = defineProps<{
             >
               <polyline points="20 6 9 17 4 12" />
             </svg>
-            <span>Gestione anomalie rilevate</span>
+            <span> Gestione anomalie rilevate </span>
           </li>
-          <li class="flex gap-2 items-center">
+          <li class="flex items-center gap-2">
             <svg
               class="flex-shrink-0 h-4 w-4 mt-0.5 text-green-500"
               xmlns="http://www.w3.org/2000/svg"
@@ -134,8 +140,9 @@ const props = defineProps<{
             >
               <polyline points="20 6 9 17 4 12" />
             </svg>
-            <span>Gestione storico pagamenti</span>
+            <span> Gestione storico pagamenti </span>
           </li>
+
         </ul>
       </div>
     </div>
