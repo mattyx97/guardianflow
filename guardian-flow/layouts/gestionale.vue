@@ -3,7 +3,7 @@ const navOptions = [
   {
     name: "Dashboard",
     icon: "svg-spinners:blocks-scale",
-    link: "/gestionale/",
+    link: "/gestionale/dashboard",
   },
   {
     name: "Profilo",

@@ -4,7 +4,7 @@ import type { Header, Item } from "vue3-easy-data-table";
 definePageMeta({
   layout: "gestionale",
 });
-
+const save = ref(false);
 const Utente = [
   {
     userEmail: "ciao",
@@ -53,7 +53,7 @@ const Utente = [
                 />
               </button>
 
-             <ModalAdd :open="true" />
+             <ModalAdd :open="true"  />
             </div>
           </div>
           <!-- INIZIO TABELLA -->
