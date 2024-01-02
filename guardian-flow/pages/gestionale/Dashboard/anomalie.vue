@@ -6,6 +6,7 @@ definePageMeta({
   middleware: ["protected"],
 });
 const { data: anomalies } = useFetch("/api/Dashboard/getAllVulnerability");
+const user = useAuthenticatedUser();
 
 
 </script>
@@ -64,7 +65,7 @@ const { data: anomalies } = useFetch("/api/Dashboard/getAllVulnerability");
                 >
                   Stato
                 </th>
-                <th scope="col" class="px-6 py-3 text-xs font-medium text-white uppercase text-end">
+                <th v-if="user.permessi=='admin'" scope="col" class="px-6 py-3 text-xs font-medium text-white uppercase text-end">
                   Opzioni
                 </th>
               </tr>

@@ -74,6 +74,10 @@ function sendMessage() {
       type: "answer", // 'question' o 'answer' a seconda del tipo di messaggio
       text: newMessage.value.trim(),
     });
+    messages.value.push({
+      type: "question", // 'question' o 'answer' a seconda del tipo di messaggio
+      text: 'Non possiamo rispondere a questa domanda, sarà aperta una segnalazione al nostro team tecnico, ti ricontatteremo il prima possibile.',
+    });
     newMessage.value = "";
   }
 }
@@ -185,7 +189,7 @@ const open = ref(false);
           <div
             class="p-4 space-y-2 bg-[#1e1e1e] border border-red-500 rounded-2xl"
           >
-            <h2 class="font-bold text-white text-md">
+            <h2 class="text-white text-md">
               {{ message.text }}
             </h2>
             <div class="space-y-1.5" v-if="message.suggestions">

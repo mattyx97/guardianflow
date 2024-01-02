@@ -1,5 +1,7 @@
 <script setup lang="ts">
 const { data: piano } = useFetch("/api/Piano/getPiano");
+const user = useAuthenticatedUser();
+
 </script>
 
 <template>
@@ -26,7 +28,8 @@ const { data: piano } = useFetch("/api/Piano/getPiano");
           </div>
         </div>
 
-        <div>
+        <div
+        v-if="user.permessi=='admin'">
           <NuxtLink
             to="../Piano/Modpiani"
             class="py-[9px] px-[1px] text-sm text-md rounded-md bg-gradient-to-r from-red-500 via-red-600 to-red-700 shadow-md"

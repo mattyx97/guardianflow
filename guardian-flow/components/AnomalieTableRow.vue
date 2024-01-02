@@ -11,6 +11,8 @@ const Anomaly = defineProps<{
 const falsoPositivo = ref(false);
 const showAlertConfirm = ref();
 const showAlertNotConfirm = ref();
+const user = useAuthenticatedUser();
+
 
 /* funzione per segnalare un falso positivo */
 function falsoPositivoFunction() {
@@ -60,7 +62,7 @@ function falsoPositivoFunction() {
     <td class="px-6 py-4 text-sm whitespace-nowrap">
       {{ $props.anomalyStatus }}
     </td>
-    <td class="px-6 py-4 text-sm font-medium whitespace-nowrap text-end">
+    <td class="px-6 py-4 text-sm font-medium whitespace-nowrap text-end" v-if="user.permessi=='admin'">
       <div class="relative inline-flex hs-dropdown">
         <button
           id="hs-dropdown-custom-icon-trigger-2"
@@ -73,6 +75,7 @@ function falsoPositivoFunction() {
         <div
           class="z-50 hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[15rem] bg-[#171717] shadow-md rounded-lg p-2 mt-2"
           aria-labelledby="hs-dropdown-custom-icon-trigger-2"
+
         >
           <button
             @click="falsoPositivoFunction()"
