@@ -6,8 +6,11 @@ const token = ref<string | null>(null);
 const secreet = ref<string | null>(null);
 
 const user = useAuthenticatedUser();
-console.log(user.value);
+const twoFactorEnabled = ref<boolean>(false);
 
+onMounted(() => {
+  twoFactorEnabled.value = user.value.twoFactorEnabled;
+});
 async function setup2FA() {
   try {
     // Richiedi al server di iniziare il processo di setup del 2FA
@@ -38,6 +41,8 @@ async function verifyToken() {
     console.log(response);
     if (response.verified) {
       alert("2FA attivato con successo!");
+      twoFactorEnabled.value = true;
+      qrCode.value = null;
     } else {
       alert("Verifica del token fallita. Riprova.");
     }
@@ -58,7 +63,11 @@ async function verifyToken() {
         class="flex items-center gap-2 px-3 py-1 border border-black rounded-lg hover:bg-black hover:text-white"
       >
         <!-- BOTTONE PER 2FA -->
-        <button class="flex flex-row items-center gap-2" @click="setup2FA">
+        <button v-if="twoFactorEnabled" class="flex flex-row items-center gap-2">
+          <Icon v-elese name="fluent-emoji-flat:green-circle" size="20" />
+          <h1>ATTIVA</h1>
+        </button>
+        <button v-else class="flex flex-row items-center gap-2" @click="setup2FA">
           <Icon name="fluent-emoji-flat:red-circle" size="20" />
           <h1>NON ATTIVA</h1>
         </button>
