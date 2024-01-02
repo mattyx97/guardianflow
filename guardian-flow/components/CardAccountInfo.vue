@@ -128,7 +128,7 @@ function onSave() {
       </div>
     </div>
     <!-- alert -->
-    <div class="absolute top-0 right-0">
+    <div class="fixed top-0 right-0 ">
       <div
         v-if="showAlertConfirm"
         class="p-4 bg-green-400 border-t-2 border-teal-500 rounded-lg"
