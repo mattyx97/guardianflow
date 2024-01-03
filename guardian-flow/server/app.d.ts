@@ -5,6 +5,10 @@ declare namespace Lucia {
     username: string;
     two_factor: boolean;
     two_factor_token: string;
+    nome: string;
+    cognome: string;
+    permessi: string;
+    azienda_id: number;
   };
   type DatabaseSessionAttributes = {};
 }
