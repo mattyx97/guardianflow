@@ -69,7 +69,7 @@ const data = [
     ricariche: 1200,
   },
 ];
-const optionsRicMensili = {
+const options = {
   chart: {
     id: "vuechart-example",
     zoom: {
@@ -107,10 +107,10 @@ const optionsRicMensili = {
     enabled: false,
   },
 };
-const seriesRicMedieMensili = [
+const series = [
   {
     name: "€",
-    data: data,
+    data: data.map((item) => item.ricariche),
     color: "#54B03B",
   },
 ];
@@ -120,7 +120,7 @@ const seriesRicMedieMensili = [
   <div class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
     <h1 class="text-4xl">Ciao, {{ user.nome }}</h1>
     <div
-      class="grid items-center justify-center grid-col-1 md:grid-col-3 lg:grid-cols-6 gap-5 mt-3"
+      class="grid items-center justify-center gap-5 mt-3 grid-col-1 md:grid-col-3 lg:grid-cols-6"
     >
       <CardWarnings class="col-span-2" />
       <CardWarningsStatus class="col-span-2" />
@@ -132,8 +132,8 @@ const seriesRicMedieMensili = [
         class="mt-7"
         type="area"
         height="200"
-        :options="optionsRicMensili"
-        :series="seriesRicMedieMensili"
+        :options="options"
+        :series="series"
       />
     </ClientOnly>
   </div>
