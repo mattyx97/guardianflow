@@ -103,7 +103,7 @@ function openModal() {
         </label>
 
         <button
-          class="w-full mt-5 p-2 border rounded-md bg-green-500 hover:bg-green-700 text-white"
+          class="w-full p-2 mt-5 text-white bg-red-500 border rounded-md hover:bg-red-700"
           :disabled="isLoading"
           :class="{ 'bg-gray-400': isLoading }"
         >

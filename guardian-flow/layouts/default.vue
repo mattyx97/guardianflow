@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import Falco_Bianco from "@/assets/Falco_Bianco.png";
 
-
 const navOptions = [
   {
     nome: "Home",
@@ -76,9 +75,11 @@ const navOptions = [
 
       <div
         id="navbar-image-and-text-1"
-        class="hidden overflow-hidden transition-all duration-300 hs-collapse basis-full grow sm:block"
+        class="justify-between hidden overflow-hidden transition-all duration-300 hs-collapse basis-full grow sm:block"
       >
-        <div class="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:mt-0 sm:justify-center">
+        <div
+          class="flex flex-col gap-5 mt-5 ite sm:flex-row sm:items-center sm:mt-0 sm:justify-center"
+        >
           <NuxtLink
             v-for="option in navOptions"
             :to="option.link"
@@ -86,8 +87,14 @@ const navOptions = [
             aria-current="page"
             >{{ option.nome }}</NuxtLink
           >
+          <NuxtLink to="/login" class="font-medium hover:font-bold hover:text-red-600" aria-current="page">
+            <h1 class="">Login</h1>
+          </NuxtLink>
         </div>
       </div>
+      <NuxtLink to="/login" class="hidden hover:text-red-700 sm:block">
+        <Icon name="iconoir:log-in" size="20" />
+      </NuxtLink>
     </nav>
   </header>
 
