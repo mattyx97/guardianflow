@@ -1,58 +1,90 @@
+from dotenv import load_dotenv
+
 import json
-import pandas as pd
 import hashlib
+import numpy as np
 from sklearn.ensemble import IsolationForest
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report
+from sklearn.preprocessing import StandardScaler
+
+# Function to extract features and convert them into a format suitable for Isolation Forest
+campi_desiderati = ["_source,layers,eth,eth.dst", "_source,layers,eth,eth.dst_tree,eth.addr", "_source,layers,ip,ip.src", "_source,layers,ip,ip.dst", "_source,layers,tcp,tcp.dstport", "_source,layers,tcp,tcp.flags_tree,tcp.flags.reset", "_source,layers,tcp,tcp.flags_tree,tcp.flags.syn"]
 
 
+def extract_features(data):
+    features = []
+    for oggetto in data:
+        feature_vector = []
+        for campo in campi_desiderati:
+            campi = campo.split(",")
+            valore = oggetto
+            for campo in campi:
+                if isinstance(valore, dict) and campo in valore:
+                    valore = valore[campo]
+                elif isinstance(valore, list) and all(isinstance(item, dict) for item in valore) and campo.isdigit():
+                    index = int(campo)
+                    if index < len(valore):
+                        valore = valore[index]
+                    else:
+                        print(f"Indice '{campo}' non valido nella lista.")
+                        break
+                else:
+                    print(f"Il campo '{campo}' non è presente nell'oggetto.")
+                    break
+            else:
+                if isinstance(valore, str):
+                    valore = float(int(hashlib.sha1(valore.encode('utf-8')).hexdigest(), 16))
+                elif not isinstance(valore, float):
+                    print(f"Il valore non è né una stringa né un float: {valore}")
+                    break
 
-# Funzione per convertire una lista in hash
-def hash_list(lst):
-    return [hashlib.sha256(str(value).encode('utf-8')).hexdigest() if isinstance(value, str) else value
-            for value in lst]
+                feature_vector.append(valore)
 
-# Carica i dati JSON relativi al traffico normale e malevolo
-def load_and_hash_json(file_path):
-    with open(file_path, 'r') as file:
-        data = json.load(file)
+        if len(feature_vector) == len(campi_desiderati):
+            features.append(feature_vector)
 
-    # Converti le stringhe in hash per ciascuna lista nel JSON
-    hashed_data = {key: hash_list(value) if isinstance(value, list) else value
-                   for key, value in data.items()}
+    return features
 
-    return pd.DataFrame(hashed_data)
+# Nome dei file JSON da leggere
+nome_file_normale = "normal_traffic.json"
+nome_file_malicious = "malicious_traffic.json"
 
-# Carica i dati JSON relativi al traffico normale e malevolo, convertendo le stringhe in hash
-normal_data = load_and_hash_json('normal_traffic.json')
-malicious_data = load_and_hash_json('malicious_traffic.json')
+# Leggi i dati dai file JSON
+try:
+    with open(nome_file_normale, "r") as file:
+        normal_data = json.load(file)
 
-# Aggiungi una colonna 'label' per indicare se il traffico è normale (0) o malevolo (1)
-normal_data['label'] = 0
-malicious_data['label'] = 1
+    with open(nome_file_malicious, "r") as file:
+        malicious_data = json.load(file)
 
-# Unisci i dati in un unico DataFrame
-all_data = pd.concat([normal_data, malicious_data], ignore_index=True)
+except FileNotFoundError:
+    print(f"File non trovato.")
+except json.JSONDecodeError:
+    print(f"Errore nella decodifica del file JSON.")
 
-# Seleziona le colonne rilevanti per l'addestramento del modello
-features = all_data.drop('label', axis=1)
+# Estrai le feature per il training del modello Isolation Forest
+normal_features = extract_features(normal_data)
+malicious_features = extract_features(malicious_data)
 
-# Dividi i dati in set di addestramento e set di test
-X_train, X_test = train_test_split(features, test_size=0.2, random_state=42)
+# Combina le feature di traffico normale e malevolo
+X = normal_features + malicious_features
 
-# Addestra l'Isolation Forest
-model = IsolationForest(contamination=0.1)  # Modifica la contaminazione in base alle tue esigenze
-model.fit(X_train)
+if not X:
+    print("No features found. Check the data extraction process.")
+else:
+    # Normalizza o scala le feature
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X)
 
-# Valuta il modello
-y_pred = model.predict(X_test)
-print(classification_report(X_test, y_pred))
+    # Addestra il modello Isolation Forest
+    clf = IsolationForest(contamination=0.3)  # Contamination parameter can be adjusted
+    clf.fit(X_scaled)
 
-# Esempio di utilizzo del modello su nuovi dati, convertendo le stringhe in hash
-new_data = load_and_hash_json('new_data.json')
-predictions = model.predict(new_data)
-
-# Analizza i risultati delle previsioni sui nuovi dati
-for data_point, prediction in zip(new_data, predictions):
-    if prediction == -1:
-        print(f"Anomalia rilevata: {data_point}")
+    # Esegui la predizione sui dati malevoli
+    malicious_predictions = clf.predict(X_scaled[len(normal_features):])
+    contatore = 0
+    for val in malicious_predictions:
+        if val == -1:
+            contatore += 1
+            
+    print(contatore)
+    print(len(malicious_predictions))
