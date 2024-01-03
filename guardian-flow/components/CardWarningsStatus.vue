@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { type Anomalia } from "@/types";
 import VueApexCharts from "vue3-apexcharts";
+const { data: anomalies } = await useFetch("/api/getAllVulnerability");
 
 const mesi = ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"];
 
@@ -9,6 +11,7 @@ const options = {
     type: "pie",
   },
   labels: ["Falso Positivo", "Anomalia"],
+  colors: ["#32CD32", "#FF0000"],
 
   grid: {
     show: false,
@@ -17,7 +20,12 @@ const options = {
     enabled: false,
   },
 };
-const series = [44, 55];
+
+const series = computed(() => {
+  const falsoPositivo = anomalies.value?.filter(anomalia => anomalia.stato == true).length || 0;
+  const anomalia = anomalies.value?.filter(anomalia => anomalia.stato == false).length || 0;
+  return [falsoPositivo, anomalia];
+});
 </script>
 
 <template>

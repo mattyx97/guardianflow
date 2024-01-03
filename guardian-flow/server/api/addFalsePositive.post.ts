@@ -14,7 +14,7 @@ export default defineEventHandler(async event => {
 
     // Esegui qui le operazioni desiderate con la connessione al database
     //add id to vulnerability table
-    await connection.execute("UPDATE anomalia SET stato = 0 WHERE id = ?", [id]);
+    await connection.execute("UPDATE anomalia SET stato = 1 WHERE id = ?", [id]);
     console.log("id: ", id);
 
     // Chiudi la connessione dopo aver eseguito le operazioni necessarie
