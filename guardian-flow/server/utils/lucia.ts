@@ -24,6 +24,10 @@ export const auth = lucia({
       username: data.username,
       twoFactorEnabled: data.two_factor,
       twoFactorToken: data.two_factor_token,
+      nome: data.nome,
+      cognome: data.cognome,
+      permessi: data.permessi,
+      aziendaId: data.azienda_id,
     };
   },
 });
