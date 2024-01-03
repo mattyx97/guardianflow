@@ -79,7 +79,7 @@ else:
     clf = IsolationForest(contamination=0.3)  # Contamination parameter can be adjusted
     clf.fit(X_scaled)
 
-    # Esegui la predizione sui dati maliziosi
+    # Esegui la predizione sui dati malevoli
     malicious_predictions = clf.predict(X_scaled[len(normal_features):])
     contatore = 0
     for val in malicious_predictions:

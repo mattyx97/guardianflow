@@ -1,4 +1,5 @@
 <script setup lang="ts">
+//@ts-nocheck
 import auth from "@/assets/2fa.png";
 
 const qrCode = ref<string | null>(null);

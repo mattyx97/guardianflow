@@ -1,20 +1,10 @@
 <script setup lang="ts">
+import { type Anomalia } from "@/types";
 /* layout */
 definePageMeta({
   layout: "gestionale",
 });
-
-const Anomaly = [
-  {
-    anomalyID: 1,
-    anomalyDate: "2021-10-10",
-    anomalyProtocol: "TCP",
-    anomalyPort: 80,
-    anomalyIPSorg: "",
-    anomalyIPDest: "",
-    anomalyStatus: true,
-  },
-];
+const { data: anomalies } = useFetch("/api/getAllVulnerability");
 </script>
 
 <template>
@@ -79,15 +69,15 @@ const Anomaly = [
                 </th>
               </tr>
             </thead>
-            <tbody class="overflow-auto divide-y divide-gray-200">
+            <tbody v-for="anomalia in anomalies" class="overflow-auto divide-y divide-gray-200">
               <AnomalieTableRow
-                :anomalyID="1"
-                anomalyDate="08/07/2023"
-                anomalyProtocol="TCP"
-                :anomalyPort="8080"
-                anomalyIPSorg="192.0.0.0"
-                anomalyIPDest="192.0.0.0"
-                :anomalyStatus="false"
+                :anomalyID="anomalia.id"
+                :anomalyDate="new Date(anomalia.data)"
+                :anomalyProtocol="anomalia.protocollo"
+                :anomalyPort="anomalia.porta"
+                :anomalyIPSorg="anomalia.ip_sorgente"
+                :anomalyIPDest="anomalia.ip_destinazione"
+                :anomalyStatus="anomalia.stato"
               />
             </tbody>
           </table>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const Anomaly = defineProps<{
-  anomalyID?: number;
-  anomalyDate?: string;
+  anomalyID?: string;
+  anomalyDate?: Date;
   anomalyProtocol?: string;
   anomalyPort?: number;
   anomalyIPSorg?: string;
@@ -31,7 +31,9 @@ function falsoPositivoFunction() {
 <template>
   <tr class="cursor-pointer hover:bg-gray-100">
     <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">{{ $props.anomalyID }}</td>
-    <td class="px-6 py-4 text-sm whitespace-nowrap">{{ $props.anomalyDate }}</td>
+    <td class="px-6 py-4 text-sm whitespace-nowrap">
+      {{ $props.anomalyDate?.toLocaleDateString("it-IT") }}
+    </td>
     <td class="px-6 py-4 text-sm whitespace-nowrap">{{ $props.anomalyProtocol }}</td>
     <td class="px-6 py-4 text-sm whitespace-nowrap">{{ $props.anomalyPort }}</td>
     <td class="px-6 py-4 text-sm whitespace-nowrap">{{ $props.anomalyIPSorg }}</td>
