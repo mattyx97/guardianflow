@@ -13,7 +13,15 @@ const showAlertConfirm = ref();
 const showAlertNotConfirm = ref();
 
 function falsoPositivoFunction() {
+  console.log(Anomaly.anomalyID);
+  $fetch("/api/addFalsePositive", {
+    method: "POST",
+    body: {
+      id: Anomaly.anomalyID,
+    },
+  });
   falsoPositivo.value = true;
+
   if (falsoPositivo.value == true) {
     showAlertConfirm.value = true;
     setTimeout(() => {

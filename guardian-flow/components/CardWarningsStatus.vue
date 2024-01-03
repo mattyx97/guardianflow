@@ -119,6 +119,7 @@ const seriesRicMedieMensili = [
         height="200"
         :options="optionsRicMensili"
         :series="seriesRicMedieMensili"
+        :dataLabels="optionsRicMensili.dataLabels"
       />
     </ClientOnly>
   </div>

@@ -1,4 +1,14 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const { data: anomalies } = useFetch("/api/getLatestVulnerability");
+
+function countDayFromDate(date: string) {
+  const today = new Date();
+  const date2 = new Date(date);
+  const diffTime = Math.abs(today.getTime() - date2.getTime());
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  return diffDays;
+}
+</script>
 
 <template>
   <div
@@ -11,41 +21,17 @@
         <h1 class="font-bold">Age</h1>
       </div>
       <ul>
-        <li class="flex items-center justify-between">
+        <li v-for="anomalia in anomalies" class="flex items-center justify-between">
           <div class="flex items-center justify-center gap-2">
-            <Icon name="fluent-emoji-flat:red-circle" size="10"/>
-          <h1 class="">ciao</h1>
+            <Icon name="fluent-emoji-flat:red-circle" v-if="anomalia.stato==0" size="10"/>
+            <Icon name="fluent-emoji-flat:green-circle" v-else-if="anomalia.stato==1" size="10"/>
+            <Icon name="fluent-emoji-flat:orange-circle" v-else size="10"/>
+          <h1 class="text-[10px]">{{ anomalia.id }}</h1>
         </div>
-        <h1 class="">3 days</h1>
+        <h1 class="">{{ countDayFromDate(anomalia.data) }} days</h1>
         </li>
-        <li class="flex items-center justify-between">
-          <div class="flex items-center justify-center gap-2">
-            <Icon name="fluent-emoji-flat:yellow-circle" size="10"/>
-          <h1 class="">ciao</h1>
-        </div>
-        <h1 class="">3 days</h1>
-        </li>
-        <li class="flex items-center justify-between">
-          <div class="flex items-center justify-center gap-2">
-            <Icon name="fluent-emoji-flat:red-circle" size="10"/>
-          <h1 class="">ciao</h1>
-        </div>
-        <h1 class="">3 days</h1>
-        </li>
-        <li class="flex items-center justify-between">
-          <div class="flex items-center justify-center gap-2">
-            <Icon name="fluent-emoji-flat:red-circle" size="10"/>
-          <h1 class="">ciao</h1>
-        </div>
-        <h1 class="">3 days</h1>
-        </li>
-        <li class="flex items-center justify-between">
-          <div class="flex items-center justify-center gap-2">
-            <Icon name="fluent-emoji-flat:red-circle" size="10"/>
-          <h1 class="">ciao</h1>
-        </div>
-        <h1 class="">3 days</h1>
-        </li>
+       
+       
       </ul>
     </p>
   </div>

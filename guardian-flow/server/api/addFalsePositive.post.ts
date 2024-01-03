@@ -1,13 +1,10 @@
 // server/api/hello.ts
 
 import * as mysql from "mysql2/promise";
-import { type Anomalia } from "@/types";
 
 export default defineEventHandler(async event => {
-  const authRequest = auth.handleRequest(event);
-  const session = await authRequest.validate();
-  const uid = session?.user.userId;
-  if (!uid) throw createError({ message: "Invalid session", statusCode: 400 });
+  const body = await readBody(event);
+  const id = body.id;
 
   try {
     // Crea la connessione al database
@@ -15,19 +12,21 @@ export default defineEventHandler(async event => {
       'mysql://c5lv9jv7jcocax04gncj:pscale_pw_zr6YE9l2OQpSSM6XXSz8yXSJht6rEbSO4toNsRMBQup@aws.connect.psdb.cloud/guardianflow?ssl={"rejectUnauthorized":true}'
     );
 
-    console.log("Connected to PlanetScale!");
-
     // Esegui qui le operazioni desiderate con la connessione al database
-    console.log("uid: ", uid);
-    const [rows, fields] = await connection.execute(
-      "SELECT anomalia.* FROM anomalia INNER JOIN user ON anomalia.id_azienda = user.azienda_id WHERE user.id = ?",
-      [uid]
-    );
+    //add id to vulnerability table
+    await connection.execute("UPDATE anomalia SET stato = 0 WHERE id = ?", [id]);
+    console.log("id: ", id);
+
     // Chiudi la connessione dopo aver eseguito le operazioni necessarie
     await connection.end();
 
-    return rows as Anomalia[];
-  } catch (error) {
+    return {
+      message: "Vulnerability added!",
+    };
+  } catch (error: any) {
     console.error("Error connecting to the database:", error);
+    return {
+      error: error.code,
+    };
   }
 });
