@@ -9,10 +9,13 @@ const secreet = ref<string | null>(null);
 const user = useAuthenticatedUser();
 const twoFactorEnabled = ref<boolean>(false);
 
+const mostraDiv = ref(true);
+
 onMounted(() => {
   twoFactorEnabled.value = user.value.twoFactorEnabled;
 });
 async function setup2FA() {
+    mostraDiv.value = false;
   try {
     // Richiedi al server di iniziare il processo di setup del 2FA
     const response = await $fetch("/api/2fa/setup", {
@@ -56,29 +59,32 @@ async function verifyToken() {
 <template>
   <div class="flex flex-col gap-3 p-4 bg-white border shadow-sm rounded-xl md:p-5">
     <h1 class="font-bold">Autenticazione 2FA</h1>
-    <div class="flex flex-row justify-center gap-5 p-4">
+
+    <div class="flex flex-row justify-center gap-5 p-4"  >
       <div>
         <img :src="auth" alt="Autenticazione 2FA" class="w-[50px]" />
       </div>
       <div
-        class="flex items-center gap-2 px-3 py-1 border border-black rounded-lg hover:bg-black hover:text-white"
+        class="flex items-center gap-2 px-3 py-1 border border-black rounded-lg hover:bg-black hover:text-white "
+        :class="{'hidden': !mostraDiv}"
       >
         <!-- BOTTONE PER 2FA -->
-        <button v-if="twoFactorEnabled" class="flex flex-row items-center gap-2">
+        <button v-if="twoFactorEnabled" class="flex flex-row items-center gap-2 cursor-none">
           <Icon v-elese name="fluent-emoji-flat:green-circle" size="20" />
           <h1>ATTIVA</h1>
         </button>
-        <button v-else class="flex flex-row items-center gap-2" @click="setup2FA">
+
+        <button v-else class="flex flex-row items-center gap-2" @click="setup2FA" >
           <Icon name="fluent-emoji-flat:red-circle" size="20" />
           <h1>NON ATTIVA</h1>
         </button>
       </div>
-      <div v-if="qrCode">
+      <div v-if="qrCode" class="flex flex-col justify-center items-center text-center">
         <p>Scansiona questo QR code con la tua app di autenticazione:</p>
         <img :src="qrCode" />
-        <div>
-          <input type="text" v-model="token" placeholder="Inserisci il tuo token 2FA" />
-          <button @click="verifyToken">Verifica Token</button>
+        <div class="flex flex-col gap-3">
+          <input class="px-2 py-3 border rounded-lg" type="text" v-model="token" placeholder="Inserisci il tuo token 2FA" />
+          <button @click="verifyToken" class="bg-green-500 hover:bg-green-600 text-white px-2 py-2 rounded-lg">Verifica Token</button>
         </div>
       </div>
     </div>

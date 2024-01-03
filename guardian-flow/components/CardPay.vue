@@ -1,7 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="flex flex-col gap-3 p-4 bg-white border shadow-sm rounded-xl md:p-5">
+  <div
+    class="flex flex-col gap-3 p-4 bg-white border shadow-sm rounded-xl md:p-5"
+  >
     <div class="flex flex-col">
       <h1 class="mb-3 font-bold">Il tuo piano</h1>
       <div class="flex flex-row items-center gap-7">
@@ -23,18 +25,13 @@
       </div>
     </div>
     <div class="flex flex-col gap-2">
-      <div>
-        <h1 class="font-bold">Fatture da pagare</h1>
-        <h1 class="text-xs text-gray-300">Visualizza fatture da pagare</h1>
-        <div class="flex gap-5 mt-4">
-          <button class="p-1 border border-black rounded-md hover:bg-black hover:text-white">
-            Visualizza
-          </button>
-          <button class="p-1 border border-black rounded-md hover:bg-black hover:text-white">
-            Paga ora
-          </button>
-        </div>
+      <div class="flex flex-row items-center gap-5 font-bold">
+        <h1>Prossima data di fatturazione</h1>
+        <h1>02/02/2023</h1>
       </div>
+
+      <h1>Il prossimo pagamento dovrà essere effettuato al seguente iban:</h1>
+      <h1>IT53E0300203280772747229526</h1>
     </div>
   </div>
 </template>
