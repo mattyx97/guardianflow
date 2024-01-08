@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import getPiano from '~/server/api/Piano/getPiano';
-
 const user = useUser();
 if (user.value) {
   await navigateTo("/"); // redirect to profile page
@@ -24,7 +22,6 @@ function validateCVV(cvv: string): boolean {
   return cvvRegex.test(cvv);
 }
 
-
 function generatePassword() {
   var length = 12,
     charset =
@@ -41,18 +38,14 @@ const handleSubmit = async (e: Event) => {
   const formData = new FormData(e.target);
   const password = generatePassword();
 
-  const cardNumberInput = (e.target as HTMLFormElement).querySelector('#af-payment-payment-method') as HTMLInputElement;
-  const expirationDateInput = (e.target as HTMLFormElement).querySelector('#expiration-date') as HTMLInputElement;
-  const cvvInput = (e.target as HTMLFormElement).querySelector('#cvv') as HTMLInputElement;
-
-  const cardNumber = cardNumberInput.value;
-  const expirationDate = expirationDateInput.value;
-  const cvv = cvvInput.value;
-
-  if (!validateCardNumber(cardNumber) || !validateExpirationDate(expirationDate) || !validateCVV(cvv)) {
-    errorMessage.value = 'Si prega di inserire informazioni valide per il pagamento.';
-    return;
-  }
+  // if (
+  //   !validateCardNumber(cardNumber) ||
+  //   !validateExpirationDate(expirationDate) ||
+  //   !validateCVV(cvv)
+  // ) {
+  //   errorMessage.value = "Si prega di inserire informazioni valide per il pagamento.";
+  //   return;
+  // }
 
   try {
     await $fetch("/api/utente/signup", {
@@ -60,10 +53,16 @@ const handleSubmit = async (e: Event) => {
       body: {
         username: formData.get("username"),
         password: password,
+        nomeAzienda: formData.get("nomeAzienda"),
+        nome: formData.get("nome"),
+        cognome: formData.get("cognome"),
+        emailAzienda: formData.get("emailAziendale"),
+        p_iva: formData.get("pIva"),
+        telefono: formData.get("telefono"),
       },
       redirect: "manual",
     });
-    await navigateTo("/"); // profile page
+    await navigateTo("/login"); // profile page
   } catch (e) {
     const { data: error } = e as {
       data: {
@@ -73,8 +72,6 @@ const handleSubmit = async (e: Event) => {
     errorMessage.value = error.message;
   }
 };
-
-
 </script>
 <template>
   <!-- Card Section -->
@@ -101,11 +98,13 @@ const handleSubmit = async (e: Event) => {
               type="text"
               class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg disabled:pointer-events-none"
               placeholder="Nome*"
+              name="nome"
             />
             <input
               type="text"
               class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg disabled:pointer-events-none"
               placeholder="Cognome*"
+              name="cognome"
             />
             <input
               type="text"
@@ -128,24 +127,28 @@ const handleSubmit = async (e: Event) => {
             <input
               id="af-payment-billing-address"
               type="text"
+              name="nomeAzienda"
               class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg disabled:pointer-events-none"
               placeholder="Nome azienda*"
             />
             <input
               id="af-payment-billing-address"
               type="text"
+              name="pIva"
               class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg disabled:pointer-events-none"
               placeholder="P.IVA*"
             />
             <input
               id="af-payment-billing-address"
               type="text"
+              name="emailAziendale"
               class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg disabled:pointer-events-none"
               placeholder="Email aziendale*"
             />
             <input
               id="af-payment-billing-address"
               type="text"
+              name="telefono"
               class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg disabled:pointer-events-none"
               placeholder="Numero di telefono*"
             />
