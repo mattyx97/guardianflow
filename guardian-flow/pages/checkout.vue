@@ -16,7 +16,7 @@ const props = defineProps<{
       <div>
         <h1 class="text-2xl font-bold">Cosa include il piano {{ $props.title }}</h1>
 
-        <ul class="mt-3 space-y-3">
+        <ul class="mt-3 space-y-3 p-2">
           <li class="flex items-center gap-2">
             <svg
               class="flex-shrink-0 h-4 w-4 mt-0.5 text-green-500"

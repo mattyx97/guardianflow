@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import VueApexCharts from "vue3-apexcharts";
+const { data: anomalies } = await useFetch("/api/Dashboard/getNumAnomalie");
+
 /* layout */
 definePageMeta({
   layout: "gestionale",
 });
 const user = useAuthenticatedUser();
-console.log(user.value.userId);
 const mesi = [
   "Gen",
   "Feb",
@@ -20,54 +21,7 @@ const mesi = [
   "Nov",
   "Dic",
 ];
-const data = [
-  {
-    anno: 2021,
-    mese: 1,
-    ricariche: 100,
-  },
-  {
-    anno: 2021,
-    mese: 2,
-    ricariche: 200,
-  },
-  {
-    anno: 2021,
-    mese: 3,
-    ricariche: 300,
-  },
-  {
-    anno: 2021,
-    mese: 4,
-    ricariche: 400,
-  },
-  {
-    anno: 2021,
-    mese: 5,
-    ricariche: 500,
-  },
-  {
-    anno: 2021,
-    mese: 6,
-    ricariche: 600,
-  },
-  {
-    anno: 2021,
-    mese: 7,
-    ricariche: 700,
-  },
-  {
-    anno: 2021,
-    mese: 8,
-    ricariche: 800,
-  },
-  {
-    anno: 2021,
-    mese: 9,
-    ricariche: 900,
-  },
-  
-];
+
 const options = {
   chart: {
     id: "vuechart-example",
@@ -119,11 +73,12 @@ const options = {
 };
 const series = [
   {
-    name: "€",
-    data: data.map((item) => item.ricariche),
+    name: "Numero anomalie:",
+  data:anomalies.value,
     color: "#2db5bb",
   },
 ];
+console.log("anomalieeee",anomalies.value);
 </script>
 
 <template>

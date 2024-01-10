@@ -10,6 +10,14 @@ const addUtente = ref(false);
 const showAlertConfirm = ref();
 const showAlertNotConfirm = ref();
 
+function validateName(name: string): boolean {
+  const nameRegex = /^[a-zA-Z]+$/;
+  return nameRegex.test(name);
+}
+function validateCognome(cognome: string): boolean {
+  const cognomeRegex = /^[a-zA-Z]+$/;
+  return cognomeRegex.test(cognome);
+}
 function generatePassword() {
   var length = 12,
     charset =
@@ -24,56 +32,65 @@ const handleSubmit = async (e: Event) => {
   if (!(e.target instanceof HTMLFormElement)) return;
   const formData = new FormData(e.target);
   const password = generatePassword();
+  const nome = formData.get("nome") as string;
+  const cognome = formData.get("cognome") as string;
+
+  if (!validateName(nome) || !validateCognome(cognome)) {
+    showAlertNotConfirm.value = true; // Mostra l'alert di errore
+    setTimeout(() => {
+      showAlertNotConfirm.value = false;
+    }, 3000);
+    return;
+  }
   const azienda = user.value?.aziendaId;
   console.log(formData.get("ruolo"));
 
   try {
-  const response = await $fetch("/api/utente/addUtente", {
-    method: "POST",
-    body: {
-      username: formData.get("email"),
-      nome: formData.get("nome"),
-      cognome: formData.get("cognome"),
-      ruolo: formData.get("ruolo"),
-      password: password,
-      azienda_id: azienda,
-    },
-  });
+    const response = await $fetch("/api/utente/addUtente", {
+      method: "POST",
+      body: {
+        username: formData.get("email"),
+        nome: formData.get("nome"),
+        cognome: formData.get("cognome"),
+        ruolo: formData.get("ruolo"),
+        password: password,
+        azienda_id: azienda,
+      },
+    });
 
-  if (response.statusCode === 200) {
-    addUtente.value = true;
-    showAlertConfirm.value = true; // Mostra l'alert di conferma
-    setTimeout(() => {
+    if (response.statusCode === 200) {
+      addUtente.value = true;
+      showAlertConfirm.value = true; // Mostra l'alert di conferma
+      setTimeout(() => {
+        addUtente.value = false;
+      }, 3000);
+    } else {
       addUtente.value = false;
-    }, 3000);
-  } else {
-    addUtente.value = false;
+      showAlertNotConfirm.value = true; // Mostra l'alert di errore
+      setTimeout(() => {
+        showAlertNotConfirm.value = false;
+      }, 3000);
+    }
+  } catch (e) {
+    const { data: error } = e as { data: { message: string } };
+    // Gestisci l'errore qui se necessario
     showAlertNotConfirm.value = true; // Mostra l'alert di errore
     setTimeout(() => {
       showAlertNotConfirm.value = false;
     }, 3000);
   }
-} catch (e) {
-  const { data: error } = e as { data: { message: string } };
-  // Gestisci l'errore qui se necessario
-  showAlertNotConfirm.value = true; // Mostra l'alert di errore
+};
+if (addUtente.value == false) {
+  showAlertNotConfirm.value = false;
   setTimeout(() => {
-    showAlertNotConfirm.value = false;
+    showAlertNotConfirm.value = null;
+  }, 3000);
+} else {
+  showAlertConfirm.value = true;
+  setTimeout(() => {
+    showAlertConfirm.value = null;
   }, 3000);
 }
-  }
-  if (addUtente.value == false) {
-      showAlertNotConfirm.value = false;
-      setTimeout(() => {
-        showAlertNotConfirm.value = null;
-      }, 3000);
-    } else {
-      showAlertConfirm.value = true;
-      setTimeout(() => {
-        showAlertConfirm.value = null;
-      }, 3000);
-    }
-
 </script>
 
 <template>
@@ -87,7 +104,11 @@ const handleSubmit = async (e: Event) => {
       class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto min-h-[calc(100%-3.5rem)] flex items-center"
     >
       <div class="flex flex-col w-full bg-[#171717] shadow-sm rounded-xl">
-        <form method="post" action="/api/Piano/editPiano" @submit.prevent="handleSubmit">
+        <form
+          method="post"
+          action="/api/Piano/editPiano"
+          @submit.prevent="handleSubmit"
+        >
           <div class="flex items-center justify-between px-4 py-3">
             <h3 class="font-bold text-white">Aggiungi utente</h3>
             <button
@@ -95,11 +116,16 @@ const handleSubmit = async (e: Event) => {
               class="flex items-center justify-center text-sm font-semibold text-red-500 rounded-full cursor-pointer hover:scale-125"
               data-hs-overlay="#hs-modal"
             >
-              <Icon name="material-symbols-light:close-small-outline-rounded" size="35" />
+              <Icon
+                name="material-symbols-light:close-small-outline-rounded"
+                size="35"
+              />
             </button>
           </div>
 
-          <div class="flex flex-col items-center gap-3 p-4 overflow-y-auto text-[#171717]">
+          <div
+            class="flex flex-col items-center gap-3 p-4 overflow-y-auto text-[#171717]"
+          >
             <div class="flex flex-col justify-center w-full gap-3 text-white">
               <div class="relative">
                 <input
@@ -205,14 +231,20 @@ const handleSubmit = async (e: Event) => {
             <!-- End Icon -->
           </div>
           <div class="ms-3">
-            <h3 class="font-semibold text-gray-800 dark:text-white">Successfully updated.</h3>
+            <h3 class="font-semibold text-gray-800 dark:text-white">
+              Successfully updated.
+            </h3>
             <p class="text-sm text-gray-700 dark:text-gray-400">
               Utente aggiunto.
             </p>
           </div>
         </div>
       </div>
-      <div v-if="showAlertNotConfirm" class="p-4 bg-red-500 border-red-500 border-s-4" role="alert">
+      <div
+        v-if="showAlertNotConfirm"
+        class="p-4 bg-red-500 border-red-500 border-s-4"
+        role="alert"
+      >
         <div class="flex">
           <div class="">
             <!-- Icon -->
@@ -239,7 +271,9 @@ const handleSubmit = async (e: Event) => {
           </div>
           <div class="ms-3">
             <h3 class="font-semibold text-gray-800 dark:text-white">Error!</h3>
-            <p class="text-sm text-gray-700 dark:text-gray-400">Utente non aggiunto.</p>
+            <p class="text-sm text-gray-700 dark:text-gray-400">
+              Utente non aggiunto.
+            </p>
           </div>
         </div>
       </div>

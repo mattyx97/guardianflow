@@ -112,21 +112,29 @@ function eliminaFunction() {
               stroke-linecap="round"
               stroke-linejoin="round"
             >
-              <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+              <path
+                d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"
+              />
               <path d="m9 12 2 2 4-4" />
             </svg>
           </span>
           <!-- End Icon -->
         </div>
         <div class="ms-3">
-          <h3 class="font-semibold text-gray-800 dark:text-white">Successfully updated.</h3>
+          <h3 class="font-semibold text-gray-800 dark:text-white">
+            Cambiamento effettuato.
+          </h3>
           <p class="text-sm text-gray-700 dark:text-gray-400">
             Hai rimosso correttamente l'utente.
           </p>
         </div>
       </div>
     </div>
-    <div v-if="showAlertNotConfirm" class="p-4 bg-red-500 border-red-500 border-s-4" role="alert">
+    <div
+      v-if="showAlertNotConfirm"
+      class="p-4 bg-red-500 border-red-500 border-s-4"
+      role="alert"
+    >
       <div class="flex">
         <div class="">
           <!-- Icon -->
@@ -152,8 +160,10 @@ function eliminaFunction() {
           <!-- End Icon -->
         </div>
         <div class="ms-3">
-          <h3 class="font-semibold text-gray-800 dark:text-white">Error!</h3>
-          <p class="text-sm text-gray-700 dark:text-gray-400">La tua richiestà è stata rifiutata.</p>
+          <h3 class="font-semibold text-gray-800 dark:text-white">Errore!</h3>
+          <p class="text-sm text-gray-700 dark:text-gray-400">
+            La tua richiestà è stata rifiutata.
+          </p>
         </div>
       </div>
     </div>
