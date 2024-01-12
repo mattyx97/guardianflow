@@ -131,7 +131,7 @@ def main():
     test_features = extract_features(test_data)
     X_test_scaled = prepara_dati(test_features)
 
-    # Run del modello
+    # Run del modello ai
     test_modello(clf, X_test_scaled, received_file_path)
 
 if __name__ == "__main__":
